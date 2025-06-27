@@ -1,9 +1,30 @@
 ---
 layout: page
-title: "About me"
-description: "This is what i do"
+title: "About Me"
 permalink: /about/
 ---
 
-¡Morning! dotMuny here, IT and ethical hacking enthusiast.
-In this blog I share my discoverings and writeups from platforms like Hack The Box or TryHackMe.
+## Hello, I'm **dotMuny** 👋
+
+I’m passionate about **ethical hacking**, **IT research**, and sharing my knowledge with the community.
+
+- 🎓 **Background**: Computer Engineering  
+- 🛠 **Specialization**: Pentesting, security analysis, and Hack The Box writeups  
+- 📝 **Purpose**: Publish detailed walkthroughs, research papers, and hands-on projects
+
+---
+
+### What you’ll find here
+
+1. **HackTheBox writeups** — Technical breakdowns of HTB machines  
+2. **Research & papers** — In‑depth explorations of cybersecurity topics  
+3. **Other posts** — Insights, tutorials, and general IT content
+
+---
+
+### Connect with me
+
+- **GitHub**: [dotMuny](https://github.com/dotMuny) 
+
+Feel free to check out my [HackTheBox section](/htb/) for the latest writeups, or browse the rest via the [Posts page](/posts/).  
+Happy hacking! 🧠
