@@ -3,3 +3,59 @@
 ---
 
 @import "styles";
+
+body {
+  background: #181a1b !important;  // Fondo oscuro global
+  color: #f1f1f1 !important;       // Texto claro global
+}
+
+/* Ajusta enlaces para que sean legibles */
+a {
+  color: #4fc3f7;
+}
+
+/* Opcional: títulos más claros */
+h1, h2, h3, h4, h5, h6 {
+  color: #fff;
+}
+
+/* Bloques de código en modo oscuro */
+pre, code, pre code {
+  background: #23272e !important;  /* Fondo más oscuro para código */
+  color: #e6db74 !important;       /* Texto claro y legible */
+  border-radius: 6px;
+  padding: 0.5em 0.8em;
+  font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
+  font-size: 1em;
+  overflow-x: auto;
+}
+
+/* Opcional: para inline code */
+p code, li code {
+  background: #23272e !important;
+  color: #ffd700 !important;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+hr {
+  border: none;
+  border-top: 2px solid #444;   /* Gris visible sobre fondo oscuro */
+  margin: 2.5rem 0;
+  opacity: 0.8;
+}
+
+/* Limita el ancho de las imágenes dentro del contenido */
+.container img,
+.col-lg-8 img,
+.markdown-body img,
+.post-content img,
+.post img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+

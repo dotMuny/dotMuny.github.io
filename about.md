@@ -8,7 +8,6 @@ permalink: /about/
 
 I’m passionate about **ethical hacking**, **IT research**, and sharing my knowledge with the community.
 
-- 🎓 **Background**: Computer Engineering  
 - 🛠 **Specialization**: Pentesting, security analysis, and Hack The Box writeups  
 - 📝 **Purpose**: Publish detailed walkthroughs, research papers, and hands-on projects
 

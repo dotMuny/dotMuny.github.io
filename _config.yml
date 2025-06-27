@@ -17,14 +17,36 @@ google_analytics:   UA-XXXXXXXXX-X # out your google-analytics code
 
 # Build settings
 markdown:           kramdown
-paginate:           5
-paginate_path:      "/posts/page:num/"
 plugins:
   - jekyll-feed
-  - jekyll-paginate
-  - jekyll-sitemap ## Uncomment this line to silently generate a sitemaps.org compliant sitemap for your Jekyll site
+  - jekyll-sitemap
+  - jekyll-paginate-v2
 
+# General pagination config
+pagination:
+  enabled: true
+  per_page: 5
+  permalink: '/posts/page:num/'
+  title: ':title - page :num'
+  sort_field: 'date'
+  sort_reverse: true
+  trail:
+    before: 2
+    after: 2
+  # Aquí filtras por tag
+  filter:
+    include:
+      - posts
+
+# Collection for HTB (sigue igual)
 collections:
   htb:
     output: true
     permalink: /htb/:path/
+
+htb_paginate:
+  enabled: true
+  per_page: 5
+  paginate_path: "/htb/page:num/"
+  collection: htb
+
