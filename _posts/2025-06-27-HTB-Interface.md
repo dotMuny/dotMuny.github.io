@@ -171,7 +171,8 @@ ID           Response   Lines    Word       Chars       Payload
 100  1167  100  1136  100    31  13975    381 --:--:-- --:--:-- --:--:-- 14407
 ```
 
-![image.png](image%202.png)
+![Web recon](/img/htb_img/interface_img/03.png)
+
 
 After visual inspection, we extract the metadata from the file to confirm the tool used to create the `PDF`.
 
@@ -240,11 +241,13 @@ Resolving deltas: 100% (64/64), done.
 
 We will modify the CSS to our needs:
 
-![image.png](image%203.png)
+![Web recon](/img/htb_img/interface_img/04.png)
+
 
 We also modify the php file to allow us to execute commands.
 
-![image.png](image%204.png)
+![Web recon](/img/htb_img/interface_img/05.png)
+
 
 After that, we execute two servers, one at port 9000 and the other at 9001.
 
