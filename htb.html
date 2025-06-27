@@ -1,0 +1,11 @@
+---
+layout: page
+title: "Hack The Box"
+permalink: /htb/
+---
+
+<ul>
+  {% for post in site.htb %}
+    <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>
