@@ -4,49 +4,219 @@
 
 @import "styles";
 
+/* CSS Variables for Light/Dark Theme */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --link-color: #007bff;
+  --card-bg: #ffffff;
+  --border-color: #dee2e6;
+  --code-bg: #f8f9fa;
+  --code-text: #e83e8c;
+  --navbar-bg: #ffffff;
+  --navbar-text: #333333;
+}
+
+[data-theme="dark"] {
+  --bg-color: #181a1b;
+  --text-color: #f1f1f1;
+  --link-color: #4fc3f7;
+  --card-bg: #2d3748;
+  --border-color: #4a5568;
+  --code-bg: #23272e;
+  --code-text: #e6db74;
+  --navbar-bg: #1a202c;
+  --navbar-text: #f1f1f1;
+}
+
+/* Apply theme variables */
 body {
-  background: #181a1b !important;  // Fondo oscuro global
-  color: #f1f1f1 !important;       // Texto claro global
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Ajusta enlaces para que sean legibles */
+/* Links */
 a {
-  color: #4fc3f7;
+  color: var(--link-color);
+  transition: color 0.3s ease;
 }
 
-/* Opcional: títulos más claros */
+/* Headings */
 h1, h2, h3, h4, h5, h6 {
-  color: #fff;
+  color: var(--text-color);
 }
 
-/* Bloques de código en modo oscuro */
-pre, code, pre code {
-  background: #23272e !important;  /* Fondo más oscuro para código */
-  color: #e6db74 !important;       /* Texto claro y legible */
-  border-radius: 6px;
-  padding: 0.5em 0.8em;
-  font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
-  font-size: 1em;
+/* Code blocks - Improved styling for better readability */
+pre {
+  background: var(--code-bg) !important;
+  color: var(--code-text) !important;
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
   overflow-x: auto;
+  border: 1px solid var(--border-color);
+  margin: 1.5rem 0;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Opcional: para inline code */
-p code, li code {
-  background: #23272e !important;
-  color: #ffd700 !important;
-  padding: 0.2em 0.4em;
+pre code {
+  background: none !important;
+  color: inherit !important;
+  font-size: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-family: inherit;
+}
+
+/* Inline code */
+p code, li code, h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
+  background: var(--code-bg) !important;
+  color: var(--code-text) !important;
+  padding: 0.2rem 0.4rem;
   border-radius: 4px;
-  font-size: 0.95em;
+  font-size: 0.9rem;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+  border: 1px solid var(--border-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* HR elements */
 hr {
   border: none;
-  border-top: 2px solid #444;   /* Gris visible sobre fondo oscuro */
+  border-top: 2px solid var(--border-color);
   margin: 2.5rem 0;
   opacity: 0.8;
 }
 
-/* Limita el ancho de las imágenes dentro del contenido */
+/* Cards and content areas */
+.card, .post-preview {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 0;
+  padding: 20px 0;
+  transition: all 0.3s ease;
+}
+
+.post-preview:hover {
+  background-color: var(--card-bg);
+  padding: 20px;
+  border-radius: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Navbar theming */
+.navbar {
+  background-color: var(--navbar-bg) !important;
+  transition: background-color 0.3s ease;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: var(--navbar-text) !important;
+}
+
+/* Dark mode toggle button */
+.theme-toggle {
+  background: none;
+  border: 2px solid var(--text-color);
+  color: var(--text-color);
+  border-radius: 20px;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.theme-toggle:hover {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+
+/* Search functionality styles */
+.search-container {
+  position: relative;
+  margin-right: 15px;
+}
+
+.search-input {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  border-radius: 20px;
+  padding: 8px 35px 8px 15px;
+  width: 200px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--link-color);
+  width: 250px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-color);
+  opacity: 0.6;
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-item {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-result-item:hover {
+  background-color: var(--border-color);
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-title {
+  font-weight: bold;
+  color: var(--link-color);
+  margin-bottom: 5px;
+}
+
+.search-result-excerpt {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* Image sizing */
 .container img,
 .col-lg-8 img,
 .markdown-body img,
@@ -57,5 +227,21 @@ hr {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .search-input {
+    width: 150px;
+  }
+  
+  .search-input:focus {
+    width: 180px;
+  }
+  
+  .theme-toggle {
+    margin-left: 5px;
+    margin-top: 5px;
+  }
 }
 

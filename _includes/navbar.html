@@ -21,6 +21,21 @@
           <a class="nav-link" href="{{"/about" | relative_url }}">About</a>
         </li>
         
+        <!-- Search functionality -->
+        <li class="nav-item d-none d-lg-block">
+          <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search posts...">
+            <i class="fa fa-search search-icon"></i>
+            <div id="searchResults" class="search-results"></div>
+          </div>
+        </li>
+        
+        <!-- Dark mode toggle -->
+        <li class="nav-item">
+          <button id="themeToggle" class="theme-toggle">
+            <i class="fa fa-moon-o" id="themeIcon"></i>
+          </button>
+        </li>
       </ul>
     </div>
   </div>

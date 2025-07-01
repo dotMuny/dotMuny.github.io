@@ -1,0 +1,20 @@
+---
+---
+[
+  {
+    "title": "[HTB] Interface",
+    "url": "{{ '/2025/06/27/HTB-Interface.html' | absolute_url }}",
+    "date": "2025-06-27",
+    "tags": ["htb", "medium", "linux"],
+    "excerpt": "Medium difficulty HTB machine involving dompdf RCE vulnerability and privilege escalation.",
+    "content": "htb interface linux dompdf rce vulnerability exploitation pentesting hackthebox medium difficulty writeup walkthrough"
+  },
+  {
+    "title": "First Entry",
+    "url": "{{ '/2025/06/27/First-Entry.html' | absolute_url }}",
+    "date": "2025-06-27",
+    "tags": ["blog"],
+    "excerpt": "Welcome to my ethical hacking blog",
+    "content": "welcome first entry blog ethical hacking cybersecurity introduction"
+  }
+] 

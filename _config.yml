@@ -15,6 +15,9 @@ linkedin_username:
 # Add your google-analytics ID here to activate google analytics
 google_analytics:   UA-XXXXXXXXX-X # out your google-analytics code
 
+# HTB Profile settings
+htb_profile_id:     2106325
+
 # Build settings
 markdown:           kramdown
 plugins:
