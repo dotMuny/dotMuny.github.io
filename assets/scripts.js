@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const themeIcon = document.getElementById('themeIcon');
   const body = document.body;
   
+  // Check if elements exist before proceeding
+  if (!themeToggle || !themeIcon) {
+    console.log('Theme toggle elements not found');
+    return;
+  }
+  
   // Check for saved theme preference or default to 'dark' mode
   const currentTheme = localStorage.getItem('theme') || 'dark';
   
@@ -48,9 +54,11 @@ class BlogSearch {
   }
   
   async init() {
-    if (this.searchInput) {
+    if (this.searchInput && this.searchResults) {
       await this.loadPosts();
       this.bindEvents();
+    } else {
+      console.log('Search elements not found');
     }
   }
   
@@ -60,7 +68,7 @@ class BlogSearch {
       
       // Try to fetch posts from Jekyll's generated posts data
       try {
-        const response = await fetch('/assets/data/posts.json');
+        const response = await fetch('/posts.json');
         if (response.ok) {
           this.posts = await response.json();
         } else {
@@ -184,7 +192,10 @@ class BlogSearch {
 
 // Initialize search when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-  new BlogSearch();
+  // Small delay to ensure all elements are rendered
+  setTimeout(() => {
+    new BlogSearch();
+  }, 100);
 });
 
 
