@@ -1,6 +1,6 @@
-title:              dotMuny's blog
+title:              dotMuny's Blog
 email:              
-description:        Ethical Hacking and IT researching
+description:        Ethical Hacking and IT Security Research
 author:             dotMuny
 baseurl:            ""
 url:                "https://dotmuny.github.io"
@@ -22,7 +22,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-paginate-v2
 
-# General pagination config
+# Pagination for posts page (only posts with 'posts' tag)
 pagination:
   enabled: true
   per_page: 5
@@ -33,10 +33,6 @@ pagination:
   trail:
     before: 2
     after: 2
-  # Aquí filtras por tag
-  filter:
-    include:
-      - posts
 
 # Collection for HTB (sigue igual)
 collections:
