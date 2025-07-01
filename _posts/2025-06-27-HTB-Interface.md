@@ -7,7 +7,7 @@ background: '/img/bg-machine.jpg'
 tags: [htb]
 ---
 
-![Web recon](/img/htb_img/interface_img/interface.png)
+![Web recon](/img/htb_img/Interface_img/Interface.png)
 
 OS: Linux
 IP: 10.10.11.200
@@ -70,7 +70,7 @@ The results show that the web service is `nginx 1.14.0` and the codenames of bot
 
 ## Web Recon
 
-![Web recon](/img/htb_img/interface_img/01.png)
+![Web recon](/img/htb_img/Interface_img/01.png)
 
 When accessing the website, we can see that it is under maintenance and there is not much more information available, so we will have to perform some kind of `fuzzing`.
 
@@ -104,7 +104,7 @@ Nothing found even with other wordlists.
 
 After not finding anything through directory, we proceed to check the browser’s developer console on the website and find that the `Content Security Policy` field reveals a new subdomain, which we will add to our hosts file.
 
-![New subdomain](/img/htb_img/interface_img/02.png)
+![New subdomain](/img/htb_img/Interface_img/02.png)
 
 ```bash
 ❯ echo "$target interface.htb prd.m.rendering-api.interface.htb" | sudo tee -a /etc/hosts
@@ -171,7 +171,7 @@ ID           Response   Lines    Word       Chars       Payload
 100  1167  100  1136  100    31  13975    381 --:--:-- --:--:-- --:--:-- 14407
 ```
 
-![Web recon](/img/htb_img/interface_img/03.png)
+![Web recon](/img/htb_img/Interface_img/03.png)
 
 
 After visual inspection, we extract the metadata from the file to confirm the tool used to create the `PDF`.
@@ -241,12 +241,12 @@ Resolving deltas: 100% (64/64), done.
 
 We will modify the CSS to our needs:
 
-![Web recon](/img/htb_img/interface_img/04.png)
+![Web recon](/img/htb_img/Interface_img/04.png)
 
 
 We also modify the php file to allow us to execute commands.
 
-![Web recon](/img/htb_img/interface_img/05.png)
+![Web recon](/img/htb_img/Interface_img/05.png)
 
 
 After that, we execute two servers, one at port 9000 and the other at 9001.
