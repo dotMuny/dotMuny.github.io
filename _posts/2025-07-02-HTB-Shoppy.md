@@ -2,7 +2,7 @@
 layout: post
 title: "[HTB] Shoppy"
 description: "[Machine] - Easy difficulty"
-date: 2025-07-02 20:00:00
+date: 2025-07-02 17:00:00
 background: '/img/bg-machine.jpg'
 tags: [htb]
 ---
