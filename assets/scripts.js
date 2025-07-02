@@ -42,6 +42,12 @@ $(document).ready(function() {
       url: '/2025/06/27/First-Entry.html',
       excerpt: 'Welcome to my ethical hacking blog',
       tags: 'blog welcome introduction'
+    },
+    {
+      title: '[HTB] Shoppy',
+      url: '/2025/07/02/HTB-Shoppy.html',
+      excerpt: 'Easy difficulty HTB machine involving NoSQL injection, Mattermost foothold, and Docker privilege escalation.',
+      tags: 'htb easy linux nosql mattermost docker privilege escalation'
     }
   ];
   
