@@ -1,4 +1,13 @@
-# Shoppy
+---
+layout: post
+title: "[HTB] Shoppy"
+description: "[Machine] - Easy difficulty"
+date: 2025-07-02 20:00:00
+background: '/img/bg-machine.jpg'
+tags: [htb]
+---
+
+![Web recon](/img/htb_img/Shoppy_img/Shoppy.png)
 
 OS: Linux
 IP: 10.10.11.180
