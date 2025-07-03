@@ -2,7 +2,7 @@
 layout: post
 title: "IoT Security Auditing Methods"
 subtitle: "A comprehensive Security Auditing Article"
-date: 2025-06-27 10:00:00
+date: 2025-07-03 10:00:00
 background: ""
 tags: [posts]
 ---
