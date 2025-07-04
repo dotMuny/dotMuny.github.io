@@ -11,10 +11,10 @@ tags: [htb]
 
 OS: Linux
 IP: 10.10.11.180
-Complete: No
+Complete: Yes
 Created time: July 2, 2025 6:25 PM
 Level: Easy
-Status: In progress
+Status: Done
 
 # Enumeration
 
