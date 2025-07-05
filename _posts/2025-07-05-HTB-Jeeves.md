@@ -15,8 +15,6 @@ Created time: July 5, 2025 3:38 PM
 Level: Medium
 Status: Done
 
-Jeeves
-
 # Enumeration
 
 ## Nmap Recon
