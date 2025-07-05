@@ -48,6 +48,24 @@ $(document).ready(function() {
       url: '/2025/07/02/HTB-Shoppy.html',
       excerpt: 'Easy difficulty HTB machine involving NoSQL injection, Mattermost foothold, and Docker privilege escalation.',
       tags: 'htb easy linux nosql mattermost docker privilege escalation'
+    },
+    {
+      title: 'IoT Auditing',
+      url: '/2025/07/03/IoT-Auditing.html',
+      excerpt: 'Comprehensive guide to IoT security auditing methodologies, tools, and best practices for identifying vulnerabilities.',
+      tags: 'iot security auditing penetration testing methodology vulnerability assessment'
+    },
+    {
+      title: '[HTB] Love',
+      url: '/2025/07/04/HTB-Love.html',
+      excerpt: 'Easy difficulty HTB Windows machine involving SSRF, voting system exploitation, and AlwaysInstallElevated privilege escalation.',
+      tags: 'htb easy windows ssrf voting system privilege escalation'
+    },
+    {
+      title: '[HTB] Jeeves',
+      url: '/2025/07/05/HTB-Jeeves.html',
+      excerpt: 'Medium difficulty HTB Windows machine involving Jenkins exploitation, Groovy script execution, and privilege escalation.',
+      tags: 'htb medium windows jenkins groovy script execution privilege escalation'
     }
   ];
   
