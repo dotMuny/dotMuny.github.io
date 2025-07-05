@@ -157,4 +157,104 @@ document.addEventListener('DOMContentLoaded', function() {
   document.head.insertAdjacentHTML('beforeend', searchStyles);
 });
 
+// Table of Contents Generator
+$(document).ready(function() {
+  // Only run on post pages that have the TOC sidebar
+  if ($('#toc').length && $('.post-content').length) {
+    generateTableOfContents();
+    setupTocScrollSpy();
+  }
+});
+
+function generateTableOfContents() {
+  const tocContainer = $('#toc');
+  const postContent = $('.post-content');
+  const headers = postContent.find('h1, h2, h3, h4, h5, h6');
+  
+  if (headers.length === 0) {
+    tocContainer.html('<p class="text-muted small">No headings found</p>');
+    return;
+  }
+  
+  let tocHTML = '<ul>';
+  let currentLevel = 1;
+  
+  headers.each(function(index) {
+    const header = $(this);
+    const level = parseInt(header.prop('tagName').charAt(1));
+    const text = header.text().trim();
+    const id = 'toc-' + text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    
+    // Add ID to header for linking
+    header.attr('id', id);
+    
+    // Handle nesting levels
+    if (level > currentLevel) {
+      for (let i = currentLevel; i < level; i++) {
+        tocHTML += '<ul>';
+      }
+    } else if (level < currentLevel) {
+      for (let i = currentLevel; i > level; i--) {
+        tocHTML += '</ul></li>';
+      }
+    } else if (index > 0) {
+      tocHTML += '</li>';
+    }
+    
+    tocHTML += `<li><a href="#${id}" class="toc-link" data-target="${id}">${text}</a>`;
+    currentLevel = level;
+  });
+  
+  // Close remaining tags
+  for (let i = currentLevel; i >= 1; i--) {
+    tocHTML += '</li>';
+  }
+  tocHTML += '</ul>';
+  
+  tocContainer.html(tocHTML);
+  
+  // Add click handlers for smooth scrolling
+  $('.toc-link').click(function(e) {
+    e.preventDefault();
+    const target = $(this).data('target');
+    const targetElement = $('#' + target);
+    
+    if (targetElement.length) {
+      $('html, body').animate({
+        scrollTop: targetElement.offset().top - 100
+      }, 500);
+    }
+  });
+}
+
+function setupTocScrollSpy() {
+  const tocLinks = $('.toc-link');
+  const headers = $('.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6');
+  
+  if (headers.length === 0) return;
+  
+  $(window).scroll(function() {
+    let current = '';
+    const scrollTop = $(window).scrollTop();
+    
+    headers.each(function() {
+      const header = $(this);
+      const headerTop = header.offset().top - 120;
+      
+      if (scrollTop >= headerTop) {
+        current = header.attr('id');
+      }
+    });
+    
+    // Update active state
+    tocLinks.removeClass('active');
+    if (current) {
+      $(`.toc-link[data-target="${current}"]`).addClass('active');
+    }
+  });
+  
+  // Trigger scroll event on page load
+  $(window).trigger('scroll');
+}
+
 
