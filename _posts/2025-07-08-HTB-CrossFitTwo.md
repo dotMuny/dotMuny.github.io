@@ -1,4 +1,12 @@
-# CrossFitTwo
+---
+layout: post
+title: "[HTB] CrossFitTwo"
+description: "[Machine] - Insane difficulty"
+background: '/img/bg-machine.jpg'
+tags: [htb]
+---
+
+![CrossFitTwo](/img/htb_img/CrossFitTwo_img/CrossFitTwo.png)
 
 OS: OpenBSD
 IP: 10.10.10.232
@@ -6,10 +14,6 @@ Complete: Yes
 Created time: July 7, 2025 4:24 PM
 Level: Insane
 Status: Done
-
-![CrossFitTwo](CrossFitTwo.png)
-
-CrossFitTwo
 
 # Enumeration
 
@@ -173,19 +177,19 @@ Got nothing as a result for the command.
 
 Port 80 is hosting the website `CrossFit`.
 
-![HTTP port 80 - CrossFit](image.png)
+![HTTP port 80 - CrossFit](/img/htb_img/CrossFitTwo_img/01.png)
 
 HTTP port 80 - CrossFit
 
 With the Wappalyzer extension we can confirm the site is using PHP 7.4.12 (worth for fuzzing)
 
-![Wappalyzer](image%201.png)
+![Wappalyzer](/img/htb_img/CrossFitTwo_img/02.png)
 
 Wappalyzer
 
 Checking the source code of the site, we find a subdomain `employees`.
 
-![Source Code review](image%202.png)
+![Source Code review](/img/htb_img/CrossFitTwo_img/03.png)
 
 Source Code review
 
@@ -198,7 +202,7 @@ So, we add it to our hosts file to be able to access it.
 
 Loading the employees webpage welcomes us with a login.
 
-![employees.crossfit.htb](image%203.png)
+![employees.crossfit.htb](/img/htb_img/CrossFitTwo_img/04.png)
 
 employees.crossfit.htb
 
@@ -309,19 +313,19 @@ I will add the `gym` domain to my hosts file and reload the page to see if it’
 
 After reloading the webpage we can see that Arnold the assisstant lets us use some commands:
 
-![Chat - help](image%204.png)
+![Chat - help](/img/htb_img/CrossFitTwo_img/05.png)
 
 Chat - help
 
-![Chat - Coaches](image%205.png)
+![Chat - Coaches](/img/htb_img/CrossFitTwo_img/06.png)
 
 Chat - Coaches
 
-![Chat - Classes](image%206.png)
+![Chat - Classes](/img/htb_img/CrossFitTwo_img/07.png)
 
 Chat - Classes
 
-![Chat - subscriptions](image%207.png)
+![Chat - subscriptions](/img/htb_img/CrossFitTwo_img/08.png)
 
 Chat - subscriptions
 
@@ -333,23 +337,23 @@ Nothing more interesting over here, so I should fire up Burpsuite to take a look
 
 When reloading the web we get two different interactions with the websocket:
 
-![WebSocket HTTP Request](image%208.png)
+![WebSocket HTTP Request](/img/htb_img/CrossFitTwo_img/09.png)
 
 WebSocket HTTP Request
 
 And the WebSocket message itself
 
-![WebSocket initial message](image%209.png)
+![WebSocket initial message](/img/htb_img/CrossFitTwo_img/10.png)
 
 WebSocket initial message
 
 I also tryied intercepting the messages when we send a request with the `help` command to Arnold.
 
-![WebSocket send help message](image%2010.png)
+![WebSocket send help message](/img/htb_img/CrossFitTwo_img/11.png)
 
 WebSocket send help message
 
-![WebSocket response to help](image%2011.png)
+![WebSocket response to help](/img/htb_img/CrossFitTwo_img/12.png)
 
 WebSocket response to help
 
@@ -357,7 +361,7 @@ Looking at the messages, every message that we send has the token of the previou
 
 The only messages that we haven’t intercepted yet are the membership ones that check availability.
 
-![image.png](image%2012.png)
+![image.png](/img/htb_img/CrossFitTwo_img/13.png)
 
 We see a new parameter: debug.
 
@@ -385,7 +389,7 @@ We try with this payload:
 {"message":"available","params":"1 union select 1, group_concat(schema_name) from information_schema.schemata where schema_name not like '%schema' and schema_name != 'mysql' order by name desc; -- -","token":"dc2b08fc4d5e43f53bc66bab476b539404dfb01856b8a2b16ade336d42519f7a"}
 ```
 
-![First SQLi](image%2013.png)
+![First SQLi](/img/htb_img/CrossFitTwo_img/14.png)
 
 First SQLi
 
@@ -688,7 +692,7 @@ relay portal{
 
 We can see some interesting things, for example a bunch of other ports that we had no idea were being used, as well as a new domain `crossfit-club.htb`. I will add this to my hosts file and take a look.
 
-![crossfit-club.htb](image%2014.png)
+![crossfit-club.htb](/img/htb_img/CrossFitTwo_img/15.png)
 
 crossfit-club.htb
 
@@ -696,13 +700,13 @@ We can see that the SignUp option is disabled, so we need to work around the log
 
 From the source code we can see that there is a call to a js file.
 
-![JS files in club](image%2015.png)
+![JS files in club](/img/htb_img/CrossFitTwo_img/16.png)
 
 JS files in club
 
 Looking at the code of this script we can see that a call to /api/login is being performed.
 
-![/api/login](image%2016.png)
+![/api/login](/img/htb_img/CrossFitTwo_img/17.png)
 
 /api/login
 
@@ -1071,7 +1075,7 @@ And, finally, we get some messages sent through the chat
 
 If we decode the last one, we can clearly see the best message we could get.
 
-![URL Decoding credentials](image%2017.png)
+![URL Decoding credentials](/img/htb_img/CrossFitTwo_img/18.png)
 
 URL Decoding credentials
 
