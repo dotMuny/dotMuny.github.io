@@ -58,14 +58,20 @@ $(document).ready(function() {
     {
       title: '[HTB] Love',
       url: '/2025/07/04/HTB-Love.html',
-      excerpt: 'Easy difficulty HTB Windows machine involving SSRF, voting system exploitation, and AlwaysInstallElevated privilege escalation.',
-      tags: 'htb easy windows ssrf voting system privilege escalation'
+      excerpt: 'Easy difficulty HTB machine featuring SSRF vulnerability and privilege escalation through AlwaysInstallElevated.',
+      tags: 'htb easy windows ssrf privilege escalation msi'
     },
     {
       title: '[HTB] Jeeves',
       url: '/2025/07/05/HTB-Jeeves.html',
-      excerpt: 'Medium difficulty HTB Windows machine involving Jenkins exploitation, Groovy script execution, and privilege escalation.',
-      tags: 'htb medium windows jenkins groovy script execution privilege escalation'
+      excerpt: 'Medium difficulty HTB machine involving Jenkins exploitation and Windows privilege escalation.',
+      tags: 'htb medium windows jenkins privilege escalation keepass'
+    },
+    {
+      title: '[HTB] CrossFitTwo',
+      url: '/2025/07/08/HTB-CrossFitTwo.html',
+      excerpt: 'Insane difficulty HTB machine running OpenBSD with web exploitation, Unbound DNS control, and advanced privilege escalation.',
+      tags: 'htb insane openbsd web exploitation unbound dns privilege escalation'
     }
   ];
   
