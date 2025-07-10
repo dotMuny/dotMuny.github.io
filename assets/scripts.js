@@ -72,6 +72,12 @@ $(document).ready(function() {
       url: '/2025/07/08/HTB-CrossFitTwo.html',
       excerpt: 'Insane difficulty HTB machine running OpenBSD with web exploitation, Unbound DNS control, and advanced privilege escalation.',
       tags: 'htb insane openbsd web exploitation unbound dns privilege escalation'
+    },
+    {
+      title: '[HTB] Tabby',
+      url: '/2025/07/10/HTB-Tabby.html',
+      excerpt: 'Easy difficulty HTB machine featuring LFI vulnerability, Apache Tomcat exploitation, and privilege escalation through file permissions.',
+      tags: 'htb easy linux ubuntu apache tomcat lfi path traversal war webshell privilege escalation'
     }
   ];
   
