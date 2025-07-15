@@ -78,6 +78,12 @@ $(document).ready(function() {
       url: '/2025/07/10/HTB-Tabby.html',
       excerpt: 'Easy difficulty HTB machine featuring LFI vulnerability, Apache Tomcat exploitation, and privilege escalation through file permissions.',
       tags: 'htb easy linux ubuntu apache tomcat lfi path traversal war webshell privilege escalation'
+    },
+    {
+      title: '[HTB] RedPanda',
+      url: '/2025/07/15/HTB-RedPanda.html',
+      excerpt: 'Easy difficulty HTB machine featuring Spring Boot application, SSTI vulnerability, and privilege escalation through log injection.',
+      tags: 'htb easy linux ubuntu spring boot java apache tomcat ssti log injection privilege escalation'
     }
   ];
   

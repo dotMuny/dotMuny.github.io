@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[HTB] Tabby"
+title: "[HTB] RedPanda"
 description: "[Machine] - Easy difficulty"
 background: '/img/bg-machine.jpg'
 tags: [htb]
