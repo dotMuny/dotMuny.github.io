@@ -84,6 +84,12 @@ $(document).ready(function() {
       url: '/2025/07/15/HTB-RedPanda.html',
       excerpt: 'Easy difficulty HTB machine featuring Spring Boot application, SSTI vulnerability, and privilege escalation through log injection.',
       tags: 'htb easy linux ubuntu spring boot java apache tomcat ssti log injection privilege escalation'
+    },
+    {
+      title: '[HTB] Time',
+      url: '/2025/07/16/HTB-Time.html',
+      excerpt: 'Medium difficulty HTB machine featuring Jackson deserialization vulnerability, H2 database exploitation, and systemd timer privilege escalation.',
+      tags: 'htb medium linux ubuntu jackson deserialization h2 database json validator cve-2019-12384 systemd timer privilege escalation'
     }
   ];
   
