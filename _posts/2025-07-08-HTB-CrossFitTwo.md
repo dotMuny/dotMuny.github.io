@@ -1194,7 +1194,7 @@ uid=1005(john) gid=1005(john) groups=1005(john), 20(staff), 1003(sysadmins)
 
 Stabilizing the shell here caused it to crash so I will need to be using this poor shell, at least I can create a script to use bash properly.
 
-# Privilege Scalation
+# Privilege Escalation
 
 After enumerating, the user `john` is able to run the /usr/local/bin/log.
 We can’t read the /root directory but we can read /var/db, where there is a yubikey directory, with files to create a OTP.
