@@ -235,7 +235,7 @@ PS C:\Users\Administrator\.jenkins> type C:\Users\kohsuke\Desktop\user.txt
 
 ---
 
-# Privilege Scalation
+# Privilege Escalation
 
 In the documents folder of the user `kohsuke`  we can find a KeePass file.
 
