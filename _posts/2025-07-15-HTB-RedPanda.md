@@ -276,7 +276,7 @@ woodenk@redpanda:~$ cat user.txt
 woodenk@redpanda:~$ 
 ```
 
-# Privilege Scalation
+# Privilege Escalation
 
 In the home folder we can find a `.m2` folder, this is a Maven folder (Java).
 
