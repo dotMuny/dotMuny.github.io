@@ -433,7 +433,7 @@ su deploy
 Deploying@pp!
 ```
 
-# Privilege Scalation
+# Privilege Escalation
 
 After basic enumeration I remembered that in the Matermost chats they were talking about deploying dockers.
 
