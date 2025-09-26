@@ -96,6 +96,12 @@ $(document).ready(function() {
       url: '/2025/09/26/HTB-Forgotten.html',
       excerpt: 'Easy HTB machine exploiting a vulnerable LimeSurvey installation — installer allowed plugin upload and RCE (reverse shell). Credentials leaked in environment variables enabled SSH access, and a writable host mount combined with a SUID bash trick yielded root. Clean, container-based escalation flow (LimeSurvey RCE → SSH foothold → SUID root shell).',
       tags: 'htb easy linux limesurvey rce plugin-upload reverse-shell env-credentials ssh container mount sudo suid-bash privilege-escalation'
+    },
+    {
+      title: 'Penelope',
+      url: '/2025/09/26/HTB-Penelope',
+      excerpt: 'Penelope is a lightweight Python reverse-shell handler that stabilises shells, manages sessions and provides file transfer utilities — a practical ergonomics boost for pentesters and CTF players.',
+      tags: 'security tools pentesting revshell python oscp'
     }
   ];
   
