@@ -11,7 +11,7 @@ tags: [htb]
 - OS: Linux
 - Release Date: 16 Sep 2025
 - Difficulty: Easy
----
+
 
 # Enumeration
 ## Nmap recon
@@ -233,8 +233,9 @@ PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FIL
 _=/usr/bin/env
 ```
 
-> [!NOTE] Password
-> 5W5HN4K4GCXf9E
+```
+5W5HN4K4GCXf9E
+```
 
 ## Trying SSH
 Using the same username and the password, we can login directly to ssh.
