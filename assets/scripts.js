@@ -90,6 +90,12 @@ $(document).ready(function() {
       url: '/2025/07/16/HTB-Time.html',
       excerpt: 'Medium difficulty HTB machine featuring Jackson deserialization vulnerability, H2 database exploitation, and systemd timer privilege escalation.',
       tags: 'htb medium linux ubuntu jackson deserialization h2 database json validator cve-2019-12384 systemd timer privilege escalation'
+    },
+    {
+      title: '[HTB] Forgotten',
+      url: '/2025/09/26/HTB-Forgotten.html',
+      excerpt: 'Easy HTB machine exploiting a vulnerable LimeSurvey installation — installer allowed plugin upload and RCE (reverse shell). Credentials leaked in environment variables enabled SSH access, and a writable host mount combined with a SUID bash trick yielded root. Clean, container-based escalation flow (LimeSurvey RCE → SSH foothold → SUID root shell).',
+      tags: 'htb easy linux limesurvey rce plugin-upload reverse-shell env-credentials ssh container mount sudo suid-bash privilege-escalation'
     }
   ];
   
