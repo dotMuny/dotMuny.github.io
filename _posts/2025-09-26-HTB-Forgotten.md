@@ -6,7 +6,7 @@ background: '/img/bg-machine.jpg'
 tags: [htb]
 ---
 
-![[/img/htb_img/Forgotten_img/img1.png]]
+![Forgotten](/img/htb_img/Forgotten_img/img1.png)
 
 - OS: Linux
 - Release Date: 16 Sep 2025
@@ -63,7 +63,7 @@ Nmap done: 1 IP address (1 host up) scanned in 8.79 seconds
 There is a SSH port open, aswell as a HTTP port.
 
 ## TCP 80
-![[/img/htb_img/Forgotten_img/img2.png]]
+![](/img/htb_img/Forgotten_img/img2.png)
 
 We get a 403 error when trying to see the webpage.
 
@@ -97,7 +97,7 @@ by Ben "epi" Risher                    ver: 2.11.0
 ```
 
 We found the directory `survey`, so let's take a look.
-![[/img/htb_img/Forgotten_img/img3.png]]
+![](/img/htb_img/Forgotten_img/img3.png)
 It's a LimeSurvey installer webpage.
 
 ### LimeSurvey
@@ -110,13 +110,13 @@ For this we need to deploy a MYSQL instance locally.
 ```
 
 After entering the necessary data on the webpage, we can see that the database has not yet  been created. We can click on create.
-![[/img/htb_img/Forgotten_img/img4.png]]
+![](/img/htb_img/Forgotten_img/img4.png)
 
 Then we click on `Populate Database`.
 After that, we can login with the administrator credentials.
-![[/img/htb_img/Forgotten_img/img5.png]]
+![](/img/htb_img/Forgotten_img/img5.png)
 
-![[/img/htb_img/Forgotten_img/img6.png]]
+![](/img/htb_img/Forgotten_img/img6.png)
 
 We can see that the version of LimeSurvey is `LimeSurvey CE 6.3.7+231127`.
 This has some vulnerabilities so we can exploit it
@@ -134,7 +134,7 @@ Resolving deltas: 100% (5/5), done.
 ```
 
 We need to edit the `config.xml` file to add compatibility to version 6.0
-![[/img/htb_img/Forgotten_img/img7.png]]
+![](/img/htb_img/Forgotten_img/img7.png)
 
 Then we need to modify the `php-rev.php`, to add our host and port for the reverse shell.
 After that, we can zip it and upload it.
@@ -147,11 +147,11 @@ updating: php-rev.php (deflated 61%)
 
 ## LimeSurvey plugin
 We upload the zipped plugin and make a curl to the endpoint to trigger the revshell.
-![[/img/htb_img/Forgotten_img/img8.png]]
+![](/img/htb_img/Forgotten_img/img8.png)
 
-![[/img/htb_img/Forgotten_img/img9.png]]
+![](/img/htb_img/Forgotten_img/img9.png)
 
-![[/img/htb_img/Forgotten_img/img10.png]]
+![](/img/htb_img/Forgotten_img/img10.png)
 
 ```
 [+] Listening for reverse shells on 0.0.0.0:4444 →  127.0.0.1 • 10.0.2.15 • 10.10.14.49 • 172.17.0.1
