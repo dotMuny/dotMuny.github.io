@@ -299,4 +299,50 @@ function setupTocScrollSpy() {
   $(window).trigger('scroll');
 }
 
+// ============================================
+// BACK TO TOP BUTTON
+// ============================================
+$(document).ready(function() {
+  // Create back to top button
+  const backToTopButton = $('<button id="backToTop" class="back-to-top" title="Volver arriba"><i class="fas fa-arrow-up"></i></button>');
+  $('body').append(backToTopButton);
+  
+  // Show/hide button based on scroll position
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 300) {
+      $('#backToTop').addClass('show');
+    } else {
+      $('#backToTop').removeClass('show');
+    }
+  });
+  
+  // Scroll to top when clicked
+  $('#backToTop').click(function() {
+    $('html, body').animate({ scrollTop: 0 }, 600);
+    return false;
+  });
+});
+
+// ============================================
+// READING PROGRESS BAR
+// ============================================
+$(document).ready(function() {
+  // Only show on post pages
+  if ($('.post-content').length || $('article').length) {
+    // Create progress bar
+    const progressBar = $('<div class="reading-progress"><div class="reading-progress-fill"></div></div>');
+    $('body').prepend(progressBar);
+    
+    // Update progress on scroll
+    $(window).scroll(function() {
+      const winHeight = $(window).height();
+      const docHeight = $(document).height();
+      const scrollTop = $(window).scrollTop();
+      const progress = (scrollTop / (docHeight - winHeight)) * 100;
+      
+      $('.reading-progress-fill').css('width', progress + '%');
+    });
+  }
+});
+
 

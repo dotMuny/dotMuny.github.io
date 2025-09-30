@@ -254,3 +254,171 @@ hr {
   }
 }
 
+/* ============================================
+   BACK TO TOP BUTTON
+   ============================================ */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: var(--link-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.back-to-top:hover {
+  background: var(--text-color);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.back-to-top:active {
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   READING PROGRESS BAR
+   ============================================ */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--border-color);
+  z-index: 9999;
+}
+
+.reading-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--link-color), #00d4ff);
+  width: 0%;
+  transition: width 0.1s ease;
+}
+
+/* ============================================
+   SOCIAL SHARE BUTTONS
+   ============================================ */
+.social-share {
+  margin: 30px 0;
+  padding: 25px;
+  background: var(--card-bg);
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.social-share h5 {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-share h5 i {
+  color: var(--link-color);
+}
+
+.share-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.share-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.share-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.share-button.twitter {
+  background: #1DA1F2;
+}
+
+.share-button.linkedin {
+  background: #0077B5;
+}
+
+.share-button.facebook {
+  background: #1877F2;
+}
+
+.share-button.reddit {
+  background: #FF4500;
+}
+
+.share-button.whatsapp {
+  background: #25D366;
+}
+
+.share-button.telegram {
+  background: #0088cc;
+}
+
+.share-button.copy-link {
+  background: var(--text-color);
+}
+
+.share-button.copied {
+  background: #22c55e;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS FOR NEW FEATURES
+   ============================================ */
+@media (max-width: 768px) {
+  .back-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+  
+  .social-share {
+    padding: 20px;
+  }
+  
+  .share-buttons {
+    gap: 10px;
+  }
+  
+  .share-button {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+}
+
