@@ -114,6 +114,20 @@
     max-width: 100%;
     height: auto;
   }
+  
+  // Make links more visible and clickable
+  a {
+    color: var(--link-color);
+    text-decoration: underline;
+    text-decoration-color: var(--link-color);
+    text-decoration-thickness: 1px;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      text-decoration-thickness: 2px;
+      opacity: 0.8;
+    }
+  }
 }
 
 // Dark mode support

@@ -20,6 +20,14 @@ htb_profile_id:     2106325
 
 # Build settings
 markdown:           kramdown
+
+# Kramdown settings
+kramdown:
+  auto_ids: true
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+
 plugins:
   - jekyll-feed
   - jekyll-sitemap
