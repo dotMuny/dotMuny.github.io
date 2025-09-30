@@ -47,6 +47,14 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-color);
 }
 
+/* Keep masthead titles always white */
+.masthead .post-heading h1,
+.masthead .post-heading h2,
+.masthead .page-heading h1,
+.masthead .site-heading h1 {
+  color: white !important;
+}
+
 
 /* Code blocks - Improved styling for better readability */
 pre {
