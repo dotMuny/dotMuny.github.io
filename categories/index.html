@@ -61,25 +61,3 @@ background: '/img/bg-post.jpg'
 
 </div>
 
-<hr class="my-4">
-
-<!-- Recent Posts by Category -->
-<h2 class="section-heading">Recent Posts by Category</h2>
-
-{% for category in site.data.categories %}
-  {% assign cat_posts = site.posts | where: "category", category[0] | sort: "date" | reverse %}
-  {% if cat_posts.size > 0 %}
-    <h3 class="category-section-title">
-      <span class="category-badge category-{{ category[0] }}">{{ category[1] }}</span>
-    </h3>
-    <ul class="category-post-list">
-      {% for post in cat_posts limit:5 %}
-        <li>
-          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-          <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
-        </li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endfor %}
-
