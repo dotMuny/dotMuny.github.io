@@ -59,5 +59,18 @@ background: '/img/bg-post.jpg'
     </a>
   </div>
 
+  <!-- OPSEC Category -->
+  {% assign opsec_posts = site.posts | where: "category", "opsec" %}
+  <div class="category-card">
+    <a href="{{ '/categories/opsec/' | relative_url }}">
+      <div class="category-icon">
+        <i class="fas fa-user-secret"></i>
+      </div>
+      <h3>OPSEC</h3>
+      <p class="category-count">{{ opsec_posts.size }} post{% if opsec_posts.size != 1 %}s{% endif %}</p>
+      <p class="category-description">Operational security, privacy and anonymity</p>
+    </a>
+  </div>
+
 </div>
 
