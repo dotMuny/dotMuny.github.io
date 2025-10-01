@@ -396,6 +396,199 @@ hr {
 }
 
 /* ============================================
+   CATEGORY SYSTEM
+   ============================================ */
+
+/* Category badges */
+.category-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: 10px;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.category-cybersecurity {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.category-hardware {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.category-software {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.category-tools {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+/* Category badge in post header */
+.post-category-badge {
+  margin-bottom: 15px;
+}
+
+.post-heading .category-badge {
+  font-size: 0.85rem;
+  padding: 6px 16px;
+}
+
+/* Category cards grid */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin: 30px 0;
+}
+
+.category-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.category-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--link-color), #00d4ff);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-color: var(--link-color);
+}
+
+.category-card:hover::before {
+  transform: scaleX(1);
+}
+
+.category-card a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.category-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: var(--link-color);
+}
+
+.category-card h3 {
+  margin: 15px 0 10px;
+  font-size: 1.5rem;
+  color: var(--text-color);
+}
+
+.category-count {
+  font-size: 0.9rem;
+  color: var(--link-color);
+  font-weight: 600;
+  margin: 5px 0;
+}
+
+.category-description {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+/* Category post list */
+.category-section-title {
+  margin: 25px 0 15px;
+  font-size: 1.3rem;
+}
+
+.category-post-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.category-post-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.category-post-list li:last-child {
+  border-bottom: none;
+}
+
+.category-post-list a {
+  color: var(--text-color);
+  text-decoration: none;
+  flex: 1;
+  transition: color 0.2s ease;
+}
+
+.category-post-list a:hover {
+  color: var(--link-color);
+}
+
+.post-date {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  white-space: nowrap;
+}
+
+/* Navbar dropdown styling */
+.navbar .dropdown-menu {
+  background: var(--navbar-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 10px 0;
+  margin-top: 8px;
+}
+
+.navbar .dropdown-item {
+  color: var(--navbar-text);
+  padding: 10px 20px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar .dropdown-item:hover {
+  background: var(--border-color);
+  color: var(--link-color);
+  padding-left: 25px;
+}
+
+.navbar .dropdown-item i {
+  width: 20px;
+  text-align: center;
+}
+
+.navbar .dropdown-divider {
+  border-top: 1px solid var(--border-color);
+  margin: 8px 0;
+}
+
+/* ============================================
    RESPONSIVE ADJUSTMENTS FOR NEW FEATURES
    ============================================ */
 @media (max-width: 768px) {
@@ -419,6 +612,20 @@ hr {
     width: 40px;
     height: 40px;
     font-size: 16px;
+  }
+  
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .category-badge {
+    font-size: 0.65rem;
+    padding: 3px 10px;
+  }
+  
+  .category-post-list li {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 

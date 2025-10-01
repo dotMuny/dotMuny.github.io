@@ -13,6 +13,11 @@ layout: default
       <div class="row">
         <div class="col-lg-10 col-md-12 mx-auto">
           <div class="post-heading">
+            {% if page.category %}
+            <div class="post-category-badge">
+              <span class="category-badge category-{{ page.category }}">{{ page.category | capitalize }}</span>
+            </div>
+            {% endif %}
             <h1>{{ page.title }}</h1>
             {% if page.subtitle %}
             <h2 class="subheading">{{ page.subtitle }}</h2>
