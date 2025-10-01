@@ -108,6 +108,12 @@ $(document).ready(function() {
       url: '/2025/09/29/HTB-Baby.html',
       excerpt: 'Easy AD/Windows DC box — LDAP enumeration exposed user metadata and an initial password; password-spray and a netexec password-change yielded Caroline.Robinson WinRM access. SeBackupPrivilege + DiskShadow were used to dump NTDS.dit and extract the Administrator hash (secretsdump), enabling full domain compromise via Evil-WinRM. Clean chain: LDAP enum → password spray/change → WinRM foothold → DiskShadow/NTDS dump → Administrator shell.',
       tags: 'htb easy windows active-directory ldap password-spray netexec change-password winrm evil-winrm sebackup diskshadow ntds.dit secretsdump credential-dump domain-compromise'
+    },
+    {
+      title: 'The Value of CTFs for Learning Cybersecurity',
+      url: '/2025/10/01/The-Value-of-CTFs-for-Learning-Cybersecurity.html',
+      excerpt: 'How Capture The Flag competitions build real-world hacking skills. Explore why CTFs are one of the most effective ways to develop pentesting abilities, learn offensive security, and prepare for certifications like OSCP.',
+      tags: 'cybersecurity ctf capture-the-flag hack-the-box htb tryhackme pentesting learning offensive-security oscp training hands-on education'
     }
   ];
   
