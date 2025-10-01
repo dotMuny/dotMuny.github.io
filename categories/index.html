@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Categorías"
+title: "Categories"
 permalink: /categories/
 background: '/img/bg-post.jpg'
 ---
@@ -16,7 +16,7 @@ background: '/img/bg-post.jpg'
       </div>
       <h3>Cybersecurity</h3>
       <p class="category-count">{{ cybersecurity_posts.size }} post{% if cybersecurity_posts.size != 1 %}s{% endif %}</p>
-      <p class="category-description">Seguridad informática, análisis de vulnerabilidades y pentesting</p>
+      <p class="category-description">Information security, vulnerability analysis and pentesting</p>
     </a>
   </div>
 
@@ -29,7 +29,7 @@ background: '/img/bg-post.jpg'
       </div>
       <h3>Hardware</h3>
       <p class="category-count">{{ hardware_posts.size }} post{% if hardware_posts.size != 1 %}s{% endif %}</p>
-      <p class="category-description">Hardware hacking, IoT y dispositivos físicos</p>
+      <p class="category-description">Hardware hacking, IoT and physical devices</p>
     </a>
   </div>
 
@@ -42,7 +42,7 @@ background: '/img/bg-post.jpg'
       </div>
       <h3>Software</h3>
       <p class="category-count">{{ software_posts.size }} post{% if software_posts.size != 1 %}s{% endif %}</p>
-      <p class="category-description">Desarrollo, programación y análisis de software</p>
+      <p class="category-description">Development, programming and software analysis</p>
     </a>
   </div>
 
@@ -55,7 +55,7 @@ background: '/img/bg-post.jpg'
       </div>
       <h3>Tools</h3>
       <p class="category-count">{{ tools_posts.size }} post{% if tools_posts.size != 1 %}s{% endif %}</p>
-      <p class="category-description">Herramientas y utilidades para hacking y desarrollo</p>
+      <p class="category-description">Hacking and development tools and utilities</p>
     </a>
   </div>
 
@@ -64,7 +64,7 @@ background: '/img/bg-post.jpg'
 <hr class="my-4">
 
 <!-- Recent Posts by Category -->
-<h2 class="section-heading">Posts Recientes por Categoría</h2>
+<h2 class="section-heading">Recent Posts by Category</h2>
 
 {% for category in site.data.categories %}
   {% assign cat_posts = site.posts | where: "category", category[0] | sort: "date" | reverse %}

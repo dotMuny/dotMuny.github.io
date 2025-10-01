@@ -304,7 +304,7 @@ function setupTocScrollSpy() {
 // ============================================
 $(document).ready(function() {
   // Create back to top button
-  const backToTopButton = $('<button id="backToTop" class="back-to-top" title="Volver arriba"><i class="fas fa-arrow-up"></i></button>');
+  const backToTopButton = $('<button id="backToTop" class="back-to-top" title="Back to Top"><i class="fas fa-arrow-up"></i></button>');
   $('body').append(backToTopButton);
   
   // Show/hide button based on scroll position
