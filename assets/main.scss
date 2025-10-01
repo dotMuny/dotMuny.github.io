@@ -439,6 +439,16 @@ hr {
   padding: 6px 16px;
 }
 
+/* Category badge in post previews/listings */
+.post-category-badge-preview {
+  margin-bottom: 10px;
+}
+
+.post-preview .category-badge {
+  font-size: 0.7rem;
+  padding: 4px 12px;
+}
+
 /* Category cards grid */
 .categories-grid {
   display: grid;
