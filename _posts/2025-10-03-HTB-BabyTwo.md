@@ -603,6 +603,7 @@ I append a one-liner that launches a PowerShell reverse shell (any small stager 
 1. Copy the original `login.vbs` locally.
 2. Append a VBScript block that spawns PowerShell (base64-encoded command) back to my attacker `nc` listener.
 3. Upload the modified script back to `SYSVOL`.
+
 ```
 WScript.Echo "Failed to map " & driveLetter & ": " & Err.Description
     End If
