@@ -114,6 +114,12 @@ $(document).ready(function() {
       url: '/2025/10/01/The-Value-of-CTFs-for-Learning-Cybersecurity.html',
       excerpt: 'How Capture The Flag competitions build real-world hacking skills. Explore why CTFs are one of the most effective ways to develop pentesting abilities, learn offensive security, and prepare for certifications like OSCP.',
       tags: 'cybersecurity ctf capture-the-flag hack-the-box htb tryhackme pentesting learning offensive-security oscp training hands-on education'
+    },
+    {
+      title: '[HTB] BabyTwo',
+      url: '/2025/10/03/HTB-BabyTwo.html',
+      excerpt: 'A guest-friendly DC leaks a logon script in SYSVOL; poisoning it pops a user shell, BloodHound shows ACL control over a GPO admin account, and pyGPOAbuse turns that into local Administrators and full compromise.',
+      tags: 'htb windows active-directory smb rid-cycling bloodhound sysvol logon-script powerview acls gpo pygpoabuse winrm hackthebox'
     }
   ];
   
