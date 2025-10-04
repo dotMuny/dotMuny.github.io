@@ -170,7 +170,7 @@ $(document).ready(function() {
   });
   
   // Initialize animated counter after posts array is defined
-  initAnimatedCounter();
+  initAnimatedCounter(posts);
 });
 
 // Add smooth scrolling for anchor links
@@ -363,12 +363,12 @@ $(document).ready(function() {
 // ============================================
 // ANIMATED COUNTER FOR HOME PAGE
 // ============================================
-function initAnimatedCounter() {
+function initAnimatedCounter(postsArray) {
   // Only run on home page
   if ($('.stats-counter').length) {
     // Count writeups and posts from the posts array
-    const writeups = posts.filter(post => post.title.startsWith('[HTB]'));
-    const regularPosts = posts.filter(post => !post.title.startsWith('[HTB]'));
+    const writeups = postsArray.filter(post => post.title.startsWith('[HTB]'));
+    const regularPosts = postsArray.filter(post => !post.title.startsWith('[HTB]'));
     
     const writeupsCount = writeups.length;
     const postsCount = regularPosts.length;
