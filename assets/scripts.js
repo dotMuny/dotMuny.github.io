@@ -357,4 +357,48 @@ $(document).ready(function() {
   }
 });
 
+// ============================================
+// ANIMATED COUNTER FOR HOME PAGE
+// ============================================
+$(document).ready(function() {
+  // Only run on home page
+  if ($('.stats-counter').length) {
+    // Count writeups and posts from the posts array
+    const writeups = posts.filter(post => post.title.startsWith('[HTB]'));
+    const regularPosts = posts.filter(post => !post.title.startsWith('[HTB]'));
+    
+    const writeupsCount = writeups.length;
+    const postsCount = regularPosts.length;
+    
+    // Animate counters
+    animateCounter('#writeupsCount', writeupsCount);
+    animateCounter('#postsCount', postsCount);
+  }
+});
+
+function animateCounter(selector, targetValue) {
+  const element = $(selector);
+  const duration = 1500; // 1.5 seconds
+  const startTime = Date.now();
+  
+  function updateCounter() {
+    const elapsed = Date.now() - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    
+    // Use easing function for smooth animation
+    const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+    const currentValue = Math.floor(easeOutQuart * targetValue);
+    
+    element.text(currentValue);
+    
+    if (progress < 1) {
+      requestAnimationFrame(updateCounter);
+    } else {
+      element.text(targetValue); // Ensure final value is exact
+    }
+  }
+  
+  requestAnimationFrame(updateCounter);
+}
+
 

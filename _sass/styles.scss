@@ -146,3 +146,40 @@
     background-color: var(--bs-secondary-bg);
   }
 }
+
+// ============================================
+// ANIMATED COUNTER STYLES
+// ============================================
+.stats-counter {
+  margin-top: 20px;
+  text-align: center;
+  
+  .counter-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--bs-body-color);
+    opacity: 0.9;
+    letter-spacing: 0.5px;
+    
+    .counter-number {
+      font-weight: 700;
+      color: var(--bs-primary);
+      font-size: 1.2rem;
+      display: inline-block;
+      min-width: 20px;
+      text-align: center;
+    }
+  }
+}
+
+// Dark mode support for counter
+[data-theme="dark"] {
+  .stats-counter .counter-text {
+    color: var(--bs-body-color);
+    opacity: 0.8;
+    
+    .counter-number {
+      color: var(--bs-primary);
+    }
+  }
+}
