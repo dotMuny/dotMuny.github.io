@@ -3,13 +3,12 @@ layout: post
 title: "[HTB] Delegate"
 description: "[Machine] - Medium difficulty"
 background: /img/bg-machine.jpg
-tags:
-  - htb
+tags: [htb]
 ---
 
 ![](/img/htb_img/Delegate_img/img1.png)
 
-- OS: Linux
+- OS: Windows
 - Release Date: 11 Sep 2025
 - Difficulty: Medium
 
