@@ -168,6 +168,9 @@ $(document).ready(function() {
       }
     }
   });
+  
+  // Initialize animated counter after posts array is defined
+  initAnimatedCounter();
 });
 
 // Add smooth scrolling for anchor links
@@ -360,7 +363,7 @@ $(document).ready(function() {
 // ============================================
 // ANIMATED COUNTER FOR HOME PAGE
 // ============================================
-$(document).ready(function() {
+function initAnimatedCounter() {
   // Only run on home page
   if ($('.stats-counter').length) {
     // Count writeups and posts from the posts array
@@ -374,7 +377,7 @@ $(document).ready(function() {
     animateCounter('#writeupsCount', writeupsCount);
     animateCounter('#postsCount', postsCount);
   }
-});
+}
 
 function animateCounter(selector, targetValue) {
   const element = $(selector);
