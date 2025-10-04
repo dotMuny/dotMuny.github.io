@@ -120,6 +120,12 @@ $(document).ready(function() {
       url: '/2025/10/03/HTB-BabyTwo.html',
       excerpt: 'A guest-friendly DC leaks a logon script in SYSVOL; poisoning it pops a user shell, BloodHound shows ACL control over a GPO admin account, and pyGPOAbuse turns that into local Administrators and full compromise.',
       tags: 'htb windows active-directory smb rid-cycling bloodhound sysvol logon-script powerview acls gpo pygpoabuse winrm hackthebox'
+    },
+    {
+      title: '[HTB] Delegate',
+      url: '/2025/10/04/HTB-Delegate.html',
+      excerpt: 'Medium HTB AD machine: SMB guest share leaks creds via a login script → BloodHound shows GenericWrite over a user; targeted Kerberoast yields password and WinRM shell; create a rogue computer, enable unconstrained delegation, coerce the DC (PrinterBug) to capture its TGT; DCSync to dump Administrator’s hash.',
+      tags: 'htb medium windows active-directory smb guest-share creds-leak bloodhound genericwrite targeted-kerberoast kerberoast winrm addcomputer unconstrained-delegation krbrelayx printerbug coercion dcsync privilege-escalation'
     }
   ];
   
