@@ -1,0 +1,76 @@
+---
+layout: page
+title: "Categories"
+permalink: /categories/
+background: '/img/bg-post.jpg'
+---
+
+<div class="categories-grid">
+  
+  <!-- Cybersecurity Category -->
+  {% assign cybersecurity_posts = site.posts | where: "category", "cybersecurity" %}
+  <div class="category-card">
+    <a href="{{ '/categories/cybersecurity/' | relative_url }}">
+      <div class="category-icon">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <h3>Cybersecurity</h3>
+      <p class="category-count">{{ cybersecurity_posts.size }} post{% if cybersecurity_posts.size != 1 %}s{% endif %}</p>
+      <p class="category-description">Information security, vulnerability analysis and pentesting</p>
+    </a>
+  </div>
+
+  <!-- Hardware Category -->
+  {% assign hardware_posts = site.posts | where: "category", "hardware" %}
+  <div class="category-card">
+    <a href="{{ '/categories/hardware/' | relative_url }}">
+      <div class="category-icon">
+        <i class="fas fa-microchip"></i>
+      </div>
+      <h3>Hardware</h3>
+      <p class="category-count">{{ hardware_posts.size }} post{% if hardware_posts.size != 1 %}s{% endif %}</p>
+      <p class="category-description">Hardware hacking, IoT and physical devices</p>
+    </a>
+  </div>
+
+  <!-- Software Category -->
+  {% assign software_posts = site.posts | where: "category", "software" %}
+  <div class="category-card">
+    <a href="{{ '/categories/software/' | relative_url }}">
+      <div class="category-icon">
+        <i class="fas fa-code"></i>
+      </div>
+      <h3>Software</h3>
+      <p class="category-count">{{ software_posts.size }} post{% if software_posts.size != 1 %}s{% endif %}</p>
+      <p class="category-description">Development, programming and software analysis</p>
+    </a>
+  </div>
+
+  <!-- Tools Category -->
+  {% assign tools_posts = site.posts | where: "category", "tools" %}
+  <div class="category-card">
+    <a href="{{ '/categories/tools/' | relative_url }}">
+      <div class="category-icon">
+        <i class="fas fa-tools"></i>
+      </div>
+      <h3>Tools</h3>
+      <p class="category-count">{{ tools_posts.size }} post{% if tools_posts.size != 1 %}s{% endif %}</p>
+      <p class="category-description">Hacking and development tools and utilities</p>
+    </a>
+  </div>
+
+  <!-- OPSEC Category -->
+  {% assign opsec_posts = site.posts | where: "category", "opsec" %}
+  <div class="category-card">
+    <a href="{{ '/categories/opsec/' | relative_url }}">
+      <div class="category-icon">
+        <i class="fas fa-user-secret"></i>
+      </div>
+      <h3>OPSEC</h3>
+      <p class="category-count">{{ opsec_posts.size }} post{% if opsec_posts.size != 1 %}s{% endif %}</p>
+      <p class="category-description">Operational security, privacy and anonymity</p>
+    </a>
+  </div>
+
+</div>
+

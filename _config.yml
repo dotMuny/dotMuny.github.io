@@ -1,0 +1,62 @@
+title:              dotMuny
+email:              
+description:        Technology Research & Cybersecurity
+author:             dotMuny
+baseurl:            ""
+url:                "https://dotmuny.github.io"
+
+# Social Profiles
+twitter_username:   
+github_username:    dotMuny
+facebook_username:  
+instagram_username:  
+linkedin_username:
+
+# Add your google-analytics ID here to activate google analytics
+google_analytics:   UA-XXXXXXXXX-X # out your google-analytics code
+
+# HTB Profile settings
+htb_profile_id:     2106325
+
+# Build settings
+markdown:           kramdown
+highlighter:        rouge
+
+# Kramdown settings
+kramdown:
+  auto_ids: true
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-paginate-v2
+
+# Pagination for posts page (only posts with 'posts' tag)
+pagination:
+  enabled: true
+  per_page: 5
+  permalink: '/posts/page:num/'
+  title: ':title - page :num'
+  sort_field: 'date'
+  sort_reverse: true
+  trail:
+    before: 2
+    after: 2
+
+# Collection for HTB (sigue igual)
+collections:
+  htb:
+    output: true
+    permalink: /htb/:path/
+
+htb_paginate:
+  enabled: true
+  per_page: 5
+  paginate_path: "/htb/page:num/"
+  collection: htb
+

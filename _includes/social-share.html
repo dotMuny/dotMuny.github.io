@@ -1,0 +1,85 @@
+<!-- Social Share Buttons -->
+<div class="social-share">
+  <h5><i class="fas fa-share-alt"></i> Share:</h5>
+  <div class="share-buttons">
+    <!-- Twitter -->
+    <a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ page.url | absolute_url | url_encode }}&via={{ site.twitter_username }}" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="share-button twitter"
+       title="Share on Twitter">
+      <i class="fab fa-twitter"></i>
+    </a>
+    
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ page.url | absolute_url | url_encode }}" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="share-button linkedin"
+       title="Share on LinkedIn">
+      <i class="fab fa-linkedin-in"></i>
+    </a>
+    
+    <!-- Facebook -->
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url | url_encode }}" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="share-button facebook"
+       title="Share on Facebook">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    
+    <!-- Reddit -->
+    <a href="https://reddit.com/submit?url={{ page.url | absolute_url | url_encode }}&title={{ page.title | url_encode }}" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="share-button reddit"
+       title="Share on Reddit">
+      <i class="fab fa-reddit-alien"></i>
+    </a>
+    
+    <!-- WhatsApp -->
+    <a href="https://api.whatsapp.com/send?text={{ page.title | url_encode }}%20{{ page.url | absolute_url | url_encode }}" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="share-button whatsapp"
+       title="Share on WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <!-- Telegram -->
+    <a href="https://t.me/share/url?url={{ page.url | absolute_url | url_encode }}&text={{ page.title | url_encode }}" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="share-button telegram"
+       title="Share on Telegram">
+      <i class="fab fa-telegram-plane"></i>
+    </a>
+    
+    <!-- Copy Link -->
+    <button class="share-button copy-link" 
+            onclick="copyToClipboard('{{ page.url | absolute_url }}')" 
+            title="Copy link">
+      <i class="fas fa-link"></i>
+    </button>
+  </div>
+</div>
+
+<script>
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(function() {
+    // Show feedback
+    const btn = event.currentTarget;
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-check"></i>';
+    btn.classList.add('copied');
+    
+    setTimeout(function() {
+      btn.innerHTML = originalHTML;
+      btn.classList.remove('copied');
+    }, 2000);
+  }, function(err) {
+    console.error('Error al copiar: ', err);
+  });
+}
+</script>

@@ -1,0 +1,35 @@
+---
+layout: page
+title: "Hack The Box"
+permalink: /htb/
+background: '/img/bg-htb.jpeg'
+---
+
+<!-- Show only posts tagged with 'htb' -->
+{% assign htb_posts = site.posts | where_exp: "post", "post.tags contains 'htb'" %}
+
+{% for post in htb_posts %}
+  <article class="post-preview">
+    {% if post.tags contains 'htb' %}
+    <div class="post-htb-badge-preview">
+      <span class="htb-badge htb-difficulty-{{ post.difficulty | downcase }}">Hack The Box - {{ post.difficulty | capitalize }}</span>
+    </div>
+    {% endif %}
+    <a href="{{ post.url | relative_url }}">
+      <h2 class="post-title">{{ post.title }}</h2>
+      {% if post.subtitle %}
+        <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+      {% else %}
+        <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
+      {% endif %}
+    </a>
+    <p class="post-meta">Posted on {{ post.date | date: "%B %d, %Y" }}</p>
+  </article>
+{% endfor %}
+
+<!-- Show message if no HTB posts -->
+{% if htb_posts.size == 0 %}
+<div class="text-center">
+  <p>No Hack The Box writeups available yet. Check back soon!</p>
+</div>
+{% endif %}

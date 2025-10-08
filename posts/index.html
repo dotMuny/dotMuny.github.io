@@ -1,0 +1,46 @@
+---
+layout: page
+title: Posts
+background: '/img/bg-post.jpg'
+---
+
+<!-- Show only posts tagged with 'posts' -->
+{% assign regular_posts = site.posts | where_exp: "post", "post.tags contains 'posts'" %}
+
+{% for post in regular_posts %}
+  <article class="post-preview">
+    {% if post.category %}
+    <div class="post-category-badge-preview">
+      <span class="category-badge category-{{ post.category }}">{{ post.category | capitalize }}</span>
+    </div>
+    {% endif %}
+    {% if post.tags contains 'htb' %}
+    <div class="post-htb-badge-preview">
+      <span class="htb-badge htb-difficulty-{{ post.difficulty | downcase }}">Hack The Box - {{ post.difficulty | capitalize }}</span>
+    </div>
+    {% endif %}
+    <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
+      <h2 class="post-title">{{ post.title }}</h2>
+      {% if post.subtitle %}
+      <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+      {% else %}
+      <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
+      {% endif %}
+    </a>
+    <p class="post-meta">Posted by
+      {% if post.author %}
+      {{ post.author }}
+      {% else %}
+      {{ site.author }}
+      {% endif %}
+      on {{ post.date | date: '%B %d, %Y' }} &middot; {% include read_time.html content=post.content %}
+    </p>
+  </article>
+{% endfor %}
+
+<!-- Show message if no posts -->
+{% if regular_posts.size == 0 %}
+<div class="text-center">
+  <p>No posts available yet. Check back soon!</p>
+</div>
+{% endif %}
