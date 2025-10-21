@@ -156,6 +156,12 @@ $(document).ready(function() {
       url: '/opsec/2025/10/08/What-OPSEC-Really-Is.html',
       excerpt: 'Discover what OPSEC really is and how it extends far beyond InfoSec and privacy. Learn the 5 core principles, real-world examples, and practical applications of Operational Security for individuals and organizations in the digital age.',
       tags: 'cybersecurity opsec operational-security privacy infosec personal-security digital-hygiene threat-modeling security-awareness behavioral-security'
+    },
+    {
+      title: '[HTB] Down',
+      url: '/2025/10/20/HTB-Down.html',
+      excerpt: 'Easy HTB Linux machine. SSRF by abusing curl’s multi-URL support to read local files and recover source, revealing a TCP “expert mode”. A port parameter validation bug allowed netcat **parameter injection** (`-e /bin/bash`) for a www-data shell. Local loot included a `pswm` vault; mirroring its `cryptocode.decrypt` call with rockyou popped the master key and user password. `sudo ALL` on the user made root trivial.',
+      tags: 'htb easy linux ssrf curl multi-url file-read php source-disclosure netcat parameter-injection reverse-shell pswm cryptocode rockyou su ssh sudo-all privilege-escalation'
     }
   ];
   
