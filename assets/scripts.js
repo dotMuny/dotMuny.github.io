@@ -162,6 +162,12 @@ $(document).ready(function() {
       url: '/2025/10/20/HTB-Down.html',
       excerpt: 'Easy HTB Linux machine. SSRF by abusing curl’s multi-URL support to read local files and recover source, revealing a TCP “expert mode”. A port parameter validation bug allowed netcat **parameter injection** (`-e /bin/bash`) for a www-data shell. Local loot included a `pswm` vault; mirroring its `cryptocode.decrypt` call with rockyou popped the master key and user password. `sudo ALL` on the user made root trivial.',
       tags: 'htb easy linux ssrf curl multi-url file-read php source-disclosure netcat parameter-injection reverse-shell pswm cryptocode rockyou su ssh sudo-all privilege-escalation'
+    },
+    {
+      title: '[HTB] Reset',
+      url: '/2025/11/03/HTB-Reset.html',
+      excerpt: 'Easy HTB Linux machine. Forgot password endpoint leaked temporary credentials enabling dashboard access. Log poisoning via Apache access.log User-Agent field yielded a www-data reverse shell. Lateral movement via Rservices (rlogin) using hosts.equiv trust, then privilege escalation leveraging sudo nano access to drop a root shell.',
+      tags: 'htb easy linux forgot-password log-poisoning apache access.log user-agent rservices rlogin hosts.equiv lateral-movement sudo nano privilege-escalation'
     }
   ];
   
