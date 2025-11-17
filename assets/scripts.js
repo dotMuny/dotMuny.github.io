@@ -168,6 +168,12 @@ $(document).ready(function() {
       url: '/2025/11/03/HTB-Reset.html',
       excerpt: 'Easy HTB Linux machine. Forgot password endpoint leaked temporary credentials enabling dashboard access. Log poisoning via Apache access.log User-Agent field yielded a www-data reverse shell. Lateral movement via Rservices (rlogin) using hosts.equiv trust, then privilege escalation leveraging sudo nano access to drop a root shell.',
       tags: 'htb easy linux forgot-password log-poisoning apache access.log user-agent rservices rlogin hosts.equiv lateral-movement sudo nano privilege-escalation'
+    },
+    {
+      title: '[HTB] Academy',
+      url: '/2025/11/17/HTB-Academy.html',
+      excerpt: 'Easy HTB Linux machine. Web fuzzing revealed admin.php; modifying roleid parameter during registration granted admin access, exposing a Laravel staging subdomain. Laravel CVE-2018-15133 token unserialize RCE using exposed APP_KEY yielded a www-data shell. Lateral movement via .env database credentials to cry0l1t3, then aureport audit logs revealed mrb3n password. Privilege escalation through sudo composer GTFOBins technique.',
+      tags: 'htb easy linux laravel cve-2018-15133 token-unserialize rce app-key reverse-shell env-credentials lateral-movement aureport audit-logs sudo composer privilege-escalation'
     }
   ];
   
