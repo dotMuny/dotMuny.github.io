@@ -174,6 +174,12 @@ $(document).ready(function() {
       url: '/2025/11/17/HTB-Academy.html',
       excerpt: 'Easy HTB Linux machine. Web fuzzing revealed admin.php; modifying roleid parameter during registration granted admin access, exposing a Laravel staging subdomain. Laravel CVE-2018-15133 token unserialize RCE using exposed APP_KEY yielded a www-data shell. Lateral movement via .env database credentials to cry0l1t3, then aureport audit logs revealed mrb3n password. Privilege escalation through sudo composer GTFOBins technique.',
       tags: 'htb easy linux laravel cve-2018-15133 token-unserialize rce app-key reverse-shell env-credentials lateral-movement aureport audit-logs sudo composer privilege-escalation'
+    },
+    {
+      title: 'Vishing',
+      url: '/2025/11/22/Vishing.html',
+      excerpt: 'Defending against real-time AI vishing attacks powered by voice cloning. Learn how attackers use just 3 seconds of audio to impersonate voices, why technical detection fails, and practical countermeasures including verification phrases and multi-factor authentication.',
+      tags: 'cybersecurity vishing voice-phishing ai deepfake voice-cloning social-engineering vall-e sovits real-time-synthesis verification-phrases multi-factor-authentication security-awareness'
     }
   ];
   
