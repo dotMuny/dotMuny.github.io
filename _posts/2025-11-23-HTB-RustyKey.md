@@ -270,13 +270,11 @@ We will perform a Timeroasting attack. Timeroasting is a technique that exploits
 
 [https://github.com/SecuraBV/Timeroast.git](https://github.com/SecuraBV/Timeroast.git)
 
-> Timeroasting takes advantage of Windows' NTP authentication mechanism, allowing unauthenticated attackers to effectively request a password hash of any computer or trust account by sending an NTP request with that account's RID. This is not a problem when computer accounts are properly generated, but if a non-standard or legacy default password is set this tool allows you to brute-force those offline.
-> 
-> 
-> Three scripts are included:
-> 
-> [timeroast.py](http://timeroast.py/): given a DC domain name or IP, will attempt to get 'NTP hashes' of the computer/trust accounts in the domain by enumerating RID's.
-> 
+Timeroasting exploits the Windows NTP authentication mechanism. This allows unauthenticated attackers to request and obtain a password hash for any computer or trust account by sending an NTP request using the account's RID. Normally, this is not an issue if computer account passwords are randomly and securely generated. However, if weak, non-standard, or legacy default passwords are set, this technique enables offline brute-forcing.
+
+The Timeroast toolkit comes with three different scripts.
+
+The first script, timeroast.py, takes a domain controller's domain name or IP address and will attempt to collect 'NTP hashes' from computer and trust accounts in the domain by enumerating RIDs.
 
 ```bash
 ❯ python3 timeroast.py $target -o rustykey.hashes
@@ -296,17 +294,68 @@ Traceback (most recent call last):
 UnicodeDecodeError: 'utf-8' codec can't decode byte 0xf1 in position 933: invalid continuation byte
 ```
 
-The script encounters encoding errors when trying to read the wordlist file. This is a common issue when dealing with files that contain non-UTF-8 characters. We fix this by modifying the script to handle the encoding properly.
+The script had a UnicodeDecodeError when reading the wordlist file because some passwords in rockyou.txt (and similar lists) aren’t valid UTF-8. To fix this, we need to open the wordlist file with a more tolerant encoding and make a few adjustments to the script.
 
-| **Line(s)** | **Original code** | **Modified code & explanation** |
-| --- | --- | --- |
-| **~ Line 36** (Function definition) | **`def try_crack(hashfile : TextIO, dictfile : TextIO) -> Generator[Tuple[int, str], None, None]:`** | **`def try_crack(hashfile : TextIO, dictpath : str) -> Generator[Tuple[int, str], None, None]:`
+**Here’s how you fix it:**
 
-Explanation:** The second parameter was changed from **`dictfile`** (a file object) to **`dictpath`** (a string containing the file path). This allows us to control *how* the file is opened inside the function. |
-| **~ Lines 44-46** (Dictionary file handling) | **`python<br>for password in dictfile:<br> password = password.strip()<br> for rid, hashval, salt in hashes:<br> # ...<br>``````python<br>with open(dictpath, 'r', encoding='latin-1') as dictfile:<br> for password in dictfile:<br> password = password.strip()<br> for rid, hashval, salt in hashes:<br> # ...<br>`** |  |
-| **~ Line 65** (Argument parser) | **`argparser.add_argument('dictionary', type=FileType('r'), help='Line-delimited password dictionary')`** | **`argparser.add_argument('dictionary', type=str, help='Line-delimited password dictionary')`
+1. **Change the function signature:**  
+   Originally, the function looked like this:
+   ```python
+   def try_crack(hashfile : TextIO, dictfile : TextIO) -> Generator[Tuple[int, str], None, None]:
+   ```
+   Change it to:
+   ```python
+   def try_crack(hashfile : TextIO, dictpath : str) -> Generator[Tuple[int, str], None, None]:
+   ```
+   Now, instead of passing an open file for the dictionary, you pass the path as a string. This gives us full control over how to open the file (with any encoding we want).
 
-Explanation:** The argument type was changed from **`type=FileType('r')`** to **`type=str`**. This is necessary for the program to receive the dictionary path as a text string instead of trying to open the file itself, allowing our **`try_crack`** function to handle it |
+2. **Open the dictionary file using 'latin-1' encoding inside the function:**  
+   Replace:
+   ```python
+   for password in dictfile:
+       password = password.strip()
+       # ...
+   ```
+   with:
+   ```python
+   with open(dictpath, 'r', encoding='latin-1') as dictfile:
+       for password in dictfile:
+           password = password.strip()
+           # ...
+   ```
+   This ensures the script can read even “broken” encodings in the wordlist without crashing.
+
+3. **Update the argument parser:**  
+   Change this line:
+   ```python
+   argparser.add_argument('dictionary', type=FileType('r'), help='Line-delimited password dictionary')
+   ```
+   to:
+   ```python
+   argparser.add_argument('dictionary', type=str, help='Line-delimited password dictionary')
+   ```
+   Now argparse just passes a string (the file path), not an open file. This matches the new function parameter and allows you to open the file as needed inside the function.
+
+**In summary:**  
+Instead of letting argparse open your wordlist file and risking encoding issues, you handle opening it yourself with `encoding='latin-1'` inside the script. This makes the script much more robust for big international wordlists.
+
+Example of what to change:
+```python
+# BEFORE
+def try_crack(hashfile : TextIO, dictfile : TextIO):
+    for password in dictfile:
+        password = password.strip()
+        # (rest of logic)
+
+# AFTER
+def try_crack(hashfile : TextIO, dictpath : str):
+    with open(dictpath, 'r', encoding='latin-1') as dictfile:
+        for password in dictfile:
+            password = password.strip()
+            # (rest of logic)
+```
+And update argparse to use `type=str` for the password dictionary argument.
+
 
 ```bash
 ❯ python3 timecrack_fixed.py rustykey.hashes /usr/share/wordlists/rockyou.txt
