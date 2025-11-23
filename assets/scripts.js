@@ -180,6 +180,12 @@ $(document).ready(function() {
       url: '/2025/11/22/Vishing.html',
       excerpt: 'Defending against real-time AI vishing attacks powered by voice cloning. Learn how attackers use just 3 seconds of audio to impersonate voices, why technical detection fails, and practical countermeasures including verification phrases and multi-factor authentication.',
       tags: 'cybersecurity vishing voice-phishing ai deepfake voice-cloning social-engineering vall-e sovits real-time-synthesis verification-phrases multi-factor-authentication security-awareness'
+    },
+    {
+      title: '[HTB] Voleur',
+      url: '/2025/11/23/HTB-Voleur.html',
+      excerpt: 'Medium HTB AD machine. SMB enumeration revealed encrypted Excel file with credentials; BloodHound showed WriteSPN permission enabling targeted Kerberoast to crack svc_winrm password. Lateral movement via RESTORE USERS group to recover deleted AD user (todd.wolfe), DPAPI decryption revealed jeremy.combs credentials. WSL access via SSH key allowed NTDS.dit dump from backups, secretsdump extracted Administrator hash for domain compromise.',
+      tags: 'htb medium windows active-directory smb kerberos bloodhound writespn targeted-kerberoast kerberoast evil-winrm restore-users deleted-objects dpapi credential-decryption wsl ssh ntds.dit secretsdump domain-compromise'
     }
   ];
   
