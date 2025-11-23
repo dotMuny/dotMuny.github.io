@@ -186,6 +186,12 @@ $(document).ready(function() {
       url: '/2025/11/23/HTB-Voleur.html',
       excerpt: 'Medium HTB AD machine. SMB enumeration revealed encrypted Excel file with credentials; BloodHound showed WriteSPN permission enabling targeted Kerberoast to crack svc_winrm password. Lateral movement via RESTORE USERS group to recover deleted AD user (todd.wolfe), DPAPI decryption revealed jeremy.combs credentials. WSL access via SSH key allowed NTDS.dit dump from backups, secretsdump extracted Administrator hash for domain compromise.',
       tags: 'htb medium windows active-directory smb kerberos bloodhound writespn targeted-kerberoast kerberoast evil-winrm restore-users deleted-objects dpapi credential-decryption wsl ssh ntds.dit secretsdump domain-compromise'
+    },
+    {
+      title: '[HTB] RustyKey',
+      url: '/2025/11/23/HTB-RustyKey.html',
+      excerpt: 'Hard HTB AD machine. LDAP enumeration and BloodHound revealed attack paths. Timeroasting attack extracted computer account password (IT-COMPUTER3$). Machine account added itself to HELPDESK group, removed IT from Protected Objects, changed bb.morgan password. Lateral movement to ee.reed via RunasCs, COM hijacking for privilege escalation, unconstrained delegation configuration. S4U2 impersonation of backupadmin for domain admin access.',
+      tags: 'htb hard windows active-directory ldap bloodhound timeroasting ntp computer-account bloodyad helpdesk protected-objects lateral-movement runascs com-hijacking unconstrained-delegation s4u2 impersonation domain-admin'
     }
   ];
   
