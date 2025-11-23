@@ -12,12 +12,16 @@ difficulty: Medium
 - Release Date: 05 Jul 2025
 - Difficulty: Medium
 
+<br>
+
 # Info
 
 Initial credentials:
 
 > ryan.naylor / HollowOct31Nyt
 > 
+
+<br>
 
 # Enumeration
 
@@ -313,20 +317,23 @@ INFO: Done in 00M 12S
 
 ---
 
+<br>
+
 # Foothold
 
 After analyzing the BloodHound data, we discover that the user **SVC_LDAP** has the `WriteSPN` permission on **SVC_WINRM**. 
 
 `WriteSPN` (Service Principal Name) is an Active Directory permission that allows a user to modify the SPN attribute of another user or computer account. This is particularly dangerous because it enables a targeted Kerberoast attack. In a targeted Kerberoast attack, an attacker with `WriteSPN` permissions can add a fake SPN to a target account, request a service ticket for that SPN, and then crack the resulting hash offline to obtain the account's password.
 
-> A targeted kerberoast attack can be performed using [targetedKerberoast.py](http://targetedkerberoast.py/).
-> 
-> 
-> [targetedKerberoast.py](http://targetedkerberoast.py/) -v -d 'domain.local' -u 'controlledUser' -p 'ItsPassword'
-> The tool will automatically attempt a targetedKerberoast attack, either on all users or against a specific one if specified in the command line, and then obtain a crackable hash. The cleanup is done automatically as well.
-> 
-> The recovered hash can be cracked offline using the tool of your choice.
-> 
+You can perform a targeted Kerberoast attack using the script `targetedKerberoast.py`.
+
+Example usage:
+```
+python3 targetedKerberoast.py -v -d 'domain.local' -u 'controlledUser' -p 'ItsPassword'
+```
+The tool will automatically try a targeted Kerberoast attack, either on all users or a specific user if specified in the command, and will extract a crackable hash. It also handles cleanup automatically.
+
+The retrieved hash can then be cracked offline using any tool you prefer.
 
 ```bash
 ❯ python3 targetedKerberoast.py -k --dc-host dc.voleur.htb -u svc_ldap -d voleur.htb                   
@@ -366,6 +373,8 @@ Info: Establishing connection to remote endpoint
 ```
 
 ---
+
+<br>
 
 # Lateral Movement
 
@@ -547,6 +556,8 @@ Thanks,
 
 Admin%
 ```
+
+<br>
 
 # Privilege Escalation
 
