@@ -182,6 +182,12 @@ $(document).ready(function() {
       tags: 'htb easy linux laravel cve-2018-15133 token-unserialize rce app-key reverse-shell env-credentials lateral-movement aureport audit-logs sudo composer privilege-escalation'
     },
     {
+      title: '[HTB] Mirage',
+      url: '/2025/11/22/HTB-Mirage.html',
+      excerpt: 'Hard HTB AD machine. NFS share revealed DNS misconfiguration for nats-svc. DNS spoofing and fake NATS server captured Dev_Account_A credentials. NATS consumer revealed david.jjackson credentials. Kerberoasting yielded nathan.aadam password. BloodHound showed ForceChangePassword chain: mark.bbond → javier.mmarshall → ReadGMSAPassword on Mirage-Service$. ESC10 abuse via weak certificate mapping (Schannel) enabled UPN manipulation, certificate enrollment, and RBCD to compromise domain controller via secretsdump.',
+      tags: 'htb hard windows active-directory nfs dns-spoofing nats-server credential-capture kerberoasting bloodhound forcechangepassword gmsa esc10 certificate-mapping schannel upn-manipulation certipy-ad rbcd s4u2 secretsdump domain-compromise'
+    },
+    {
       title: 'Vishing',
       url: '/2025/11/22/Vishing.html',
       excerpt: 'Defending against real-time AI vishing attacks powered by voice cloning. Learn how attackers use just 3 seconds of audio to impersonate voices, why technical detection fails, and practical countermeasures including verification phrases and multi-factor authentication.',
