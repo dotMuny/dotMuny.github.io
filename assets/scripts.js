@@ -170,6 +170,12 @@ $(document).ready(function() {
       tags: 'htb easy linux forgot-password log-poisoning apache access.log user-agent rservices rlogin hosts.equiv lateral-movement sudo nano privilege-escalation'
     },
     {
+      title: '[HTB] Outbound',
+      url: '/2025/11/15/HTB-Outbound.html',
+      excerpt: 'Easy HTB Linux machine. Roundcube webmail RCE (CVE-2025-49113) via Metasploit yielded www-data shell. Password reuse enabled lateral movement to tyler, then database credentials revealed jacob password. Decrypted Roundcube session data using DES3 key to extract jacob credentials. SSH access as jacob, then symlink attack on writable log file (/var/log/below/error_root.log) to overwrite /etc/passwd and gain root access.',
+      tags: 'htb easy linux roundcube webmail rce cve-2025-49113 metasploit meterpreter password-reuse database credentials des3 decryption ssh symlink attack privilege-escalation /etc/passwd'
+    },
+    {
       title: '[HTB] Academy',
       url: '/2025/11/17/HTB-Academy.html',
       excerpt: 'Easy HTB Linux machine. Web fuzzing revealed admin.php; modifying roleid parameter during registration granted admin access, exposing a Laravel staging subdomain. Laravel CVE-2018-15133 token unserialize RCE using exposed APP_KEY yielded a www-data shell. Lateral movement via .env database credentials to cry0l1t3, then aureport audit logs revealed mrb3n password. Privilege escalation through sudo composer GTFOBins technique.',
