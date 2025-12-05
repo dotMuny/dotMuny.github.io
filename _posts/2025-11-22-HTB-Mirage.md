@@ -9,8 +9,6 @@ difficulty: Hard
 
 ![Mirage](/img/htb_img/Mirage_img/Mirage.png)
 
-Mirage
-
 # Enumeration
 ## Nmap recon
 

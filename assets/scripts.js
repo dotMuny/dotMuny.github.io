@@ -206,6 +206,12 @@ $(document).ready(function() {
       tags: 'htb hard windows active-directory ldap bloodhound timeroasting ntp computer-account bloodyad helpdesk protected-objects lateral-movement runascs com-hijacking unconstrained-delegation s4u2 impersonation domain-admin'
     },
     {
+      title: '[HTB] Era',
+      url: '/2025/11/29/HTB-Era.html',
+      excerpt: 'Medium HTB Linux machine. Subdomain enumeration revealed file.era.htb with file upload functionality. IDOR vulnerability in download.php allowed access to SQLite backup containing bcrypt password hashes. Password cracking with John the Ripper yielded yuri and eric credentials. SSH2 stream wrapper exploitation via IDOR enabled reverse shell as eric. Privilege escalation by replacing /opt/AV/periodic-checks/monitor binary with backdoored version, copying signature section to bypass integrity checks, and executing SUID bash.',
+      tags: 'htb medium linux subdomain-enumeration idor sqlite backup bcrypt john-the-ripper password-cracking ssh2 stream-wrapper reverse-shell privilege-escalation binary-replacement signature-bypass suid bash'
+    },
+    {
       title: '[HTB] RetroTwo',
       url: '/2025/12/05/HTB-RetroTwo.html',
       excerpt: 'Easy HTB AD machine. SMB guest access revealed an Access database file; password cracking with John the Ripper yielded ldapreader credentials. BloodHound showed PRE-WINDOWS 2000 COMPATIBLE ACCESS group membership for FS01, allowing password reset via bloodyAD. ADMWS01$ account manipulation added ldapreader to Services group for RDP access. Zerologon (CVE-2020-1472) exploitation enabled domain controller compromise via secretsdump.',
