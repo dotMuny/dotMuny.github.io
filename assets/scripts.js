@@ -216,6 +216,12 @@ $(document).ready(function() {
       url: '/2025/12/05/HTB-RetroTwo.html',
       excerpt: 'Easy HTB AD machine. SMB guest access revealed an Access database file; password cracking with John the Ripper yielded ldapreader credentials. BloodHound showed PRE-WINDOWS 2000 COMPATIBLE ACCESS group membership for FS01, allowing password reset via bloodyAD. ADMWS01$ account manipulation added ldapreader to Services group for RDP access. Zerologon (CVE-2020-1472) exploitation enabled domain controller compromise via secretsdump.',
       tags: 'htb easy windows active-directory smb guest-access access-database john-the-ripper ldapreader bloodhound pre-windows-2000-compatible-access bloodyad password-reset services-group rdp zerologon cve-2020-1472 secretsdump domain-compromise'
+    },
+    {
+      title: '[HTB] Help',
+      url: '/2025/12/06/HTB-Help.html',
+      excerpt: 'Easy HTB Linux machine. GraphQL endpoint on port 3000 revealed user credentials via introspection queries. Password hash cracking yielded helpme@helpme.com credentials for HelpDeskZ. Authenticated SQL injection in ticket attachment download enabled database dump, revealing admin password. SSH password spray attack with hydra yielded help user access. Linux kernel 4.4.0-116 privilege escalation exploit (CVE-2017-16995) granted root access.',
+      tags: 'htb easy linux graphql introspection password-cracking helpdeskz sql-injection sqlmap hydra password-spray ssh kernel-exploit cve-2017-16995 privilege-escalation'
     }
   ];
   
