@@ -252,6 +252,18 @@ $(document).ready(function() {
       url: '/2026/03/03/HTB-HackNeT.html',
       excerpt: 'HackNeT is a Medium Linux machine exploiting a Django SSTI in a username field to leak credentials, followed by a malicious Python pickle deserialization attack against Djangos cache for lateral movement, and GPG key cracking to recover a root password from an encrypted SQL backup.',
       tags: 'security htb linux django ssti pickle deserialization gpg medium'
+    },
+    {
+      title: '[HTB] Imagery',
+      url: '/2026/03/03/HTB-Imagery.html',
+      excerpt: 'Imagery is a Medium Linux machine exploiting XSS in a bug report form to steal an admin session cookie, chaining an LFI to recover credentials from a JSON database, injecting a reverse shell through an ImageMagick crop parameter, and abusing a custom backup tool with cron scheduling to set the SUID bit on bash.',
+      tags: 'security htb linux xss lfi imagemagick aes cracking privesc medium'
+    },
+    {
+      title: '[HTB] Previous',
+      url: '/2026/03/03/HTB-Previous.html',
+      excerpt: 'Previous is a Medium Linux machine exploiting a Next.js middleware authentication bypass (CVE-2025-29927) combined with an LFI in a download endpoint to leak hardcoded credentials from compiled NextAuth source, then abusing a sudo Terraform command with a malicious provider to achieve root.',
+      tags: 'security htb linux nextjs cve middleware lfi terraform privesc medium'
     }
   ];
   
