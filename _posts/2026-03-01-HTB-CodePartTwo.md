@@ -6,12 +6,14 @@ background: /img/bg-machine.jpg
 tags: [htb]
 difficulty: Easy
 ---
+
 ![](/img/htb_img/CodePartTwo_img/img1.png)
 
 - OS: Linux
 - Release Date: 16 Aug 2025
 - Difficulty: Easy
----
+
+<br>
 
 # Enumeration
 
