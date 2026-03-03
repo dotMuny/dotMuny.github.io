@@ -246,6 +246,12 @@ $(document).ready(function() {
       url: '/2026/03/03/HTB-Guardian.html',
       excerpt: 'Guardian is a Hard Linux machine chaining a student portal IDOR, a PHPSpreadsheet XSS to steal an admin session, CSRF to create an admin user, PHP filter chain RCE, salted hash cracking for lateral movement, and a custom Apache loader abused via a shared-library constructor for root.',
       tags: 'security htb linux xss csrf lfi rce php privesc hard'
+    },
+    {
+      title: '[HTB] HackNeT',
+      url: '/2026/03/03/HTB-HackNeT.html',
+      excerpt: 'HackNeT is a Medium Linux machine exploiting a Django SSTI in a username field to leak credentials, followed by a malicious Python pickle deserialization attack against Djangos cache for lateral movement, and GPG key cracking to recover a root password from an encrypted SQL backup.',
+      tags: 'security htb linux django ssti pickle deserialization gpg medium'
     }
   ];
   
