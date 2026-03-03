@@ -7,7 +7,7 @@ tags: [htb]
 difficulty: Medium
 ---
 
-![](/img/htb_img/Imagery_img/img1.png)
+![](/img/htb_img/Previous_img/img1.png)
 
 - OS: Linux
 - Release Date: 23 Aug 2025
@@ -79,7 +79,7 @@ Nmap done: 1 IP address (1 host up) scanned in 8.34 seconds
 ```
 
 ## TCP 80 - HTTP Web server
-![](/img/htb_img/Imagery_img/img2.png)
+![](/img/htb_img/Previous_img/img2.png)
 
 ```
 ❯ whatweb http://previous.htb

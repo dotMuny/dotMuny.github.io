@@ -264,6 +264,12 @@ $(document).ready(function() {
       url: '/2026/03/03/HTB-Previous.html',
       excerpt: 'Previous is a Medium Linux machine exploiting a Next.js middleware authentication bypass (CVE-2025-29927) combined with an LFI in a download endpoint to leak hardcoded credentials from compiled NextAuth source, then abusing a sudo Terraform command with a malicious provider to achieve root.',
       tags: 'security htb linux nextjs cve middleware lfi terraform privesc medium'
+    },
+    {
+      title: '[HTB] Signed',
+      url: '/2026/03/03/HTB-Signed.html',
+      excerpt: 'Signed is a Medium Windows machine exploiting an exposed MSSQL instance to capture an NTLMv2 hash via xp_dirtree and Responder, cracking it to forge a Silver Ticket that grants sysadmin access, then escalating to Domain Admin by crafting a second ticket with privileged group memberships and reading the root flag through OPENROWSET.',
+      tags: 'security htb windows mssql kerberos silver-ticket ntlm responder activedirectory medium'
     }
   ];
   
