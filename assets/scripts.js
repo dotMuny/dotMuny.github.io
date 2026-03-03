@@ -99,9 +99,9 @@ $(document).ready(function() {
     },
     {
       title: 'Penelope',
-      url: '/tools/2025/09/26/Penelope.html',
+      url: '/software/2025/09/26/Penelope.html',
       excerpt: 'Penelope is a lightweight Python reverse-shell handler that stabilises shells, manages sessions and provides file transfer utilities — a practical ergonomics boost for pentesters and CTF players.',
-      tags: 'security tools pentesting revshell python oscp'
+      tags: 'security software pentesting revshell python oscp'
     },
     {
       title: '[HTB] Baby',
@@ -228,6 +228,24 @@ $(document).ready(function() {
       url: '/2026/03/01/HTB-CodePartTwo.html',
       excerpt: 'Easy HTB Linux machine. Source code disclosure on port 8000 reveals a Flask app using js2py for JavaScript code execution. CVE-2024-28397 js2py sandbox escape via Popen subclass traversal yields an initial shell as the app user. MD5 password hash from the live SQLite database cracked via CrackStation enables lateral movement to the marco user. Sudo access to npbackup-cli exploited through a malicious configuration file leveraging post_exec_commands to exfiltrate the root flag.',
       tags: 'htb easy linux gunicorn flask js2py sandbox-escape cve-2024-28397 source-code-analysis md5 hash-cracking sqlite crackstation sudo npbackup privilege-escalation post-exec'
+    },
+    {
+      title: 'ADScan',
+      url: '/2026/03/02/ADScan.html',
+      excerpt: 'ADscan is an open-source Active Directory pentesting tool that wraps BloodHound, Impacket, Kerberos attacks and credential dumping into a single interactive CLI — cutting assessment time from hours to minutes.',
+      tags: 'security software pentesting activedirectory kerberos bloodhound redteam automation'
+    },
+    {
+      title: '[HTB] Giveback',
+      url: '/2026/03/03/HTB-Giveback.html',
+      excerpt: 'Giveback is a Medium Linux machine involving a GiveWP RCE (CVE-2024-5932) to land in a Kubernetes pod, lateral movement through a php-cgi trick, Kubernetes secret harvesting for credential reuse, and a custom OCI container runner abused for privilege escalation.',
+      tags: 'security htb linux kubernetes wordpress cve rce privesc medium'
+    },
+    {
+      title: '[HTB] Guardian',
+      url: '/2026/03/03/HTB-Guardian.html',
+      excerpt: 'Guardian is a Hard Linux machine chaining a student portal IDOR, a PHPSpreadsheet XSS to steal an admin session, CSRF to create an admin user, PHP filter chain RCE, salted hash cracking for lateral movement, and a custom Apache loader abused via a shared-library constructor for root.',
+      tags: 'security htb linux xss csrf lfi rce php privesc hard'
     }
   ];
   
@@ -240,7 +258,7 @@ $(document).ready(function() {
       return;
     }
     
-    const matches = posts.filter(post => 
+    const matches = posts.filter(post =>
       post.title.toLowerCase().includes(query) ||
       post.excerpt.toLowerCase().includes(query) ||
       post.tags.toLowerCase().includes(query)

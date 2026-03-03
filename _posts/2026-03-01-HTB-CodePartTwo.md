@@ -108,7 +108,7 @@ This website lets us download the app zip, so we can analyze its source code.
 6 directories, 11 files
 ```
 
-The `users.db` bundled in the zip has no registered users yet — the live instance's database is what matters.
+The `users.db` bundled in the zip has no registered users yet - the live instance's database is what matters.
 
 ```
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, send_from_directory
@@ -362,7 +362,7 @@ snapshot 28efaed7 saved
 marco@codetwo:~$
 ```
 
-npbackup supports a `post_exec_commands` field in its configuration that runs shell commands after the backup completes — and since we're running it as root via sudo, those commands also execute as root. We craft a malicious config that copies `/root/root.txt` to a world-readable location:
+npbackup supports a `post_exec_commands` field in its configuration that runs shell commands after the backup completes - and since we're running it as root via sudo, those commands also execute as root. We craft a malicious config that copies `/root/root.txt` to a world-readable location:
 ```
 conf_version: 3.0.1
 audience: public
