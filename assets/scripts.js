@@ -222,6 +222,12 @@ $(document).ready(function() {
       url: '/2025/12/06/HTB-Help.html',
       excerpt: 'Easy HTB Linux machine. GraphQL endpoint on port 3000 revealed user credentials via introspection queries. Password hash cracking yielded helpme@helpme.com credentials for HelpDeskZ. Authenticated SQL injection in ticket attachment download enabled database dump, revealing admin password. SSH password spray attack with hydra yielded help user access. Linux kernel 4.4.0-116 privilege escalation exploit (CVE-2017-16995) granted root access.',
       tags: 'htb easy linux graphql introspection password-cracking helpdeskz sql-injection sqlmap hydra password-spray ssh kernel-exploit cve-2017-16995 privilege-escalation'
+    },
+    {
+      title: '[HTB] CodePartTwo',
+      url: '/2026/03/01/HTB-CodePartTwo.html',
+      excerpt: 'Easy HTB Linux machine. Source code disclosure on port 8000 reveals a Flask app using js2py for JavaScript code execution. CVE-2024-28397 js2py sandbox escape via Popen subclass traversal yields an initial shell as the app user. MD5 password hash from the live SQLite database cracked via CrackStation enables lateral movement to the marco user. Sudo access to npbackup-cli exploited through a malicious configuration file leveraging post_exec_commands to exfiltrate the root flag.',
+      tags: 'htb easy linux gunicorn flask js2py sandbox-escape cve-2024-28397 source-code-analysis md5 hash-cracking sqlite crackstation sudo npbackup privilege-escalation post-exec'
     }
   ];
   
