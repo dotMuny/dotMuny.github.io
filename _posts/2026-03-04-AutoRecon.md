@@ -7,7 +7,7 @@ background: ""
 tags: [posts]
 category: tools
 ---
-![](Blog/Tools/AutoRecon/img1.png)
+![](/img/blog_img/AutoRecon_img/img1.png)
 
 When attacking a machine - whether on HTB, OSCP labs, or a real engagement - the reconnaissance phase sets the tone for everything that follows. A missed port or an overlooked UDP service can mean hours of wasted time. I built `autorecon` to automate and standardize this phase without any external dependencies: just Bash and `nmap`.
 
