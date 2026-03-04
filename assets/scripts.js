@@ -270,6 +270,12 @@ $(document).ready(function() {
       url: '/2026/03/03/HTB-Signed.html',
       excerpt: 'Signed is a Medium Windows machine exploiting an exposed MSSQL instance to capture an NTLMv2 hash via xp_dirtree and Responder, cracking it to forge a Silver Ticket that grants sysadmin access, then escalating to Domain Admin by crafting a second ticket with privileged group memberships and reading the root flag through OPENROWSET.',
       tags: 'security htb windows mssql kerberos silver-ticket ntlm responder activedirectory medium'
+    },
+    {
+      title: 'AutoRecon',
+      url: '/2026/03/03/AutoRecon.html',
+      excerpt: 'Autorecon is a Bash function that automates the reconnaissance phase in pentesting and CTFs, chaining four nmap stages: fast full TCP discovery, targeted service and script scanning, vulnerability script analysis, and UDP top-1000 enumeration — all outputting clean files ready for manual follow-up.',
+      tags: 'security tools bash nmap recon ctf oscp pentesting udp vulnerability-scanning automation'
     }
   ];
   
