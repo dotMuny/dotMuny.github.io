@@ -48,6 +48,21 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-color);
 }
 
+/* Heading spacing inside post content */
+.post-content h1,
+.post-content h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
 /* Keep masthead titles always white */
 .masthead .post-heading h1,
 .masthead .post-heading h2,
