@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] Previous"
-description: "[Machine] - Medium difficulty"
+description: "Previous is a Medium Linux machine exploiting a Next.js middleware authentication bypass (CVE-2025-29927) combined with an LFI in a download endpoint to leak hardcoded credentials from compiled NextAuth source, then abusing a sudo Terraform command with a malicious provider to achieve root."
 background: /img/bg-machine.jpg
 tags: [htb]
 difficulty: Medium

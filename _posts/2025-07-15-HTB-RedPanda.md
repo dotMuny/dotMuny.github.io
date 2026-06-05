@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] RedPanda"
-description: "[Machine] - Easy difficulty"
+description: "Easy difficulty HTB machine featuring Spring Boot application, SSTI vulnerability, and privilege escalation through log injection."
 background: '/img/bg-machine.jpg'
 tags: [htb]
 difficulty: Easy

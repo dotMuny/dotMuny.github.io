@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] Signed"
-description: "[Machine] - Medium difficulty"
+description: "Signed is a Medium Windows machine exploiting an exposed MSSQL instance to capture an NTLMv2 hash via xp_dirtree and Responder, cracking it to forge a Silver Ticket that grants sysadmin access, then escalating to Domain Admin by crafting a second ticket with privileged group memberships and reading the root flag through OPENROWSET."
 background: /img/bg-machine.jpg
 tags:
   - htb

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: OverTheWire - Bandit Complete Walkthrough
+description: "Complete walkthrough of the OverTheWire Bandit wargame from level 0 to 34. Covers SSH, Linux file enumeration, special filenames, hidden files, grep, base64, ROT13, hexdump decompression, SSH key authentication, netcat, OpenSSL TLS, nmap port scanning, SUID binaries, cron jobs, restricted shell escapes, and Git security."
 subtitle: A complete walkthrough of the OverTheWire Bandit wargame.
 date: 2026-06-05 00:00:00
 background: ""

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Welcome"
+description: "Welcome to my ethical hacking blog"
 subtitle: "First entry"
 date: 2025-06-27 10:00:00
 background: ""

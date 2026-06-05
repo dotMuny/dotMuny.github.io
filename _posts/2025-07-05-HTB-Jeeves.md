@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] Jeeves"
-description: "[Machine] - Medium difficulty"
+description: "Medium difficulty HTB machine involving Jenkins exploitation and Windows privilege escalation."
 background: '/img/bg-machine.jpg'
 tags: [htb]
 difficulty: Medium

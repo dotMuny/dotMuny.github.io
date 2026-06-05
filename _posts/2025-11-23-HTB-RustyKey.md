@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] RustyKey"
-description: "[Machine] - Hard difficulty"
+description: "Hard HTB AD machine. LDAP enumeration and BloodHound revealed attack paths. Timeroasting attack extracted computer account password (IT-COMPUTER3$). Machine account added itself to HELPDESK group, removed IT from Protected Objects, changed bb.morgan password. Lateral movement to ee.reed via RunasCs, COM hijacking for privilege escalation, unconstrained delegation configuration. S4U2 impersonation of backupadmin for domain admin access."
 background: /img/bg-machine.jpg
 tags: [htb]
 difficulty: Hard

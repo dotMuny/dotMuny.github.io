@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] RetroTwo"
-description: "[Machine] - Easy difficulty"
+description: "Easy HTB AD machine. SMB guest access revealed an Access database file; password cracking with John the Ripper yielded ldapreader credentials. BloodHound showed PRE-WINDOWS 2000 COMPATIBLE ACCESS group membership for FS01, allowing password reset via bloodyAD. ADMWS01$ account manipulation added ldapreader to Services group for RDP access. Zerologon (CVE-2020-1472) exploitation enabled domain controller compromise via secretsdump."
 background: /img/bg-machine.jpg
 tags: [htb]
 difficulty: Easy

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] Interface"
-description: "[Machine] - Medium difficulty"
+description: "Medium difficulty HTB machine involving dompdf RCE vulnerability and privilege escalation."
 date: 2025-06-27 12:00:00
 background: '/img/bg-machine.jpg'
 tags: [htb]

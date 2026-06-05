@@ -10,20 +10,27 @@ background: '/img/bg-post.jpg'
 
 {% for post in category_posts %}
   <article class="post-preview">
-    {% if post.category %}
-    <div class="post-category-badge-preview">
-      <span class="category-badge category-{{ post.category }}">{{ post.category | capitalize }}</span>
+    <div class="post-preview-badges">
+      {% if post.category %}<span class="category-badge category-{{ post.category }}">{{ post.category | capitalize }}</span>{% endif %}
     </div>
-    {% endif %}
+
     <a href="{{ post.url | relative_url }}">
       <h2 class="post-title">{{ post.title }}</h2>
-      {% if post.subtitle %}
-        <h3 class="post-subtitle">{{ post.subtitle }}</h3>
-      {% else %}
-        <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
-      {% endif %}
+      {% if post.subtitle %}<h3 class="post-subtitle">{{ post.subtitle }}</h3>{% endif %}
     </a>
-    <p class="post-meta">Posted on {{ post.date | date: "%B %d, %Y" }} &middot; {% include read_time.html content=post.content %}</p>
+
+    {% assign desc = post.description | default: post.subtitle | default: '' %}
+    {% if desc != '' %}<p class="post-excerpt">{{ desc }}</p>{% endif %}
+
+    <div class="post-preview-footer">
+      <span class="post-meta">{{ post.date | date: '%b %d, %Y' }} &middot; {% include read_time.html content=post.content %}</span>
+      {% if post.tags %}
+      <div class="post-tags">
+        {% assign tag_list = post.tags | join: ' ' | split: ' ' | slice: 0, 4 %}
+        {% for tag in tag_list %}<span class="post-tag">{{ tag }}</span>{% endfor %}
+      </div>
+      {% endif %}
+    </div>
   </article>
 {% endfor %}
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] Delegate"
-description: "[Machine] - Medium difficulty"
+description: "Medium HTB AD machine: SMB guest share leaks creds via a login script → BloodHound shows GenericWrite over a user; targeted Kerberoast yields password and WinRM shell; create a rogue computer, enable unconstrained delegation, coerce the DC (PrinterBug) to capture its TGT; DCSync to dump Administrator’s hash."
 background: /img/bg-machine.jpg
 tags: [htb]
 difficulty: Easy

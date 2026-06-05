@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] Voleur"
-description: "[Machine] - Medium difficulty"
+description: "Medium HTB AD machine. SMB enumeration revealed encrypted Excel file with credentials; BloodHound showed WriteSPN permission enabling targeted Kerberoast to crack svc_winrm password. Lateral movement via RESTORE USERS group to recover deleted AD user (todd.wolfe), DPAPI decryption revealed jeremy.combs credentials. WSL access via SSH key allowed NTDS.dit dump from backups, secretsdump extracted Administrator hash for domain compromise."
 background: /img/bg-machine.jpg
 tags: [htb]
 difficulty: Medium

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "uv: Astral’s High-Performance Python Package Manager"
+description: "Deep dive into uv, a Rust-powered, fast package manager for Python with lockfiles, caching, and environment management."
 subtitle: "A fast, unified workflow for Python installs, environments, and lockfiles"
 date: 2025-10-07 00:00:00
 background: ""

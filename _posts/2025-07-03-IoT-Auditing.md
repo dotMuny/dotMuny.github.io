@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "IoT Security Auditing Methods"
+description: "Comprehensive guide to IoT security auditing methodologies, tools, and best practices for identifying vulnerabilities."
 subtitle: "A comprehensive Security Auditing Article"
 date: 2025-07-03 10:00:00
 background: ""

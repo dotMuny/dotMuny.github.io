@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] Academy"
-description: "[Machine] - Easy difficulty"
+description: "Easy HTB Linux machine. Web fuzzing revealed admin.php; modifying roleid parameter during registration granted admin access, exposing a Laravel staging subdomain. Laravel CVE-2018-15133 token unserialize RCE using exposed APP_KEY yielded a www-data shell. Lateral movement via .env database credentials to cry0l1t3, then aureport audit logs revealed mrb3n password. Privilege escalation through sudo composer GTFOBins technique."
 background: /img/bg-machine.jpg
 tags: [htb]
 difficulty: Easy

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] Imagery"
-description: "[Machine] - Medium difficulty"
+description: "Imagery is a Medium Linux machine exploiting XSS in a bug report form to steal an admin session cookie, chaining an LFI to recover credentials from a JSON database, injecting a reverse shell through an ImageMagick crop parameter, and abusing a custom backup tool with cron scheduling to set the SUID bit on bash."
 background: /img/bg-machine.jpg
 tags: [htb]
 difficulty: Medium

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] Guardian"
-description: "[Machine] - Hard difficulty"
+description: "Guardian is a Hard Linux machine chaining a student portal IDOR, a PHPSpreadsheet XSS to steal an admin session, CSRF to create an admin user, PHP filter chain RCE, salted hash cracking for lateral movement, and a custom Apache loader abused via a shared-library constructor for root."
 background: /img/bg-machine.jpg
 tags: [htb]
 difficulty: Hard

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] Manage"
-description: "[Machine] - Easy difficulty"
+description: "Easy HTB machine pivoting from exposed JMX/RMI on Tomcat to code execution with beanshooter, then leveraging dumped Tomcat credentials and a world-readable backup containing Google Authenticator data to beat 2FA and assume useradmin. A constrained sudo rule for adduser let me create an admin user whose group mapped to full sudo, yielding root."
 background: /img/bg-machine.jpg
 tags: [htb]
 difficulty: Easy

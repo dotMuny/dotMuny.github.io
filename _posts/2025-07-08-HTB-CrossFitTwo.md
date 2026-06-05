@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] CrossFitTwo"
-description: "[Machine] - Insane difficulty"
+description: "Insane difficulty HTB machine running OpenBSD with web exploitation, Unbound DNS control, and advanced privilege escalation."
 background: '/img/bg-machine.jpg'
 tags: [htb]
 difficulty: Insane

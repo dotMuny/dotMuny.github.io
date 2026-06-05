@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "What OPSEC Really Is"
+description: "Discover what OPSEC really is and how it extends far beyond InfoSec and privacy. Learn the 5 core principles, real-world examples, and practical applications of Operational Security for individuals and organizations in the digital age."
 subtitle: "Critical insights that go beyond traditional cybersecurity and privacy"
 date: 2025-10-08 00:00:00
 background: ""

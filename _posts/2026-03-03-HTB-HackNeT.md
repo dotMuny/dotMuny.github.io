@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] HackNeT"
-description: "[Machine] - Medium difficulty"
+description: "HackNeT is a Medium Linux machine exploiting a Django SSTI in a username field to leak credentials, followed by a malicious Python pickle deserialization attack against Djangos cache for lateral movement, and GPG key cracking to recover a root password from an encrypted SQL backup."
 background: /img/bg-machine.jpg
 tags: [htb]
 difficulty: Medium

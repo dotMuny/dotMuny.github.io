@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] Giveback"
-description: "[Machine] - Medium difficulty"
+description: "Giveback is a Medium Linux machine involving a GiveWP RCE (CVE-2024-5932) to land in a Kubernetes pod, lateral movement through a php-cgi trick, Kubernetes secret harvesting for credential reuse, and a custom OCI container runner abused for privilege escalation."
 background: /img/bg-machine.jpg
 tags: [htb]
 difficulty: Medium

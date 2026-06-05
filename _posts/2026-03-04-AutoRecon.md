@@ -1,6 +1,7 @@
 ---
 layout: post
 title: AutoRecon
+description: "Autorecon is a Bash function that automates the reconnaissance phase in pentesting and CTFs, chaining four nmap stages: fast full TCP discovery, targeted service and script scanning, vulnerability script analysis, and UDP top-1000 enumeration — all outputting clean files ready for manual follow-up."
 subtitle: A Bash Function for Automated Recon in CTFs and Pentest
 date: 2026-03-04 00:00:00
 background: ""

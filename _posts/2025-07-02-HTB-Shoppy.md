@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] Shoppy"
-description: "[Machine] - Easy difficulty"
+description: "Easy difficulty HTB machine involving NoSQL injection, Mattermost foothold, and Docker privilege escalation."
 date: 2025-07-02 17:00:00
 background: '/img/bg-machine.jpg'
 tags: [htb]

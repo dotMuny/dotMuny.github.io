@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "How Apple's MagSafe Wireless Charging Works"
+description: "Engineering deep dive into MagSafe: inductive power, magnet alignment, higher-frequency drive (~360 kHz), Qi protocol with Apple extensions, efficiency, and safety considerations compared to standard Qi."
 subtitle: "Coils, magnets, power delivery, and protocols behind MagSafe"
 date: 2025-10-05 00:00:00
 background: ""

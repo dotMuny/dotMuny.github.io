@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] Outbound"
-description: "[Machine] - Easy difficulty"
+description: "Easy HTB Linux machine. Roundcube webmail RCE (CVE-2025-49113) via Metasploit yielded www-data shell. Password reuse enabled lateral movement to tyler, then database credentials revealed jacob password. Decrypted Roundcube session data using DES3 key to extract jacob credentials. SSH access as jacob, then symlink attack on writable log file (/var/log/below/error_root.log) to overwrite /etc/passwd and gain root access."
 background: /img/bg-machine.jpg
 tags: [htb]
 difficulty: Easy

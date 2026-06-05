@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] Mirage"
-description: "[Machine] - Hard difficulty"
+description: "Hard HTB AD machine. NFS share revealed DNS misconfiguration for nats-svc. DNS spoofing and fake NATS server captured Dev_Account_A credentials. NATS consumer revealed david.jjackson credentials. Kerberoasting yielded nathan.aadam password. BloodHound showed ForceChangePassword chain: mark.bbond → javier.mmarshall → ReadGMSAPassword on Mirage-Service$. ESC10 abuse via weak certificate mapping (Schannel) enabled UPN manipulation, certificate enrollment, and RBCD to compromise domain controller via secretsdump."
 background: /img/bg-machine.jpg
 tags: [htb]
 difficulty: Hard

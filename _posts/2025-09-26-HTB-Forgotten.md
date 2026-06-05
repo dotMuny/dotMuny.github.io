@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] Forgotten"
-description: "[Machine] - Easy difficulty"
+description: "Easy HTB machine exploiting a vulnerable LimeSurvey installation — installer allowed plugin upload and RCE (reverse shell). Credentials leaked in environment variables enabled SSH access, and a writable host mount combined with a SUID bash trick yielded root. Clean, container-based escalation flow (LimeSurvey RCE → SSH foothold → SUID root shell)."
 background: '/img/bg-machine.jpg'
 tags: [htb]
 difficulty: Easy

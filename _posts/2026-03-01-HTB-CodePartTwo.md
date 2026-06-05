@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] CodePartTwo"
-description: "[Machine] - Easy difficulty"
+description: "Easy HTB Linux machine. Source code disclosure on port 8000 reveals a Flask app using js2py for JavaScript code execution. CVE-2024-28397 js2py sandbox escape via Popen subclass traversal yields an initial shell as the app user. MD5 password hash from the live SQLite database cracked via CrackStation enables lateral movement to the marco user. Sudo access to npbackup-cli exploited through a malicious configuration file leveraging post_exec_commands to exfiltrate the root flag."
 background: /img/bg-machine.jpg
 tags: [htb]
 difficulty: Easy

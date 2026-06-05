@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[HTB] BabyTwo"
-description: "[Machine] - Medium difficulty"
+description: "A guest-friendly DC leaks a logon script in SYSVOL; poisoning it pops a user shell, BloodHound shows ACL control over a GPO admin account, and pyGPOAbuse turns that into local Administrators and full compromise."
 background: /img/bg-machine.jpg
 tags: [htb]
 difficulty: Easy
