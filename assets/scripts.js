@@ -276,6 +276,12 @@ $(document).ready(function() {
       url: '/2026/03/03/AutoRecon.html',
       excerpt: 'Autorecon is a Bash function that automates the reconnaissance phase in pentesting and CTFs, chaining four nmap stages: fast full TCP discovery, targeted service and script scanning, vulnerability script analysis, and UDP top-1000 enumeration — all outputting clean files ready for manual follow-up.',
       tags: 'security tools bash nmap recon ctf oscp pentesting udp vulnerability-scanning automation'
+    },
+    {
+      title: 'OverTheWire - Bandit Complete Walkthrough',
+      url: '/cybersecurity/2026/06/05/OverTheWire-Bandit-Walkthrough.html',
+      excerpt: 'Complete walkthrough of the OverTheWire Bandit wargame from level 0 to 34. Covers SSH, Linux file enumeration, special filenames, hidden files, grep, base64, ROT13, hexdump decompression, SSH key authentication, netcat, OpenSSL TLS, nmap port scanning, SUID binaries, cron jobs, restricted shell escapes, and Git security.',
+      tags: 'security ctf overthewire bandit wargame linux ssh netcat openssl nmap suid cron git restricted-shell base64 rot13 hexdump grep enumeration beginner walkthrough'
     }
   ];
   
